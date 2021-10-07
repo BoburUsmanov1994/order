@@ -1,5 +1,6 @@
 import React from 'react';
 import {createGlobalStyle, ThemeProvider} from "styled-components";
+import Wrapper from "../components/wrapper";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -91,7 +92,9 @@ const Theme = ({children}) => {
     return (
         <ThemeProvider theme={{dark: false}}>
             <GlobalStyles/>
-            {children}
+            <Wrapper>
+                {children}
+            </Wrapper>
         </ThemeProvider>
     );
 };
