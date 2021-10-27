@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {isEqual,isNil} from "lodash";
 import classNames from "classnames";
 import {useHistory} from "react-router-dom";
-import data from "./../../mock/mapData";
+
 import popupImg from "../../assets/images/popup.png";
 
 const StyledMap = styled.div`
@@ -98,11 +98,10 @@ const StyledMap = styled.div`
   }
 `;
 const Map = ({
-                 active, setActive = () => {
+                nopopup = false,transfer=false, transform = "translate(-333 -759)",viewBox="0 0 1000 652",items=[],active, setActive = () => {
     }, ...props
              }) => {
     const history = useHistory();
-    const [items] = useState(data);
     const [coordinate, setCoordinate] = useState({x: 520, y: 566});
     const setActiveSvg = (e, id) => {
         setCoordinate({x: e.clientX, y: e.pageY});
@@ -110,7 +109,7 @@ const Map = ({
     }
     return (
         <StyledMap {...coordinate} {...props}>
-            {!isNil(active) && <div className="popup">
+            {!isNil(active) && !nopopup && <div className="popup">
                 <ul>
                     <li><span className={'circle'}></span>Умумий сони <span className={'count'}>13.3k</span></li>
                     <li><span className={'circle warning'}></span>Жабрланганлар  <span className={'count'}>15.1k</span></li>
@@ -118,17 +117,31 @@ const Map = ({
                 </ul>
                 <img src={popupImg} className={'bottom'} alt=""/>
             </div>}
-            <svg xmlns="http://www.w3.org/2000/svg" width={'100%'} height={600} viewBox="0 0 1000 652">
-                <g transform="translate(-333 -759)">
+            <svg xmlns="http://www.w3.org/2000/svg" width={'100%'} height={600} viewBox={viewBox}>
+                <g transform={transform}>
                     {
-                        items && items.map(({id, path, name}) => <path key={id}
-                                                                       onDoubleClick={() => history.push('/region')}
-                                                                       onClick={(e) => setActiveSvg(e, id)}
-                                                                       className={classNames({active: isEqual(id, active)})}
-                                                                       d={path}
-                                                                       transform="translate(333 739)" fill="#d5d7e3"
-                                                                       stroke="#fff" strokeLinecap="round"
-                                                                       strokeLinejoin="round" strokeWidth={2}/>
+                        items && items.map(({_id, pathd, transform}) => {
+                                if (transfer) {
+                                    return <path key={_id}
+                                                 onDoubleClick={() => history.push(`/region/${_id}`)}
+                                                 onClick={(e) => setActiveSvg(e, _id)}
+                                                 className={classNames({active: isEqual(_id, active)})}
+                                                 transform={transform}
+                                                 d={pathd}
+                                                  fill="#d5d7e3"
+                                                 stroke="#fff" strokeLinecap="round"
+                                                 strokeLinejoin="round" strokeWidth={2}/>
+                                }
+                                    return <path key={_id}
+                                                 onDoubleClick={() => history.push(`/region/${_id}`)}
+                                                 onClick={(e) => setActiveSvg(e, _id)}
+                                                 className={classNames({active: isEqual(_id, active)})}
+                                                  d={pathd}
+                                                 transform="translate(333 739)"
+                                                 fill="#d5d7e3"
+                                                 stroke="#fff" strokeLinecap="round"
+                                                 strokeLinejoin="round" strokeWidth={2} />
+                            }
                         )
 
                     }

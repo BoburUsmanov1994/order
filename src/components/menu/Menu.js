@@ -11,25 +11,33 @@ import usersIcon from "../../assets/images/icons/users.svg";
 import bookmarkIcon from "../../assets/images/icons/bookmark.svg";
 
 const StyledMenu = styled.ul`
-  padding-top: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  padding-top: 10px;
+  height: 84vh;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  text-align: center;
+  overflow-x: hidden;
+  border-bottom: 1px solid #E5E5E5;
   li{
-    margin-bottom: 35px;
+    margin-bottom: 25px;
+    position: relative;
+    .hover{
+      position: absolute;
+      left: 100%;
+      z-index: 9999;
+    }
     a.active{
       position: relative;
       &:after{
         position: absolute;
         content:"";
         height: 30px;
-        width: 3px;
+        width: 6px;
         border-radius: 10px;
         background-color: #FFA101;
-        right: -47px;
+        right: -40px;
         z-index: 9;
-        top: -6px;
+        top: -4px;
       }
       svg{
          path,rect{
@@ -45,43 +53,138 @@ const StyledMenu = styled.ul`
 const Menu = ({items, ...props}) => {
     return (
         <StyledMenu {...props}>
-            <li>
+            <li title={'dashboard'}>
                 <NavLink to={'/'} exact>
                     <ReactSVG src={dashboardIcon}/>
                 </NavLink>
             </li>
-            <li>
+            <li title={'orders'}>
                 <NavLink to={'/order/list'}>
-                    <ReactSVG src={graphIcon}/>
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to={'/appointments'}>
                     <ReactSVG src={appointmentsIcon}/>
                 </NavLink>
             </li>
-            <li>
-                <NavLink to={'/list'}>
-                    <ReactSVG src={enquiriesIcon}/>
+
+            <li title={'users'}>
+                <NavLink to={'/users'}   >
+                    <ReactSVG src={usersIcon}/>
                 </NavLink>
             </li>
-            <li>
-                <NavLink to={'/list'}>
+            <li title={'victims'}>
+                <NavLink to={'/victim/list'}>
+                    <ReactSVG src={usersIcon}/>
+                </NavLink>
+            </li>
+            <li title={'violents'}>
+                <NavLink to={'/violent/list'}>
+                    <ReactSVG src={usersIcon}/>
+                </NavLink>
+            </li>
+
+            <li title={'regions'}>
+                <NavLink to={'/regions'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li title={'districts'}>
+                <NavLink to={'/districts'}>
                     <ReactSVG src={clipboardIcon}/>
                 </NavLink>
             </li>
             <li>
-                <NavLink to={'/users'}>
-                    <ReactSVG src={usersIcon}/>
+                <NavLink to={'/neighborhoods'}>
+                    <ReactSVG src={clipboardIcon}/>
                 </NavLink>
             </li>
             <li>
-                <NavLink to={'/settings'}>
-                    <ReactSVG src={bookmarkIcon}/>
+                <NavLink to={'/ranks'}>
+                    <ReactSVG src={clipboardIcon}/>
                 </NavLink>
             </li>
+            <li>
+                <NavLink to={'/account-roles'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/positions'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/account-status'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/status-order'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/person-violence'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/working-place'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/violence-type'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/restrictions-type'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/state-violence'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/social-status'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/send-preparation'}>
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/reason-violence'}>
 
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/criminal-case'}>
 
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/criminal-codex'}>
+
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/administrative'}>
+
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={'/administrative-codex'}>
+
+                    <ReactSVG src={clipboardIcon}/>
+                </NavLink>
+            </li>
         </StyledMenu>
     );
 };

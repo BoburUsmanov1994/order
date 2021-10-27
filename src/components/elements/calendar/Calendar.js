@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendarImg from "../../../assets/images/calendar.png";
 
 const StyledCalendar = styled.div`
-  width: 300px;
+  width: 100%;
+  min-width: 300px;
   height: 53px;
-  border: 1px solid #707070;
+  border: 1px solid #E8E8E8;
   border-radius: 5px;
   position: relative;
   display: flex;
@@ -15,7 +16,7 @@ const StyledCalendar = styled.div`
 
   img {
     padding: 18px 22px;
-    border-right: 1px solid #555555;
+    border-right: 1px solid #E8E8E8;
     cursor: pointer;
   }
 
@@ -30,13 +31,30 @@ const StyledCalendar = styled.div`
     background-color: transparent;
     font-family: 'Ubuntu', sans-serif;
   }
+  ${({sm}) => sm && css`
+    height:40px;
+    img{
+      padding: 10px 22px;
+    }
+  `}
 `;
-const Calendar = (props) => {
-    const [startDate, setStartDate] = useState(new Date());
+const Calendar = ({
+                      error,
+                      defaultValue = new Date(),
+                      disabled = false,
+                      dateFormat="dd/MM/yyyy",
+                      onChange = (value) => { console.log(value)},
+                       ...props
+                  }) => {
+    const [startDate, setStartDate] = useState(defaultValue);
+    const handleChange = (date) => {
+        setStartDate(date);
+        onChange(date);
+    }
     return (
         <StyledCalendar {...props}>
             <img src={calendarImg} alt=""/>
-            <DatePicker className={'datepicker'} selected={startDate} onChange={(date) => setStartDate(date)}/>
+            <DatePicker dateFormat={dateFormat} className={'datepicker'} selected={startDate} onChange={handleChange}/>
         </StyledCalendar>
     );
 };

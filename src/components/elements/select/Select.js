@@ -32,15 +32,11 @@ const customStyles = {
         display: 'none'
     })
 };
-const BaseSelect = ({options = [],...props}) => {
-     options = [
-        { value: 'Navoiy', label: 'Navoiy' },
-        { value: 'Buxoro', label: 'Buxoro' },
-        { value: 'Samarqand', label: 'Samarqand' }
-    ]
+const BaseSelect = ({options = [],defaultValue="",placeholder = 'Танлаш',handleChange = (value) => {console.log(value)},...props}) => {
+
     return (
         <StyledSelect {...props}>
-          <Select options={options}  styles={customStyles} />
+          <Select defaultValue={defaultValue} options={options} placeholder={placeholder}  onChange={(value) => handleChange(value)} styles={customStyles} />
         </StyledSelect>
     );
 };

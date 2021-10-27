@@ -47,7 +47,7 @@ const List = ({items = [],...props}) => {
     const [active,setActive] = useState(null);
     return (
         <StyledList {...props}>
-            {items && items.map(({id,name},index) =>  <li className={classNames({active:isEqual(id,active)})} key={id} onClick={() => setActive(id)}>{`${index+1}. ${name}`}</li>) }
+            {items && items.map(({_id,name},index) =>  <li className={classNames({active:isEqual(_id,active)})} key={_id} onClick={() => setActive(_id)}>{`${index+1}. ${name}`}</li>) }
         </StyledList>
     );
 };

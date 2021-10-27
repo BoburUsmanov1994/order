@@ -1,15 +1,18 @@
 import React from 'react';
 import {Container} from 'react-grid-system';
+import {connect} from "react-redux";
+import {get} from "lodash";
 import Sidebar from "../../components/sidebar";
 import Content from "../../components/content";
 import Header from "../../components/header";
 
-const OrderLayout = ({children}) => {
+
+const OrderLayout = ({children,profile}) => {
     return (
         <>
-            <Sidebar />
+            <Sidebar/>
             <Content>
-                <Header />
+                <Header profile={profile} />
                 <Container fluid>
                     {children}
                 </Container>
@@ -17,5 +20,14 @@ const OrderLayout = ({children}) => {
         </>
     );
 };
+const mapStateToProps = (state) => {
+    return {
+        profile:get(state,'auth.user',{})
+    }
+}
 
-export default OrderLayout;
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderLayout);

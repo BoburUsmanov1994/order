@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {find, get, isEqual} from "lodash";
+import {get} from "lodash";
 import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 import SubHeaderBox from "../../../components/subheader";
 import ProgressBox from "../../../components/progressbar";
 import Map from "../../../components/map";
@@ -12,7 +13,6 @@ import exportImg from "../../../assets/images/icons/export.png";
 import Flex from "../../../components/flex/Flex";
 import RangeCalendar from "../../../components/range-calendar";
 import List from "../../../components/list";
-import regionsData from "../../../mock/regionsData";
 import Box from "../../../components/box";
 import Select from "./../../../components/elements/select";
 import Card from "../../../components/card";
@@ -20,10 +20,24 @@ import Type from "../../../components/type";
 import Radio from "../../../components/elements/radio";
 import CustomAreaChart from "../../../components/chart/AreaChart";
 import Statistics from "../../../components/statistics";
+import ApiActions from "../../../services/api/Actions";
+import RegionScheme from "../../../schema/RegionScheme";
+import Normalizer from "../../../services/normalizer";
+import DistrictScheme from "../../../schema/DistrictScheme";
 
-const HomeContainer = ({history}) => {
+const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regions, districts,setDistrictListTrigger}) => {
     const [active, setActive] = useState(null);
-    const districts = get(find(regionsData, item => isEqual(get(item, 'id', null), active)), 'districts', []);
+    useEffect(() => {
+        setDistrictListTrigger();
+        getRegionList({});
+    }, [])
+    useEffect(() => {
+        if (active) {
+            getDistrictsList({regId: active})
+        }
+    }, [active])
+    regions = Normalizer.Denormalize(regions, [RegionScheme], entities);
+    districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
     return (
         <>
             <Row className={'mb-16'}>
@@ -36,12 +50,12 @@ const HomeContainer = ({history}) => {
                     </Row>
                     <Row>
                         <Col xs={7}>
-                            <Map active={active} setActive={setActive}/>
+                            <Map  items={regions} active={active} setActive={setActive}/>
                         </Col>
                         <Col xs={5}>
                             <Row>
                                 <Col xs={12} className={'mb-16'}>
-                                    <Slider active={active} setActive={setActive}/>
+                                    <Slider items={regions} active={active} setActive={setActive}/>
                                 </Col>
                                 <Col xs={12} className={'text-right mb-16'}>
                                     <Flex justify={'flex-end'}> <Text className={'cursor-pointer'}>Хисоботни экспорт
@@ -154,4 +168,61 @@ const HomeContainer = ({history}) => {
     );
 };
 
-export default withRouter(HomeContainer);
+const mapStateToProps = (state) => {
+    return {
+        entities: get(state, 'normalizer.entities', {}),
+        regions: get(state, 'normalizer.data.region-list.result.region', []),
+        districts: get(state, 'normalizer.data.district-list.result.districts', []),
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getRegionList: ({page = 1}) => {
+            const storeName = 'region-list';
+            const entityName = 'region';
+            const scheme = {region: [RegionScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: '/regions',
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getDistrictsList: ({regId, page = 1}) => {
+            const storeName = 'district-list';
+            const entityName = 'district';
+            const scheme = {districts: [DistrictScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/districts/reg/${regId}`,
+                    config: {
+                        params: {},
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        setDistrictListTrigger: () => dispatch({
+            type: ApiActions.GET_ALL.TRIGGER,
+            payload: {
+                scheme: {},
+                storeName: 'district-list',
+            },
+        })
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HomeContainer));

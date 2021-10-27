@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import Select,{components } from "react-select";
+import Select, {components} from "react-select";
 import caretDown from "../../../assets/images/caret-down.png";
+import Text from "../../text";
+import {Col, Row} from "react-grid-system";
 
 const StyledFormSelect = styled.div`
-  width: 300px;
+  width: 100%;
 `;
 
 const DropdownIndicator = props => {
@@ -17,21 +19,22 @@ const DropdownIndicator = props => {
     );
 };
 const customStyles = {
-    control: (base, state) => ({
+
+    control: (base, state, error) => ({
         ...base,
         background: "#fff",
-        borderColor: "#707070",
+        borderColor: "#E8E8E8",
         borderRadius: '5px',
         outline: "none",
         boxShadow: "none",
         color: "#7E7E7E",
         display: "flex",
         overflow: 'hidden',
-        padding:'5px 10px',
-        width: '300px',
-        height:'51px',
-        fontSize:'18px',
-        fontWeight:'300',
+        padding: '0px 10px',
+        width: '100%',
+        minHeight: '40px',
+        fontSize: '18px',
+        fontWeight: '300',
         "&:hover": {
             borderColor: 'none',
             outline: "none",
@@ -47,14 +50,68 @@ const customStyles = {
     })
 };
 
-const FormSelect = ({options = [{ value: 'Ayol', label: 'Ayol' },
-    { value: 'Erkak', label: 'Erkak' },], ...props}) => {
+const FormSelect = ({
+                        options = [],
+                        setValue,
+                        label,
+                        name,
+                        placeholder,
+                        validation,
+                        error,
+                        defaultValue = '',
+                        disabled = false,
+                        Controller,
+                        control,
+                        rule = {},
+                        onChange = (value) => { console.log(value)},
+                        isMulti = false, ...props
+                    }) => {
+    const [selectedValue, setSelectedValue] = useState(defaultValue)
+    useEffect(() => {
+        setValue(name, defaultValue)
+    }, [defaultValue])
+    const handleChange = (value) => {
+        setSelectedValue(value.value);
+        setValue(name, isMulti ? [...value.map(item => item.value)] : value.value);
+        onChange(value);
 
+    }
 
     return (
-        <StyledFormSelect {...props}>
-            <Select    components={{ DropdownIndicator }} options={options}   styles={customStyles} />
-        </StyledFormSelect>
+        <Row>
+            <Col xs={12}>
+                <StyledFormSelect {...props}>
+                    <Controller
+                        control={control}
+                        name={name}
+                        rules={rule}
+                        render={() => (
+                            <Select
+                                clearIndicator={true}
+                                options={options}
+                                disabled={disabled}
+                                placeholder={placeholder}
+                                onChange={handleChange}
+                                styles={customStyles}
+                                components={{DropdownIndicator}}
+                                isMulti={isMulti}
+                                value={
+                                    isMulti ? selectedValue : options.filter(option =>
+                                        option.value === selectedValue)
+                                }
+                            />
+                        )}
+                    />
+
+                </StyledFormSelect>
+            </Col>
+            <Col xs={12}>
+                <Text xs danger>{error && error.type == 'required' && `${label} is required`}</Text>
+                <Text xs danger>{error && error.type == 'pattern' && `${label} is not valid`}</Text>
+                <Text xs danger>{error && error.type == 'validation' && `${error.message} `}</Text>
+            </Col>
+
+        </Row>
     );
 };
 

@@ -7,7 +7,6 @@ import {isEqual} from "lodash";
 import "swiper/swiper.min.css";
 import arrowPrev from "../../assets/images/icons/arrow-prev.png";
 import arrowNext from "../../assets/images/icons/arrow-next.png";
-import regionsData from "../../mock/regionsData";
 
 SwiperCore.use([Navigation]);
 const StyledSlider = styled.div`
@@ -54,14 +53,18 @@ const StyledSlider = styled.div`
       font-size: 15px;
       color: #A1A1A7;
       cursor: pointer;
-      padding: 10px 15px;
+      padding: 10px 10px;
       font-weight: 300;
+  
+      text-align: center;
 
       &.active {
         font-weight: 700;
         color: #fff;
         background-color: #322A7D;
         border-radius: 31px;
+        text-align: center;
+        min-width: 175px !important;
         text-align: center;
       }
     }
@@ -71,17 +74,19 @@ const Slider = ({
                     items = [], active, setActive = () => {
     }, ...props
                 }) => {
-    const [regions] = useState(regionsData);
+
     return (
-        <StyledSlider {...props}>
-            <Swiper  slidesPerView={5} spaceBetween={0} navigation={true} className="mySwiper">
+        <>
+        {items.length > 0 && <StyledSlider {...props}>
+            <Swiper  slidesPerView={4} spaceBetween={0} navigation={true} className="mySwiper">
                 {
-                    regions && regions.map(({id, name}) => <SwiperSlide
-                        className={classNames({active: isEqual(id, active)})} onClick={() => setActive(id)}
-                        key={id}>{name}</SwiperSlide>)
+                    items && items.map(({_id, name}) => <SwiperSlide
+                        className={classNames({active: isEqual(_id, active)})} onClick={() => setActive(_id)}
+                        key={_id}>{name}</SwiperSlide>)
                 }
             </Swiper>
-        </StyledSlider>
+        </StyledSlider>}
+            </>
     );
 };
 

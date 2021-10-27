@@ -1,5 +1,5 @@
 import React from 'react';
-import styled,{css} from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledText = styled.p`
   display: flex;
@@ -7,12 +7,15 @@ const StyledText = styled.p`
   font-size: 14px;
   font-weight: 400;
   color: #666666;
-  
+
   ${({primary}) => primary && css`
-  color: #817C9B;
+    color: #817C9B;
   `};
   ${({md}) => md && css`
- font-size: 15px;
+    font-size: 15px;
+  `};
+  ${({danger}) => danger && css`
+    color: #F76652;
   `};
 `;
 const Text = (props) => {

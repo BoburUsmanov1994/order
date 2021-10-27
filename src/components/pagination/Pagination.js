@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import styled from "styled-components";
+import {ceil} from "lodash";
 import paginationPrev from "../../assets/images/paginationPrev.png";
 import paginationNext from "../../assets/images/paginationNext.png";
 import go from "../../assets/images/go.png";
@@ -79,10 +80,8 @@ const StyledPagination = styled.div`
     }
   }
 `;
-const Pagination = (props) => {
-    const handlePageClick = (page) => {
-        console.log(page);
-    }
+const Pagination = ({totalItems=0,current=0,paginate=(page)=>console.log(page),...props}) => {
+
     return (
         <StyledPagination {...props}>
             <ReactPaginate
@@ -90,22 +89,23 @@ const Pagination = (props) => {
                 nextLabel={<img src={paginationNext}/>}
                 breakLabel={'...'}
                 breakClassName={'break-me'}
-                pageCount={10}
+                pageCount={ceil(totalItems/20)}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
-                onPageChange={handlePageClick}
+                onPageChange={paginate}
                 containerClassName={'pagination'}
                 activeClassName={'active'}
+                forcePage={current}
             />
-            <div className={'go'}>
-                <p className={'go__text'}>Саҳифага утиш</p>
-                <div className={'go__input'}>
-                    <input type="number"/>
-                    <button>
-                        <img src={go} alt=""/>
-                    </button>
-                </div>
-            </div>
+            {/*<div className={'go'}>*/}
+            {/*    <p className={'go__text'}>Саҳифага утиш</p>*/}
+            {/*    <div className={'go__input'}>*/}
+            {/*        <input type="number"/>*/}
+            {/*        <button>*/}
+            {/*            <img src={go} alt=""/>*/}
+            {/*        </button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </StyledPagination>
     );
 };

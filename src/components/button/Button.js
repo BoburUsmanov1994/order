@@ -16,26 +16,43 @@ const StyledButton = styled.button`
 
   ${({outlined}) => outlined && css`
     background-color: transparent !important;
-    border:1px solid #707070;
+    border: 1px solid #707070;
   `}
+
 
   ${({danger}) => danger && css`
-    background-color: transparent;
-    border-color: #EF142F;
-    color: #EF142F;
-    background-color: #EF142F;
-  `}
-  
-  ${({success}) => success && css`
-    color: #fff;
-    background-color: #21D59B;
+    border-color: #EF142F !important;
+    color: #EF142F !important;
+    background-color: #EF142F !important;
   `}
 
+  ${({primary}) => primary && css`
+    border-color: #2457F6 !important;
+    color: #2457F6 !important;
+    background-color: #2457F6 !important;
+  `}
+
+  ${({success}) => success && css`
+    color: #fff;
+    background-color: #21D59B !important;
+    border-color: #21D59B !important;
+  `}
+  ${({status}) => status && css`
+    background-color: transparent !important;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    font-weight: 300;
+    padding: 10px 15px;
+    color: #21D59B;
+  `}
+  ${({back,danger}) => back && danger && css`
+      color: #fff !important;
+  `}
   ${({lg}) => lg && css`
     min-width: 250px;
   `}
   ${({thin}) => thin && css`
-   font-weight: 300;
+    font-weight: 300;
   `}
 `;
 const Button = ({handleClick = () => {},...props}) => {

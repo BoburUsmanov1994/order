@@ -1,6 +1,8 @@
 import React from 'react';
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 import Wrapper from "../components/wrapper";
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import 'react-tabs/style/react-tabs.css';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -30,12 +32,18 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     font-family: 'Ubuntu', sans-serif;
   }
-
+  .img-fluid{
+    max-width: 100%;
+    height: auto;
+  }
   .text-center {
     text-align: center;
   }
   .text-right {
     text-align: right;
+  }
+  .text-danger{
+    color: #EF142F;
   }
   .cursor-pointer {
     cursor: pointer;
@@ -51,6 +59,9 @@ const GlobalStyles = createGlobalStyle`
   }
   .mb-32{
     margin-bottom: 32px;
+  }
+  .mb-8{
+    margin-bottom: 8px;
   }
   .ml-16{
     margin-left: 16px;
@@ -86,6 +97,38 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: #C4C4C4;
     border-radius: 6px;
+  }
+.react-confirm-alert-body{
+  text-align: center;
+  h1{
+    font-size: 24px !important;
+  }
+  .react-confirm-alert-button-group{
+    justify-content: center;
+  
+    button{
+      font-size: 16px;
+      &:first-child{
+        background-color: #F76652;
+      }
+      :last-child{
+        background-color: #2BCC71;
+      }
+    }
+  }
+}
+.react-tabs__tab{
+  border:unset;
+  bottom: unset;
+  margin-right: 35px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+  .react-tabs__tab:focus{
+    box-shadow: unset;
+  }
+  .react-tabs__tab.react-tabs__tab--selected{
+    border-bottom: 1px solid #DE1010;
   }
 `;
 const Theme = ({children}) => {

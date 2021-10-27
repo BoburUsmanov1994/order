@@ -5,6 +5,7 @@ import AuthLayout from "./auth";
 import ErrorLayout from "./error";
 import ForbiddenLayout from "./403";
 import NotFoundLayout from "./404";
+import Toastify from "../components/toastify";
 
 const LayoutManager = (props) => {
 
@@ -36,6 +37,7 @@ const LayoutManager = (props) => {
 
     return (
         <Layout>
+            <Toastify />
             {children}
         </Layout>
     );

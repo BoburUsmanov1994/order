@@ -1,12 +1,14 @@
 import React from 'react';
+import {withRouter} from "react-router-dom";
+import {get} from "lodash";
 import RegionContainer from "../containers/RegionContainer";
 
-const RegionPage = () => {
+const RegionPage = ({match}) => {
     return (
         <>
-            <RegionContainer />
+            <RegionContainer id={get(match, 'params.id', null)}/>
         </>
     );
 };
 
-export default RegionPage;
+export default withRouter(RegionPage);
