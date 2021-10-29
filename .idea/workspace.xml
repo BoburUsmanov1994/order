@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/content/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/Logo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuParent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/MenuParent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile-info/ProfileInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile-info/ProfileInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/Sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/wrapper/Wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wrapper/Wrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +69,7 @@
       <workItem from="1634895703565" duration="9047000" />
       <workItem from="1634915427633" duration="20000" />
       <workItem from="1634925879358" duration="123115000" />
-      <workItem from="1635265642214" duration="75084000" />
+      <workItem from="1635265642214" duration="75325000" />
     </task>
     <servers />
   </component>

@@ -78,14 +78,14 @@ const OrderListContainer = ({history, orders, entities, isFetched, totalItems, g
                     <Box oval>
                         <Row>
                             <Col xs={12}>
-                                <Flex justify={'space-between'}>
+                                <Flex wrap justify={'space-between'}>
                                     <Flex>
-                                        <OrderSearch className={'mr-16'}/>
-                                        <Select placeholder={'Зўравонлик турлари'} className={'mr-16'}/>
-                                        <Select placeholder={'Вилоят'} className={'mr-16'}/>
+                                        <OrderSearch  className={'mr-16 mb-8'}/>
+                                        <Select placeholder={'Зўравонлик турлари'} className={'mr-16 mb-8'}/>
+                                        <Select placeholder={'Вилоят'} className={'mr-16 mb-8'}/>
 
                                     </Flex>
-                                    <Button success>Қидириш</Button>
+                                    <Button className={'mb-8'} success>Қидириш</Button>
                                 </Flex>
                             </Col>
                         </Row>
