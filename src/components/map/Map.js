@@ -29,7 +29,7 @@ const StyledMap = styled.div`
     background-color: #131523;
     position: absolute;
     top: -50px;
-    left: ${({x}) => x - 200 + 'px'};
+    left: ${({x,theme:{open}}) => isEqual(open,'open')  ?  x - 400  + 'px' : x-200 + 'px' };
     border-radius: 7px;
     z-index: 9999;
     padding: 15px;
@@ -69,7 +69,7 @@ const StyledMap = styled.div`
       left: 50%;
       width: 1px;
       z-index: 9;
-      height: ${({y}) => y - 400 + 'px'};
+      height: ${({y,theme:{open}}) => isEqual(open,'open')  ? y-375 + 'px' : y - 400 + 'px'};
       transform: translateX(-100%);
       border-left: 1px dashed #131522;
     }
@@ -84,7 +84,7 @@ const StyledMap = styled.div`
       background-clip: content-box;
       content: "";
       position: absolute;
-      top: ${({y}) => y - 300 + 'px'};
+      top: ${({y,theme:{open}}) => isEqual(open,'open')  ? y-275 + 'px' : y - 300 + 'px'};
       left: 50%;
       transform: translateX(-60%);
     }
