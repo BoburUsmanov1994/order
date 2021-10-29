@@ -135,7 +135,7 @@ const CriminalCaseContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Criminal case рўйхати</Title>
+                    <Title>Ушбу ҳолат бўйича ҳимоя ордерини бериш билан биргаликда жиноят иши қўзғатилганлиги</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

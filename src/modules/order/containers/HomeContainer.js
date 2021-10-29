@@ -101,12 +101,12 @@ const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regi
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Flex justify={'space-between'}>
-                                            <Card title={'Оилада'} percent={15} count={'339,259'} danger/>
-                                            <Card title={'Таълим муассасасида'} percent={23} count={'339,259'} success/>
-                                            <Card title={'Кўчада'} percent={23} count={'339,259'} primary/>
-                                            <Card title={'Жамоат жойида'} percent={23} count={'339,259'} warning/>
-                                            <Card title={'Иш жойида'} percent={23} count={'339,259'} primary/>
+                                        <Flex wrap justify={'space-between'}>
+                                            <Card className={'mb-8'} title={'Оилада'} percent={15} count={'339,259'} danger/>
+                                            <Card className={'mb-8'} title={'Таълим муассасасида'} percent={23} count={'339,259'} success/>
+                                            <Card className={'mb-8'} title={'Кўчада'} percent={23} count={'339,259'} primary/>
+                                            <Card className={'mb-8'} title={'Жамоат жойида'} percent={23} count={'339,259'} warning/>
+                                            <Card className={'mb-8'} title={'Иш жойида'} percent={23} count={'339,259'} primary/>
                                         </Flex>
                                     </Col>
                                 </Row>

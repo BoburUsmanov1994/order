@@ -135,7 +135,7 @@ const AdministrativeCodexContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Administrative рўйхати</Title>
+                    <Title>Маъмурий кодекси моддалари</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

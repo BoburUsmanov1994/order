@@ -26,10 +26,10 @@ const StyledList = styled.ul`
     border-radius: 6px;
   }
 li{
-  font-size: 20px;
+  font-size: 16px;
   color: #C6C6C6;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
   border-bottom: 1px solid transparent;
   display: inline-block;

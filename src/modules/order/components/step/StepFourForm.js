@@ -35,16 +35,6 @@ const StepFourForm = ({reset=()=>{},create = () =>{},typeviolence=[],typerestric
                 <Col xs={12}><Title>4. Жабрланувчининг ўтказилган зўравонлик ҳақида маълумот</Title></Col>
             </Row>
             <Row className={'mb-48'}>
-                {/*<Col xs={6} className={'mb-32'}>*/}
-                {/*    <Label>Судланганлик ҳолати</Label>*/}
-                {/*    <Textarea register={register} label={'Айни вақтда яшаш манзили'} name={'currentaddress'}*/}
-                {/*              validation={{required: true}} error={errors?.currentaddress} noshadow sm/>*/}
-                {/*</Col>*/}
-                {/*<Col xs={6} className={'mb-32'}>*/}
-                {/*    <Label>Тазйиқ ва зўравонликнинг қисқача фабуласи</Label>*/}
-                {/*    <Textarea register={register} label={'Айни вақтда яшаш манзили'} name={'currentaddress'}*/}
-                {/*              validation={{required: true}} error={errors?.currentaddress} noshadow sm/>*/}
-                {/*</Col>*/}
                 <Col xs={4} className={'mb-32'}>
                     <Label >Тазйиқ ва зўравонлик
                         турлари </Label>
@@ -58,41 +48,41 @@ const StepFourForm = ({reset=()=>{},create = () =>{},typeviolence=[],typerestric
                                 error={errors?.typeviolencesId} isMulti/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >Чеклов турлари</Label>
+                    <Label >Белгиланган чекловлар</Label>
                     <FormSelect
                          options={typerestrictions}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'typerestrictionsId'}
                         label={'Чеклов турлари'} placeholder={'Чеклов турлари'}
                         error={errors?.typerestrictionsId} isMulti/>
-                </Col>
+                </Col> <Col xs={4} className={'mb-32'}>
+                <Label >Такрорийлиги </Label>
+                <FormSelect
+                    options={occuredRepetitionList}
+                    setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                    name={'occurredrepetitionId'}
+                    label={'Такрорийлиги'} placeholder={'Такрорийлиги'}
+                    error={errors?.occurredrepetitionId}/>
+            </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >Guardianship </Label>
+                    <Label >Вояга етмаган зўравонликдан жабрланувчиларга нисбатан ҳимоя ордери кимлар иштирокида расмийлаштириб берилган </Label>
                     <FormSelect
                          options={guardianshipList}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'guardianshipsId'}
-                        label={'Guardianship'} placeholder={'Guardianship'}
+                        label={'Вояга етмаган зўравонликдан жабрланувчиларга нисбатан ҳимоя ордери кимлар иштирокида расмийлаштириб берилган'} placeholder={''}
                         error={errors?.guardianshipsId} isMulti/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >Send preparation</Label>
+                    <Label >Тазйиқ ва зўравонликдан жабрланувчиларга ёрдам кўрсатиш бўйича махсус марказларга жойлаштириш</Label>
                     <FormSelect
                          options={sendpreparationlist}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'sendpreparationId'}
-                        label={'Send preparation'} placeholder={'Send preparation'}
+                        label={'Тазйиқ ва зўравонликдан жабрланувчиларга ёрдам кўрсатиш бўйича махсус марказларга жойлаштириш'} placeholder={''}
                         error={errors?.sendpreparationId}/>
                 </Col>
-                <Col xs={4} className={'mb-32'}>
-                    <Label >Occured Repetition</Label>
-                    <FormSelect
-                        options={occuredRepetitionList}
-                        setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
-                        name={'occurredrepetitionId'}
-                        label={'Occured Repetition'} placeholder={'Occured Repetition'}
-                        error={errors?.occurredrepetitionId}/>
-                </Col>
+
 
             </Row>
 

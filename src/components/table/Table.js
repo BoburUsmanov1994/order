@@ -15,10 +15,10 @@ const StyledTable = styled.div`
     vertical-align: middle;
   }
   td ,th{
-    font-size: 16px;
+    font-size: 14px;
     color: #7E7E7E;
     font-weight: 300;
-    padding: 10px 15px;
+    padding: 8px 10px;
     border-bottom: 1px solid #DCDCDC;
     vertical-align: middle;
     min-width: 125px;

@@ -7,10 +7,10 @@ const StyledTextarea = styled.textarea`
   padding: 15px;
   width: 100%;
   min-height: 200px;
-  border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
+  //border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
   border-radius: 5px;
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   color: #7E7E7E;
   font-family: 'Ubuntu', sans-serif;

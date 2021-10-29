@@ -2,7 +2,7 @@ import React from 'react';
 import styled,{css} from "styled-components";
 
 const StyledLabel = styled.label`
-  font-size: 15px;
+  font-size: 14px;
   color: #7E7E7E;
   display: block;
   margin-bottom: 10px;

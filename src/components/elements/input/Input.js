@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, {css} from "styled-components";
 import {Row,Col} from "react-grid-system";
-import classNames from "classnames";
 import Text from "../../text";
 
 const StyledInput = styled.input`
@@ -10,11 +9,11 @@ const StyledInput = styled.input`
   border-radius: 5px;
   border: 1px solid #707070;
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   color: #7E7E7E;
   font-family: 'Ubuntu', sans-serif;
-  border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
+  //border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
   ${({sm}) => sm && css`
     padding: 10px;
     width: 100%;

@@ -135,7 +135,7 @@ const WorkingPlaceContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Working place рўйхати</Title>
+                    <Title>Жабрланган шахснинг бандлиги</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

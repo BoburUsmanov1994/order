@@ -135,7 +135,7 @@ const SendPreparationContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Send preparation рўйхати</Title>
+                    <Title>Тазйиқ ва зўравонликдан жабрланувчиларга ёрдам кўрсатиш бўйича махсус марказларга жойлаштириш</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

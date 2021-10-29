@@ -290,7 +290,161 @@ class ApiService{
         return request.delete(`/administrativecodex/${id}`);
     }
 
+    static CreateCitizenship= (params) => {
+        return request.post(`/citizenship/`,{...params});
+    }
 
+    static UpdateCitizenship= (id,params) => {
+        return request.put(`/citizenship/${id}`,{...params});
+    }
+
+    static DeleteCitizenship = (id) => {
+        return request.delete(`/citizenship/${id}`);
+    }
+
+    static CreateAges= (params) => {
+        return request.post(`/ages/`,{...params});
+    }
+
+    static UpdateAges= (id,params) => {
+        return request.put(`/ages/${id}`,{...params});
+    }
+
+    static DeleteAges = (id) => {
+        return request.delete(`/ages/${id}`);
+    }
+
+    static CreateEducation= (params) => {
+        return request.post(`/education/`,{...params});
+    }
+
+    static UpdateEducation= (id,params) => {
+        return request.put(`/education/${id}`,{...params});
+    }
+
+    static DeleteEducation = (id) => {
+        return request.delete(`/education/${id}`);
+    }
+
+    static CreateFamilyPosition= (params) => {
+        return request.post(`/familyposition/`,{...params});
+    }
+
+    static UpdateFamilyPosition= (id,params) => {
+        return request.put(`/familyposition/${id}`,{...params});
+    }
+
+    static DeleteFamilyPosition = (id) => {
+        return request.delete(`/familyposition/${id}`);
+    }
+
+    static CreatePersonCondition= (params) => {
+        return request.post(`/conditionperson/`,{...params});
+    }
+
+    static UpdatePersonCondition= (id,params) => {
+        return request.put(`/conditionperson/${id}`,{...params});
+    }
+
+    static DeletePersonCondition = (id) => {
+        return request.delete(`/conditionperson/${id}`);
+    }
+
+    static CreateGuardianship= (params) => {
+        return request.post(`/guardianship/`,{...params});
+    }
+
+    static UpdateGuardianship = (id,params) => {
+        return request.put(`/guardianship/${id}`,{...params});
+    }
+
+    static DeleteGuardianship = (id) => {
+        return request.delete(`/guardianship/${id}`);
+    }
+
+    static CreateBasisTermination= (params) => {
+        return request.post(`/basistermination/`,{...params});
+    }
+
+    static UpdateBasisTermination = (id,params) => {
+        return request.put(`/basistermination/${id}`,{...params});
+    }
+
+    static DeleteBasisTermination = (id) => {
+        return request.delete(`/basistermination/${id}`);
+    }
+
+    static CreateActionPersonViolence= (params) => {
+        return request.post(`/ectionspersonviolence/`,{...params});
+    }
+
+    static UpdateActionPersonViolence = (id,params) => {
+        return request.put(`/ectionspersonviolence/${id}`,{...params});
+    }
+
+    static DeleteActionPersonViolence = (id) => {
+        return request.delete(`/ectionspersonviolence/${id}`);
+    }
+
+    static CreateConditionPersonViolence= (params) => {
+        return request.post(`/conditionpersonviolence/`,{...params});
+    }
+
+    static UpdateConditionPersonViolence = (id,params) => {
+        return request.put(`/conditionpersonviolence/${id}`,{...params});
+    }
+
+    static DeleteConditionPersonViolence = (id) => {
+        return request.delete(`/conditionpersonviolence/${id}`);
+    }
+
+    static CreateOccuredRepetition= (params) => {
+        return request.post(`/occurredrepetition/`,{...params});
+    }
+
+    static UpdateOccuredRepetition = (id,params) => {
+        return request.put(`/occurredrepetition/${id}`,{...params});
+    }
+
+    static DeleteOccuredRepetition = (id) => {
+        return request.delete(`/occurredrepetition/${id}`);
+    }
+
+    static CreateRestrictionOfType = (params) => {
+        return request.post(`/restrictionoftype/`,{...params});
+    }
+
+    static UpdateRestrictionOfType = (id,params) => {
+        return request.put(`/restrictionoftype/${id}`,{...params});
+    }
+
+    static DeleteRestrictionOfType = (id) => {
+        return request.delete(`/restrictionoftype/${id}`);
+    }
+
+    static CreateBehavior = (params) => {
+        return request.post(`/behavior/`,{...params});
+    }
+
+    static UpdateBehavior = (id,params) => {
+        return request.put(`/behavior/${id}`,{...params});
+    }
+
+    static DeleteBehavior = (id) => {
+        return request.delete(`/behavior/${id}`);
+    }
+
+    static CreateResultOrder = (params) => {
+        return request.post(`/resultorder/`,{...params});
+    }
+
+    static UpdateResultOrder = (id,params) => {
+        return request.put(`/resultorder/${id}`,{...params});
+    }
+
+    static DeleteResultOrder = (id) => {
+        return request.delete(`/resultorder/${id}`);
+    }
 }
 
 export default ApiService;

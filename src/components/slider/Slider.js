@@ -50,7 +50,7 @@ const StyledSlider = styled.div`
     }
 
     .swiper-slide {
-      font-size: 15px;
+      font-size: 14px;
       color: #A1A1A7;
       cursor: pointer;
       padding: 10px 10px;
@@ -62,7 +62,7 @@ const StyledSlider = styled.div`
         font-weight: 700;
         color: #fff;
         background-color: #322A7D;
-        border-radius: 31px;
+        border-radius: 30px;
         text-align: center;
         min-width: 175px !important;
         text-align: center;

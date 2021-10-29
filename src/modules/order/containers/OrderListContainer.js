@@ -126,7 +126,7 @@ const OrderListContainer = ({history, orders, entities, isFetched, totalItems, g
                                         onClick={() => deleteOrder(get(order, '_id'))} className={'cursor-pointer'}
                                         color="#E3111A" size={24}/></td>
                             </tr>) : <tr>
-                                <td colSpan={4}>Маълумот мавжуд эмас</td>
+                                <td colSpan={12}>Маълумот мавжуд эмас</td>
                             </tr>
                         }
                     </Table> : <ContentLoader/>}

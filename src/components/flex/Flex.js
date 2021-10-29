@@ -5,6 +5,8 @@ const StyledFlex = styled.div`
   display: flex;
   align-items: ${({align}) => align || 'center'};
   justify-content: ${({justify}) => justify || 'flex-start'};
+  flex-direction: ${({column}) => column ? 'column' : 'row'};
+  flex-wrap: ${({wrap}) => wrap ? 'wrap' : 'nowrap'};
 `;
 const Flex = (props) => {
     return (

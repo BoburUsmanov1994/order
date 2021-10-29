@@ -135,7 +135,7 @@ const PersonViolenceContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Person violence рўйхати</Title>
+                    <Title>Тазйиқ ёки зўравонлик содир этган шахс</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

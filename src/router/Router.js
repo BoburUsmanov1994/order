@@ -42,6 +42,20 @@ import AdministrativePage from "../modules/order/pages/AdministrativePage";
 import AdministrativeCodexPage from "../modules/order/pages/AdministrativeCodexPage";
 import ViolentsPage from "../modules/order/pages/ViolentsPage";
 import VictimUpdatePage from "../modules/order/pages/VictimUpdatePage";
+import OrderViewPage from "../modules/order/pages/OrderViewPage";
+import CitizenshipPage from "../modules/order/pages/CitizenshipPage";
+import AgesPage from "../modules/order/pages/AgesPage";
+import EducationPage from "../modules/order/pages/EducationPage";
+import FamilyPositionPage from "../modules/order/pages/FamilyPositionPage";
+import PersonConditionPage from "../modules/order/pages/PersonConditionPage";
+import GuardianshipPage from "../modules/order/pages/GuardianshipPage";
+import BasisTerminationPage from "../modules/order/pages/BasisTerminationPage";
+import ActionPersonViolencePage from "../modules/order/pages/ActionPersonViolencePage";
+import ConditionPersonViolencePage from "../modules/order/pages/ConditionPersonViolencePage";
+import OccuredRepetitionPage from "../modules/order/pages/OccuredRepetitionPage";
+import RestrictionOfTypePage from "../modules/order/pages/RestrictionOfTypePage";
+import BehaviorPage from "../modules/order/pages/BehaviorPage";
+import ResultOrderPage from "../modules/order/pages/ResultOrderpage";
 
 const Router = () => {
     return (
@@ -61,6 +75,7 @@ const Router = () => {
                             <Route path={'/order/list'} exact component={OrderListPage}/>
                             <Route path={'/order/attach/victim/:id'} exact component={AttachVictimToOrderPage}/>
                             <Route path={'/order/attach/violent/:id'} exact component={AttachViolentToOrderPage}/>
+                            <Route path={'/order/view/:id'} exact component={OrderViewPage}/>
                             <Route path={'/victim/list'} exact component={VictimsPage}/>
                             <Route path={'/victim/update/:id'} exact component={VictimUpdatePage}/>
                             <Route path={'/violent/list'} exact component={ViolentsPage}/>
@@ -84,6 +99,19 @@ const Router = () => {
                             <Route path={'/criminal-codex'} exact component={CriminalCodexPage}/>
                             <Route path={'/administrative'} exact component={AdministrativePage}/>
                             <Route path={'/administrative-codex'} exact component={AdministrativeCodexPage}/>
+                            <Route path={'/citizenship'} exact component={CitizenshipPage}/>
+                            <Route path={'/ages'} exact component={AgesPage}/>
+                            <Route path={'/education'} exact component={EducationPage}/>
+                            <Route path={'/family-position'} exact component={FamilyPositionPage}/>
+                            <Route path={'/conditionperson'} exact component={PersonConditionPage}/>
+                            <Route path={'/guardianship'} exact component={GuardianshipPage}/>
+                            <Route path={'/basis-termination'} exact component={BasisTerminationPage}/>
+                            <Route path={'/action-person-violence'} exact component={ActionPersonViolencePage}/>
+                            <Route path={'/condition-person-violence'} exact component={ConditionPersonViolencePage}/>
+                            <Route path={'/occured-repetation'} exact component={OccuredRepetitionPage}/>
+                            <Route path={'/restrictions-of-type'} exact component={RestrictionOfTypePage}/>
+                            <Route path={'/behavior'} exact component={BehaviorPage}/>
+                            <Route path={'/result-order'} exact component={ResultOrderPage}/>
                             <Route path={'/logout'} exact component={LogoutPage}/>
                             <Route path={'/403'} exact component={ForbiddenPage}/>
                             <Route path={'/404'} exact component={NotFoundPage}/>

@@ -135,7 +135,7 @@ const StatusOrderContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Status order рўйхати</Title>
+                    <Title>Ҳимоя ордери муддати узайтирилганлиги</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

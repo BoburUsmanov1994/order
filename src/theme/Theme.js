@@ -1,8 +1,11 @@
 import React from 'react';
 import {createGlobalStyle, ThemeProvider} from "styled-components";
+import {useSelector} from "react-redux";
+import {get} from "lodash";
 import Wrapper from "../components/wrapper";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-tabs/style/react-tabs.css';
+import storage from "../services/local-storage";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -132,8 +135,9 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 const Theme = ({children}) => {
+    const open = useSelector(state => get(state,'order.open',storage.get('open') ?? 'open'))
     return (
-        <ThemeProvider theme={{dark: false}}>
+        <ThemeProvider theme={{open}}>
             <GlobalStyles/>
             <Wrapper>
                 {children}

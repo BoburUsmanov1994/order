@@ -135,7 +135,7 @@ const SocialStatusContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Social status рўйхати</Title>
+                    <Title>Ижтимоий аҳволи рўйхати</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

@@ -33,7 +33,7 @@ const customStyles = {
         padding: '0px 10px',
         width: '100%',
         minHeight: '40px',
-        fontSize: '18px',
+        fontSize: '16px',
         fontWeight: '300',
         "&:hover": {
             borderColor: 'none',

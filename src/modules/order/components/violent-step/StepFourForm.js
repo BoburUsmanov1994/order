@@ -67,125 +67,123 @@ const StepFourForm = ({reset=()=>{},create = () =>{},typeviolence=[],typerestric
                                 error={errors?.typeviolencesId} isMulti/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >Чеклов турлари</Label>
+                    <Label >Тазйиқ ўтказган ёки зўравонлик содир этган  этишга белгиланган чекловлар</Label>
                     <FormSelect
                          options={typerestrictions}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'typerestrictionsId'}
-                        label={'Чеклов турлари'} placeholder={'Чеклов турлари'}
+                        label={'Чеклов турлари'} placeholder={''}
                         error={errors?.typerestrictionsId} isMulti/>
                 </Col>
 
                 <Col xs={4} className={'mb-32'}>
-                    <Label >Occured Repetition</Label>
+                    <Label >Такрорийлиги</Label>
                     <FormSelect
                         options={occuredRepetitionList}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'occurredrepetitionId'}
-                        label={'Occured Repetition'} placeholder={'Occured Repetition'}
+                        label={'Такрорийлиги'} placeholder={'Такрорийлиги'}
                         error={errors?.occurredrepetitionId}/>
                 </Col>
 
                 <Col xs={4} className={'mb-32'}>
-                    <Label >ectionspersonviolencesId</Label>
+                    <Label >Тазйиқ ким томондан содир этилганлиги</Label>
                     <FormSelect
                         options={actionsPersonViolenceList}
                         setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                         name={'ectionspersonviolencesId'}
-                        label={'ectionspersonviolencesId'} placeholder={'ectionspersonviolencesId'}
+                        label={'Тазйиқ ким томондан содир этилганлиги'} placeholder={'Тазйиқ ким томондан содир этилганлиги'}
                         error={errors?.ectionspersonviolencesId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >reasonviolenceId</Label>
+                    <Label >Зўравонлик содир этиш сабабалари</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={reasonViolenceList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'reasonviolenceId'}
-                        label={'reasonviolenceId'} placeholder={'reasonviolenceId'}
+                        label={'Зўравонлик содир этиш сабабалари'} placeholder={'Зўравонлик содир этиш сабабалари'}
                         error={errors?.reasonviolenceId}/>
                 </Col>
 
                 <Col xs={4} className={'mb-32'}>
-                    <Label >behaviorId</Label>
+                    <Label >Тазйиқ содир этишга шахсни ҳулқ-атворини тузатиш дастурига</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={behaviorList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'behaviorId'}
-                        label={'behaviorId'} placeholder={'behaviorId'}
+                        label={'Тазйиқ содир этишга шахсни ҳулқ-атворини тузатиш дастурига'} placeholder={''}
                         error={errors?.behaviorId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label >stateviolenceId</Label>
+                    <Label >Тазйиқ ва зўравонлик содир этган ҳолати</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={stateViolenceList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'stateviolenceId'}
-                        label={'stateviolenceId'} placeholder={'stateviolenceId'}
+                        label={'Тазйиқ ва зўравонлик содир этган ҳолати'} placeholder={''}
                         error={errors?.stateviolenceId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label>personviolenceId</Label>
+                    <Label>Тазйиқ ва зўравонлик содир этган шахс ҳолати</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={personViolence}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'personviolenceId'}
-                        label={'personviolenceId'} placeholder={'personviolenceId'}
+                        label={'Тазйиқ ва зўравонлик содир этган шахс ҳолати'} placeholder={''}
                         error={errors?.personviolenceId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label>conditionpersonviolenceId</Label>
+                    <Label>Тазйиқ ва зўравонлик содир этган шахс ҳолати (юборилганлиги)</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={conditionPersonViolenceList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'conditionpersonviolenceId'}
-                        label={'conditionpersonviolenceId'} placeholder={'conditionpersonviolenceId'}
+                        label={'Тазйиқ ва зўравонлик содир этган шахс ҳолати (юборилганлиги)'} placeholder={''}
                         error={errors?.conditionpersonviolenceId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label>criminalcaseId</Label>
+                    <Label>Ушбу ҳолат жиноят иши қўзғатилганлиги</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={criminalCaseList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'criminalcaseId'}
-                        label={'criminalcaseId'} placeholder={'criminalcaseId'}
+                        label={'Ушбу ҳолат жиноят иши қўзғатилганлиги'} placeholder={''}
                         error={errors?.criminalcaseId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label>criminalcodexId</Label>
+                    <Label>Жиноят кодекси модалари</Label>
                     <FormSelect
-                        rule={{required: true}}
                         options={criminalCodexList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'criminalcodexId'}
-                        label={'criminalcodexId'} placeholder={'criminalcodexId'}
+                        label={'Жиноят кодекси модалари'} placeholder={''}
                         error={errors?.criminalcodexId}/>
                 </Col>
                 <Col xs={4} className={'mb-32'}>
-                    <Label>administrativeworkId</Label>
+                    <Label>Ушбу ҳолат бўйича маъмурий жавобгарликка тортилганлиги</Label>
                     <FormSelect
                         rule={{required: true}}
                         options={administrativeList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'administrativeworkId'}
-                        label={'administrativeworkId'} placeholder={'administrativeworkId'}
+                        label={'Ушбу ҳолат бўйича маъмурий жавобгарликка тортилганлиги'} placeholder={''}
                         error={errors?.administrativeworkId}/>
                 </Col>
 
 
                 <Col xs={4} className={'mb-32'}>
-                    <Label>administrativecodexId</Label>
+                    <Label>Маъмурий кодекси моддалари</Label>
                     <FormSelect
-                        rule={{required: true}}
                         options={administrativeCodexList}
                         setValue={setValue} Controller={Controller}  control={control}
                         name={'administrativecodexId'}
-                        label={'administrativecodexId'} placeholder={'administrativecodexId'}
+                        label={'Маъмурий кодекси моддалари'} placeholder={''}
                         error={errors?.administrativecodexId}/>
                 </Col>
 

@@ -2,7 +2,6 @@ import axios from "axios";
 import config from "../../config";
 import storage from "../local-storage";
 import history from "../../router/history";
-import {toast} from "react-toastify";
 import {get} from "lodash";
 
 const request = axios.create({
@@ -28,9 +27,7 @@ request.interceptors.response.use((response) => {
         storage.remove('token');
         history.push('/auth');
     }
-    if(statusCode == 500){
-        toast.error('Server error please try again. Sorry!')
-    }
+
 
     return Promise.reject(error);
 });

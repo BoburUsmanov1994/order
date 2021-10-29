@@ -2,210 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/loader/ContentLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/loader/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/loader/loader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/modal/Modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/modal/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/profile-info/ProfileInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/profile-info/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/table/GridTable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/toastify/Toastify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/toastify/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/auth/AuthConsumer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/auth/AuthContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/auth/AuthProvider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/Actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/ApiService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/Reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/Sagas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/components/LoginForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/auth/pages/LogoutPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/Actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/Reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/Sagas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/district/DistrictCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/district/DistrictUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/item/ItemCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/item/ItemUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/neighborhood/NeighborhoodCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/neighborhood/NeighborhoodUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/order/OrderCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/order/OrderUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/region/RegionCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/region/RegionUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/user/UserCreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/user/UserUpdateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepFourForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepOneForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepThreeForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepTwoForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AccountRolesContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AccountStatusContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeCodexContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/CriminalCaseContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/CriminalCodexContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/DistrictsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/NeighborhoodsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderCreateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderUpdateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/PersonViolenceContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/PositionContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/RanksContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ReasonViolenceContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/RestrictionsTypeContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/SendPreparationContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/SocialStatusContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/StateViolenceContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/StatusOrderContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/UserUpdateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/UserViewContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/UsersContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolenceTypeContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolentsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/WorkingPlaceContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AccountRolesPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AccountStatusPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AdministrativeCodexPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AdministrativePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AttachViolentToOrderPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/CriminalCasePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/CriminalCodexPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/DistrictsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/NeighborhoodsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/OrderCreatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/OrderUpdatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/PersonViolencePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/PositionPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/RanksPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ReasonViolencePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/RegionsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/RestrictionsTypePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/SendPreparationPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/SocialStatusPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/StateViolencePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/StatusOrderPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/UserCreatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/UserUpdatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/UserViewPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/UsersPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/VictimUpdatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/VictimsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ViolenceTypePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ViolentsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/WorkingPlacePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/router/history.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ActionPlaceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/AdministrativeScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/AgeScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/BasisOrderScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/BasisTerminationScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/BehaviorScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/CitizenshipScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ConditionPersonViolenceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/CriminalCaseScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/CriminalCodexScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/DistrictScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/EducationScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/FamilyPositionScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/GenderScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/GuardianScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/NeighborhoodScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/OccuredRepetitionScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/OrderScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/PersonConditionScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/PersonViolenceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/RankScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ReasonViolenceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/RegionScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/RestrictionTypeScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ResultOrderScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/RoleScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/SendPreparationScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/SocialStatusScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/StateViolenceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/StatusOrderScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/StatusScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/TokenScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/TypeViolenceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/UserScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/VictimScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ViolentScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/WorkingPlaceScheme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api/Actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api/Api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api/Saga.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/auth/Auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/auth/AuthLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/auth/HasAccess.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/auth/IsAuth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/auth/IsGuest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/local-storage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/normalizer/Actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/normalizer/Reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/normalizer/Sagas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/normalizer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/Provider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/configure.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/middlewares.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/reducers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/sagas/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/menu/MenuParent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ActionPersonViolenceContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/AgesContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/BasisTerminationContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/BehaviorContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/CitizenshipContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ConditionPersonViolenceContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/EducationContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/FamilyPositionContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/GuardianshipContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/OccuredRepetitionContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderViewContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/PersonConditionContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/RestrictionOfTypeContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ResultOrderContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ActionPersonViolencePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/AgesPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/BasisTerminationPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/BehaviorPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/CitizenshipPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ConditionPersonViolencePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/EducationPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/FamilyPositionPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/GuardianshipPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/OccuredRepetitionPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/OrderViewPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/PersonConditionPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/RestrictionOfTypePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ResultOrderpage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/Сгруппировать 134.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Сгруппировать 134.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/Сгруппировать 136.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/button/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button/Button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/elements/calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/calendar/Calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/content/Content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/elements/form-select/FormSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/form-select/FormSelect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/elements/input/Input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/input/Input.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/elements/select/Select.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/select/Select.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/elements/label/Label.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/label/Label.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/elements/textarea/Textarea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/textarea/Textarea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/flex/Flex.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/flex/Flex.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/list/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list/List.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/Logo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/Profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sidebar/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/Sidebar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/slider/Slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slider/Slider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/Table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/text/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/text/Text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/LayoutManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/LayoutManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/auth/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/order/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/order/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mock/dropdownData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mock/mapData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mock/regionsData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/auth/containers/LoginContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/containers/LoginContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/OrderSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/order/OrderSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/StepFourForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepFourForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/StepThreeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepThreeForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/StepTwoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepTwoForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/CreateOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/title/Title.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/title/Title.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wrapper/Wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/wrapper/Wrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Sagas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/order/OrderCreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/order/OrderCreateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepFourForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepFourForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepFourForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepFourForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AccountRolesContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AccountRolesContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AccountStatusContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AccountStatusContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeCodexContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeCodexContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AdministrativeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/CriminalCaseContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/CriminalCaseContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/CriminalCodexContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/CriminalCodexContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/pages/CreateOrderPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/pages/AttachVictimToOrderPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/pages/RegionPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/pages/RegionPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/PersonViolenceContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/PersonViolenceContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/PositionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/PositionContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RanksContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RanksContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ReasonViolenceContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ReasonViolenceContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RestrictionsTypeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RestrictionsTypeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/SendPreparationContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/SendPreparationContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/SocialStatusContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/SocialStatusContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/StateViolenceContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/StateViolenceContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/StatusOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/StatusOrderContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ViolenceTypeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolenceTypeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/WorkingPlaceContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/WorkingPlaceContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/theme/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/Theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +142,7 @@
       <workItem from="1634895703565" duration="9047000" />
       <workItem from="1634915427633" duration="20000" />
       <workItem from="1634925879358" duration="123115000" />
-      <workItem from="1635265642214" duration="44105000" />
+      <workItem from="1635265642214" duration="72765000" />
     </task>
     <servers />
   </component>
@@ -310,7 +181,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/menu/Menu.js</url>
-          <line>148</line>
+          <line>308</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

@@ -135,7 +135,7 @@ const RanksContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Званиялар рўйхати</Title>
+                    <Title>Унвонлар рўйхати</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

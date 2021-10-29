@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
 import {Link, NavLink} from "react-router-dom";
+import {isEqual} from "lodash";
 import Menu from "../menu";
 import {ReactSVG} from "react-svg";
 import exitIcon from "../../assets/images/icons/exit.svg";
 import mvd from "../../assets/images/mvd-logo.png";
 
 const StyledSidebar = styled.div`
-  width: 80px;
+  width: ${({theme:{open}}) => isEqual(open,'open') ? '300px' : '80px'};
   position: fixed;
   top: 0;
   left: 0;
@@ -18,11 +19,12 @@ const StyledSidebar = styled.div`
   background-color: #fff;
   .sidebar {
     &__logo {
-      padding-top: 10px;
+      padding-top: 15px;
       text-align: center;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E5E5E5;
       img {
-        width: 40px;
+        width: ${({theme:{open}}) => isEqual(open,'open') ? '80px' : '50px'};
       }
     }
 

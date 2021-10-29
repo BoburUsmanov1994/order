@@ -135,7 +135,7 @@ const AdministrativeContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Administrative рўйхати</Title>
+                    <Title>Ушбу ҳолат бўйича ҳимоя ордерини бериш билан биргаликда маъмурий жавобгарликка тортилганлиги</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

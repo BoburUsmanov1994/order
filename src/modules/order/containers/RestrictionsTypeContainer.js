@@ -135,7 +135,7 @@ const RestrictionsTypeContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Restrictions type рўйхати</Title>
+                    <Title>Белгиланган чекловлар</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {

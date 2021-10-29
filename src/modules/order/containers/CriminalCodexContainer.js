@@ -135,7 +135,7 @@ const CriminalCodexContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title>Criminal codex рўйхати</Title>
+                    <Title>Жиноят кодекси моддалари</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
                     <Button success lg thin handleClick={() => {
