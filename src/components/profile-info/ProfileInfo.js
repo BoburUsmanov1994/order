@@ -2,14 +2,11 @@ import React from 'react';
 import styled from "styled-components";
 import {Col, Row} from "react-grid-system";
 import avatarLogo from "../../assets/images/avatar.png";
-import camera from "../../assets/images/icons/photo-camera.png"
 import Title from "../title";
 import Text from "../text";
 import Flex from "../flex/Flex";
-import mail from "../../assets/images/icons/mail.png";
-import tel from "../../assets/images/icons/phone.png";
-import globe from "../../assets/images/icons/globe.png";
-import {User} from "react-feather";
+import {User,Mail,Phone,Globe,UserCheck,Calendar} from "react-feather";
+import moment from "moment";
 
 const StyledProfileInfo = styled.div`
   .imgbox{
@@ -47,7 +44,7 @@ const StyledProfileInfo = styled.div`
     }
   }
 `;
-const ProfileInfo = ({avatar = avatarLogo,name="Admin",position="Катта инспектор",email="admin@gmail.com",phone="+998909566888",site="www.mvd.uz", ...props}) => {
+const ProfileInfo = ({createdAt='-',role='-',status='-',avatar = avatarLogo,name="Admin",position="Катта инспектор",email="admin@gmail.com",phone="+998909566888",site="www.mvd.uz", ...props}) => {
     return (
         <StyledProfileInfo {...props}>
             <Row align={'center'}>
@@ -67,29 +64,55 @@ const ProfileInfo = ({avatar = avatarLogo,name="Admin",position="Катта ин
                         </Col>
                     </Row>
                 </Col>
-                <Col xs={8}>
+                <Col xs={4}>
                     <Row align={'center '} className={'mb-8'}>
-                        <Col xs={2}>
-                          <Flex align={'center'}><div className="imgbox"><img src={mail} className={'img-fluid '} alt=""/></div><Text>Email:</Text></Flex>
+                        <Col xs={4}>
+                          <Flex align={'center'}><div className="imgbox"><Mail  size={16}/></div><Text>Email:</Text></Flex>
                         </Col>
-                        <Col xs={10}>
+                        <Col xs={8}>
                             <Text>{email}</Text>
                         </Col>
                     </Row>
                     <Row align={'center'} className={'mb-8'}>
-                        <Col xs={2}>
-                            <Flex align={'center'}><div className="imgbox"><img src={tel} className={'img-fluid '} alt=""/></div><Text>Телефон:</Text></Flex>
+                        <Col xs={4}>
+                            <Flex align={'center'}><div className="imgbox"><Phone size={16} /></div><Text>Телефон:</Text></Flex>
                         </Col>
-                        <Col xs={10}>
+                        <Col xs={8}>
                             <Text>{phone}</Text>
                         </Col>
                     </Row>
                     <Row align={'center'} >
-                        <Col xs={2}>
-                            <Flex align={'center'}><div className="imgbox"><img src={globe} className={'img-fluid '} alt=""/></div><Text>Сайт:</Text></Flex>
+                        <Col xs={4}>
+                            <Flex align={'center'}><div className="imgbox"><Globe size={16} /></div><Text>Сайт:</Text></Flex>
                         </Col>
-                        <Col xs={10}>
+                        <Col xs={8}>
                             <Text>{site}</Text>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col xs={4}>
+                    <Row align={'center '} className={'mb-8'}>
+                        <Col xs={4}>
+                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Status:</Text></Flex>
+                        </Col>
+                        <Col xs={8}>
+                            <Text>{status}</Text>
+                        </Col>
+                    </Row>
+                    <Row align={'center'} className={'mb-8'}>
+                        <Col xs={4}>
+                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Role:</Text></Flex>
+                        </Col>
+                        <Col xs={8}>
+                            <Text>{role}</Text>
+                        </Col>
+                    </Row>
+                    <Row align={'center'} >
+                        <Col xs={4}>
+                            <Flex align={'center'}><div className="imgbox"><Calendar  size={16}/></div><Text>Created:</Text></Flex>
+                        </Col>
+                        <Col xs={8}>
+                            <Text>{moment(createdAt).format('DD-MM-YYYY')}</Text>
                         </Col>
                     </Row>
                 </Col>

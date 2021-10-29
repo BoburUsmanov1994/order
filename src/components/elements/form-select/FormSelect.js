@@ -106,8 +106,8 @@ const FormSelect = ({
                 </StyledFormSelect>
             </Col>
             <Col xs={12}>
-                <Text xs danger>{error && error.type == 'required' && `${label} is required`}</Text>
-                <Text xs danger>{error && error.type == 'pattern' && `${label} is not valid`}</Text>
+                <Text xs danger>{error && error.type == 'required' && `${label} майдон тўлдирилиши шарт`}</Text>
+                <Text xs danger>{error && error.type == 'pattern' && `${label} яроқли эмас`}</Text>
                 <Text xs danger>{error && error.type == 'validation' && `${error.message} `}</Text>
             </Col>
 

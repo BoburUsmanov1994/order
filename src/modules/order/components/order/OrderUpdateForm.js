@@ -51,7 +51,7 @@ const OrderUpdateForm = ({
         <StyledOrderUpdateForm onSubmit={handleSubmit(onSubmit)} {...props}>
             <Row className={'mb-48'}>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Protection order series</Label>
+                    <Label>Ҳимоя ордерининг серияси</Label>
                     <Input defaultValue={get(order,'protectionorderseries')} register={register} type={'number'} label={'Protection order series'}
                            name={'protectionorderseries'} validation={{required: true}}
                            error={errors?.protectionorderseries} sm/>
@@ -80,45 +80,45 @@ const OrderUpdateForm = ({
                                 label={'Маҳалла'} placeholder={'Маҳаллани танланг'}/>
                 </Col>
                 <Col xs={12} className={'mb-24'}>
-                    <Label>Description</Label>
-                    <Textarea defaultValue={get(order,'description')} register={register} label={'Description'} name={'description'}
+                    <Label>Тазйиқ ва зўравонлик содир этилган жой</Label>
+                    <Textarea defaultValue={get(order,'description')} register={register} label={'Тазйиқ ва зўравонлик содир этилган жой'} name={'description'}
                               validation={{required: true}} error={errors?.description} noshadow sm/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Order status</Label>
+                    <Label>Берилган ордернинг холати</Label>
                     <FormSelect defaultValue={get(order,'orderstatus._id')} options={ordersStatus}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'orderstatus'}
-                                label={'Order status'} placeholder={'Order status'} error={errors?.orderstatus}/>
+                                label={'Берилган ордернинг холати'} placeholder={'Берилган ордернинг холати'} error={errors?.orderstatus}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Basis order</Label>
+                    <Label>Ҳимоя ордери бериш учун асос</Label>
                     <FormSelect defaultValue={get(order,'basisorder._id')} options={basisOrder}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'basisorder'}
-                                label={'Basis order'} placeholder={'Basis order'} error={errors?.basisorder}/>
+                                label={'Ҳимоя ордери бериш учун асос'} placeholder={'Ҳимоя ордери бериш учун асос'} error={errors?.basisorder}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Basis termination</Label>
+                    <Label>Ҳимоя ордерини тугатиш асослари</Label>
                     <FormSelect defaultValue={get(order,'basistermination._id')} options={basisTermination}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'basistermination'}
-                                label={'Basis order'} placeholder={'Basis termination'}
+                                label={'Ҳимоя ордерини тугатиш асослари'} placeholder={'Ҳимоя ордерини тугатиш асослари'}
                                 error={errors?.basistermination}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Result order</Label>
+                    <Label>Ҳимоя ордери бериш натижаси</Label>
                     <FormSelect defaultValue={get(order,'orederresults._id')} options={resultOrder}
                                 setValue={setValue} Controller={Controller}  control={control}
                                 name={'orederresults'}
-                                label={'Basis order'} placeholder={'Result order'} rule={{required: true}} error={errors?.orederresults}/>
+                                label={'Ҳимоя ордери бериш натижаси'} placeholder={'Ҳимоя ордери бериш натижаси'} rule={{required: true}} error={errors?.orederresults}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Given date</Label>
+                    <Label>Ордернинг берилган вақти</Label>
                     <Calendar defaultValue={givendate} onChange={(val) => setGivenDate(val)}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>End date</Label>
+                    <Label>Ордернинг тугаш вақти</Label>
                     <Calendar defaultValue={endedate} onChange={(val) => setEndDate(val)}/>
                 </Col>
             </Row>

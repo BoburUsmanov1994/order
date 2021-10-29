@@ -3,12 +3,15 @@ import {Col, Row} from "react-grid-system";
 import {connect} from "react-redux";
 import {get} from "lodash";
 import {withRouter} from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import ApiActions from "../../../services/api/Actions";
 import UserScheme from "../../../schema/UserScheme";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import Normalizer from "../../../services/normalizer";
 import ProfileInfo from "../../../components/profile-info/ProfileInfo";
+import Box from "../../../components/box";
+import Label from "../../../components/elements/label";
+import Title from "../../../components/title";
 
 const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched}) => {
     useEffect(() => {
@@ -25,7 +28,7 @@ const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched})
             </Row>
                 <Row>
                     <Col xs={12}>
-                        <ProfileInfo name={get(user,'name','-')} position={get(user,'position','-')} email={get(user,'email','-')} />
+                        <ProfileInfo createdAt={get(user,'createdAt','-')} status={get(user,'accountstatus.name','-')} role={get(user,'accountrole.name','-')} name={get(user,'name','-')} position={get(user,'position','-')} email={get(user,'email','-')} />
                     </Col>
                 </Row>
                 <Row>
@@ -34,16 +37,54 @@ const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched})
                             <TabList className={'mt-24 mb-24'}>
                                 <Tab>Шахский маълумотлар</Tab>
                                 <Tab>Ордерлар</Tab>
-                                <Tab>Содир этганлар</Tab>
-                                <Tab>Жабрланганлар</Tab>
-                                <Tab>Оғир вазиятлар</Tab>
                             </TabList>
 
                             <TabPanel>
-                                <h2>Any content 1</h2>
+                                <Box>
+                                    <Row>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Фамилия</Label>
+                                            <Title md>
+                                                {get(user,'secondname','-')}
+                                            </Title>
+                                        </Col>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Исми</Label>
+                                            <Title md>
+                                                {get(user,'name','-')}
+                                            </Title>
+                                        </Col>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Отасининг исми</Label>
+                                            <Title md>
+                                                {get(user,'middlename','-')}
+                                            </Title>
+                                        </Col>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Вилоят</Label>
+                                            <Title md>
+                                                {get(user,'regionId.name','-')}
+                                            </Title>
+                                        </Col>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Туман</Label>
+                                            <Title md>
+                                                {get(user,'districtsId.name','-')}
+                                            </Title>
+                                        </Col>
+                                        <Col xs={4} className={'mb-16'}>
+                                            <Label>Маҳалла</Label>
+                                            <Title md>
+                                                {get(user,'mfyId.name','-')}
+                                            </Title>
+                                        </Col>
+                                    </Row>
+                                </Box>
                             </TabPanel>
                             <TabPanel>
-                                <h2>Any content 2</h2>
+                               <Box>
+                                   <h2>No order</h2>
+                               </Box>
                             </TabPanel>
                         </Tabs>
                     </Col>
