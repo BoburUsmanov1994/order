@@ -6,7 +6,7 @@ import calendarImg from "../../../assets/images/calendar.png";
 
 const StyledCalendar = styled.div`
   width: 100%;
-  min-width: 300px;
+  min-width: 250px;
   height: 53px;
   border: 1px solid #E8E8E8;
   border-radius: 5px;

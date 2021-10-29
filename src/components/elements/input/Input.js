@@ -4,7 +4,7 @@ import {Row,Col} from "react-grid-system";
 import Text from "../../text";
 
 const StyledInput = styled.input`
-  min-width: 300px;
+min-width: 250px;
   padding: 15px 25px;
   border-radius: 5px;
   border: 1px solid #707070;

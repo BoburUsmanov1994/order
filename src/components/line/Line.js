@@ -9,6 +9,11 @@ const StyledLine = styled.div`
   color: #707070;
   font-size: 30px;
   font-weight: 700;
+  @media screen and (max-width:1600px){
+   font-size: 24px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 `;
 const Line = (props) => {
     return (
