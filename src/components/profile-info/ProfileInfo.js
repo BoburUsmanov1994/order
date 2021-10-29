@@ -9,6 +9,7 @@ import Flex from "../flex/Flex";
 import mail from "../../assets/images/icons/mail.png";
 import tel from "../../assets/images/icons/phone.png";
 import globe from "../../assets/images/icons/globe.png";
+import {User} from "react-feather";
 
 const StyledProfileInfo = styled.div`
   .imgbox{
@@ -54,10 +55,10 @@ const ProfileInfo = ({avatar = avatarLogo,name="Admin",position="Катта ин
                     <Row align={'center'}>
                         <Col xs={3}>
                             <div className="profile__logo">
-                                <img src={avatar} className={'img-fluid'} alt=""/>
-                                <span className="change__logo">
-                                    <img src={camera} alt=""/>
-                                </span>
+                                <User size={48}/>
+                                {/*<span className="change__logo">*/}
+                                {/*    <img src={camera} alt=""/>*/}
+                                {/*</span>*/}
                             </div>
                         </Col>
                         <Col xs={9}>

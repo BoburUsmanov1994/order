@@ -18,6 +18,15 @@ const StyledLogo = styled.div`
       margin-top: 6px;
     }
   }
+  @media screen and (max-width:1600px) {
+    a {
+      span {
+
+        font-size: 24px;
+        padding-left: 25px;
+      }
+    }
+  }
 `;
 const Logo = (props) => {
     return (

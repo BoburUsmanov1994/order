@@ -53,6 +53,13 @@ const StyledMenuParent = styled.div`
     margin-right: 15px;
   }
 }
+@media screen and (max-width:1600px){
+  .arrow{
+    right: -8px;
+  }
+  p{
+    padding-left: 25px;
+}
 `;
 const MenuParent = ({children, name = '', icon = clipboardIcon, toggleBurger, ...props}) => {
     const [show, setShow] = useState(false);

@@ -44,6 +44,16 @@ const StyledSidebar = styled.div`
       }
     }
   }
+  @media screen and (max-width:1600px){
+    width: ${({theme:{open}}) => isEqual(open,'open') ? '225px' : '70px'};
+    .sidebar {
+      &__logo {
+        img {
+          width: ${({theme:{open}}) => isEqual(open,'open') ? '70px' : '40px'};
+        }
+      }
+    }
+  }
 `;
 const Sidebar = (props) => {
     return (
@@ -56,7 +66,7 @@ const Sidebar = (props) => {
             <Menu/>
             <div className="sidebar__bottom">
                 <NavLink to={'/logout'}>
-                    <ReactSVG src={exitIcon}/>
+                    {/*<ReactSVG src={exitIcon}/>*/}
                 </NavLink>
             </div>
         </StyledSidebar>

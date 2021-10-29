@@ -15,7 +15,6 @@ import MenuParent from "./MenuParent";
 import {isEqual} from "lodash";
 
 const StyledMenu = styled.ul`
-  padding-top: 10px;
   height: ${({theme:{open}}) => isEqual(open,'open') ? '80vh' : '84vh'};
   overflow-y: auto;
   padding-bottom: 10px;
@@ -79,6 +78,15 @@ const StyledMenu = styled.ul`
 
     &:last-child {
       margin-bottom: 0;
+    }
+ 
+  }
+  @media screen and (max-width:1600px){
+    height: ${({theme:{open}}) => isEqual(open,'open') ? '76vh' : '80vh'};
+    li{
+      a{
+        padding-left: 25px;
+      }
     }
   }
 `;

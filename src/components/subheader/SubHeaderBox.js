@@ -7,6 +7,9 @@ const StyledSubHeaderBox = styled.div`
   padding: 12px 24px;
   border-top: 1px solid #707070;
   border-bottom: 1px solid #707070;
+  @media screen and (max-width:1600px){
+    
+  }
 `;
 const SubHeaderBox = (props) => {
     return (

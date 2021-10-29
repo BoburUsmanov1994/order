@@ -70,6 +70,11 @@ const StyledSubHeaderItem = styled.div`
       }
     }
   `}
+  @media screen and (max-width:1600px){
+  h2{
+    font-size: 40px;
+  }
+}
 `;
 const SubHeaderItem = ({title='',subtitle='',percent,count,hasBorderLeft=false, ...props}) => {
     return (
