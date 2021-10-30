@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Select from 'react-select';
 import styled from "styled-components";
 
@@ -18,6 +18,7 @@ const customStyles = {
         display: "flex",
         overflow: 'hidden',
         padding:'5px 10px',
+        height:'48px',
         "&:hover": {
             borderColor: 'none',
             outline: "none",
@@ -32,11 +33,21 @@ const customStyles = {
         display: 'none'
     })
 };
-const BaseSelect = ({options = [],defaultValue="",placeholder = 'Танлаш',handleChange = (value) => {console.log(value)},...props}) => {
-
+const BaseSelect = ({options = [],region,defaultValue="",placeholder = 'Танлаш',handleChange = (value) => {console.log(value)},...props}) => {
     return (
         <StyledSelect {...props}>
-          <Select defaultValue={defaultValue} options={options} placeholder={placeholder}  onChange={(value) => handleChange(value)} styles={customStyles} />
+            <Select
+                clearIndicator={true}
+                options={options}
+                value={region}
+                placeholder={placeholder}
+                onChange={(value) => handleChange(value)}
+                styles={customStyles}
+                defaultValue={
+                    options.filter(option =>
+                        option.value === defaultValue)
+                }
+            />
         </StyledSelect>
     );
 };

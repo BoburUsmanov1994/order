@@ -52,7 +52,7 @@ const OrderUpdateForm = ({
             <Row className={'mb-48'}>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордерининг серияси</Label>
-                    <Input defaultValue={get(order,'protectionorderseries')} register={register} type={'number'} label={'Protection order series'}
+                    <Input defaultValue={get(order,'protectionorderseries')} register={register}  label={'Protection order series'}
                            name={'protectionorderseries'} validation={{required: true}}
                            error={errors?.protectionorderseries} sm/>
                 </Col>
@@ -101,7 +101,7 @@ const OrderUpdateForm = ({
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордерини тугатиш асослари</Label>
                     <FormSelect defaultValue={get(order,'basistermination._id')} options={basisTermination}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                setValue={setValue} Controller={Controller}  control={control}
                                 name={'basistermination'}
                                 label={'Ҳимоя ордерини тугатиш асослари'} placeholder={'Ҳимоя ордерини тугатиш асослари'}
                                 error={errors?.basistermination}/>

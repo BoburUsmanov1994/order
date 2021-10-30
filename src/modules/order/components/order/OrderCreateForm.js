@@ -37,12 +37,14 @@ const OrderCreateForm = ({
         data = {...data,givendate:givendate,endedate:endedate};
         create(data);
     }
+
+
     return (
         <StyledOrderCreateForm onSubmit={handleSubmit(onSubmit)} {...props}>
             <Row className={'mb-32'}>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордерининг серияси</Label>
-                    <Input register={register} type={'number'} label={'Ҳимоя ордерининг серияси'}
+                    <Input register={register}  label={'Ҳимоя ордерининг серияси'}
                            name={'protectionorderseries'} validation={{required: true}}
                            error={errors?.protectionorderseries} sm/>
                 </Col>
@@ -53,21 +55,21 @@ const OrderCreateForm = ({
                     <FormSelect onChange={({value}) => getDistrictsByRegion(value)} options={regions}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'regiId'}
-                                label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regiId}/>
+                                label={'Вилоят'} placeholder={'Танланг'} error={errors?.regiId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>
                     <FormSelect onChange={({value}) => getNeighborhoodsByDistrict(value)} options={districts}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'districtId'}
-                                label={'Туман'} placeholder={'Туманни танланг'} error={errors?.districtId}/>
+                                label={'Туман'} placeholder={'Танланг'} error={errors?.districtId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Маҳалла</Label>
                     <FormSelect options={neighborhoods}
                                 setValue={setValue} Controller={Controller} control={control}
                                 name={'mfyId'}
-                                label={'Маҳалла'} placeholder={'Маҳаллани танланг'}/>
+                                label={'Маҳалла'} placeholder={'Танланг'}/>
                 </Col>
                 <Col xs={12} className={'mb-24'}>
                     <Label>Тазйиқ ва зўравонлик содир этилган жой</Label>
@@ -79,28 +81,28 @@ const OrderCreateForm = ({
                     <FormSelect options={ordersStatus}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'orderstatus'}
-                                label={'Order status'} placeholder={'Берилган ордернинг холати'} error={errors?.orderstatus}/>
+                                label={'Order status'} placeholder={'Танланг'} error={errors?.orderstatus}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордери бериш учун асос</Label>
                     <FormSelect options={basisOrder}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'basisorder'}
-                                label={'Ҳимоя ордери бериш учун асос'} placeholder={'Ҳимоя ордери бериш учун асос'} error={errors?.basisorder}/>
+                                label={'Ҳимоя ордери бериш учун асос'} placeholder={'Танланг'} error={errors?.basisorder}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордерини тугатиш асослари</Label>
                     <FormSelect options={basisTermination}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                setValue={setValue} Controller={Controller}  control={control}
                                 name={'basistermination'}
-                                label={'Ҳимоя ордерини тугатиш асослари'} placeholder={'Ҳимоя ордерини тугатиш асослари'} error={errors?.basistermination}/>
+                                label={'Ҳимоя ордерини тугатиш асослари'} placeholder={'Танланг'} error={errors?.basistermination}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордери бериш натижаси</Label>
                     <FormSelect options={resultOrder}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'orederresults'}
-                                label={'Basis order'} placeholder={'Ҳимоя ордери бериш натижаси'} error={errors?.orederresults}/>
+                                label={'Basis order'} placeholder={'Танланг'} error={errors?.orederresults}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ордернинг берилган вақти</Label>
@@ -113,7 +115,7 @@ const OrderCreateForm = ({
             </Row>
             <Row className={'mb-32'}>
                 <Col xs={12}>
-                    <Button success lg>Яратиш</Button>
+                    <Button success lg >Яратиш</Button>
                 </Col>
             </Row>
         </StyledOrderCreateForm>

@@ -87,20 +87,16 @@ const VictimsContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Name', 'Lastname', 'Middlename','Birthday date','Passport','INPS','Position','Region','District','Neighborhood','Created at','Actions']} >
+                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Туғилган санаси','Пасспорт','ПИНФЛ','Шахснинг бандлиги','Вилоят/Туман/Маҳалла','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(victims) ? victims && victims.map((victim, index) => <tr key={get(victim, '_id')}>
                                 <td>{index + 1}</td>
-                                <td>{get(victim, 'citizensId.name', '-')}</td>
-                                <td>{get(victim, 'citizensId.secondname', '-')}</td>
-                                <td>{get(victim, 'citizensId.middlename', '-')}</td>
-                                <td>{moment.unix(get(victim, 'citizensId.dateofbirthday', '-')).format("DD-MM-YYYY")}</td>
+                                <td>{`${get(victim, 'citizensId.name', '-')} ${get(victim, 'citizensId.secondname', '-')} ${get(victim, 'citizensId.middlename', '-')}`}</td>
+                                <td>{moment.unix(get(victim, 'citizensId.dateofbirthday', '-')/1000).format("DD-MM-YYYY")}</td>
                                 <td>{get(victim, 'citizensId.passportinfo', '-')}</td>
                                 <td>{get(victim, 'citizensId.identitynumber', '-')}</td>
                                 <td>{get(victim, 'conditionpersonId.name', '-')}</td>
-                                <td>{get(victim, 'regId.name', '-')}</td>
-                                <td>{get(victim, 'destId.name', '-')}</td>
-                                <td>{get(victim, 'mahallaId.name', '-')}</td>
+                                <td>{`${get(victim, 'regId.name', '-')}/${get(victim, 'destId.name', '-')}/${get(victim, 'mahallaId.name', '-')}`}</td>
                                 <td>{moment(get(victim, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
                                 <td>
                                     <Eye className={'mr-8 cursor-pointer'} onClick={() => history.push(`/victim/view/${get(victim, '_id')}`)} color="#FFC700" size={24} />
@@ -109,7 +105,7 @@ const VictimsContainer = ({
                                         onClick={() => deleteVictim(get(victim, '_id'))} className={'cursor-pointer'}
                                         color="#E3111A" size={24}/></td>
                             </tr>) : <tr>
-                                <td colSpan={12}>Маълумот мавжуд эмас</td>
+                                <td colSpan={9}>Маълумот мавжуд эмас</td>
                             </tr>
                         }
                     </Table> : <ContentLoader />}

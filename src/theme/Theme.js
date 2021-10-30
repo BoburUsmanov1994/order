@@ -115,23 +115,42 @@ const GlobalStyles = createGlobalStyle`
   
     button{
       font-size: 16px;
-      &:first-child{
+
+      &:first-child {
         background-color: #F76652;
       }
-      :last-child{
+
+      :last-child {
         background-color: #2BCC71;
       }
     }
   }
 }
-.react-tabs__tab{
-  border:unset;
-  bottom: unset;
-  margin-right: 35px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-  .react-tabs__tab:focus{
+
+  .bg-danger {
+    background-color: rgba(247, 102, 82, 0.1);
+  }
+
+  .bg-success {
+    background-color: rgba(33, 213, 155, 0.1);
+  }
+  .bg-primary{
+    background-color: rgba(87, 184, 255, 0.1);
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  .react-tabs__tab {
+    border: unset;
+    bottom: unset;
+    margin-right: 35px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .react-tabs__tab:focus {
     box-shadow: unset;
   }
   .react-tabs__tab.react-tabs__tab--selected{

@@ -33,15 +33,18 @@ const StyledOrderSearch = styled.form`
     margin-left: 10px;
   }
 `;
-const OrderSearch = (props) => {
-    const [str,searchStr] = useState('');
+const OrderSearch = ({search = () => {},defaultValue = '',...props}) => {
+    const [str,searchStr] = useState(defaultValue);
     const submitHandle = (e) => {
         e.preventDefault();
-        alert(str)
+    }
+    const handleSearch = (e) => {
+        searchStr(e.target.value);
+        search(e.target.value);
     }
     return (
         <StyledOrderSearch {...props} onSubmit={submitHandle}>
-            <input type="text" value={str} onChange={(e) => searchStr(e.target.value)} placeholder={'Қидириш'}/>
+            <input type="text" value={str} onChange={handleSearch} placeholder={'Қидириш'}/>
             <button><img src={searchImg} alt=""/></button>
         </StyledOrderSearch>
     );

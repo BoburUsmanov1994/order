@@ -87,23 +87,19 @@ const ViolentsContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Name', 'Lastname', 'Middlename','Birthday date','Passport','INPS','Position','Region','District','Neighborhood','Created at','Actions']} >
+                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Туғилган санаси','Пасспорт','ПИНФЛ','Шахснинг бандлиги','Вилоят/Туман/Маҳалла','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(violents) ? violents && violents.map((violent, index) => <tr key={get(violent, '_id')}>
                                 <td>{index + 1}</td>
-                                <td>{get(violent, 'citizensId.name', '-')}</td>
-                                <td>{get(violent, 'citizensId.secondname', '-')}</td>
-                                <td>{get(violent, 'citizensId.middlename', '-')}</td>
-                                <td>{moment.unix(get(violent, 'citizensId.dateofbirthday', '-')).format("DD-MM-YYYY")}</td>
+                                <td>{`${get(violent, 'citizensId.name', '-')} ${get(violent, 'citizensId.secondname', '-')} ${get(violent, 'citizensId.middlename', '-')}`}</td>
+                                <td>{moment.unix(get(violent, 'citizensId.dateofbirthday', '-')/1000).format("DD-MM-YYYY")}</td>
                                 <td>{get(violent, 'citizensId.passportinfo', '-')}</td>
                                 <td>{get(violent, 'citizensId.identitynumber', '-')}</td>
                                 <td>{get(violent, 'conditionpersonId.name', '-')}</td>
-                                <td>{get(violent, 'regId.name', '-')}</td>
-                                <td>{get(violent, 'destId.name', '-')}</td>
-                                <td>{get(violent, 'mahallaId.name', '-')}</td>
+                                <td>{`${get(violent, 'regId.name', '-')}/${get(violent, 'destId.name', '-')}/${get(violent, 'mahallaId.name', '-')}`}</td>
                                 <td>{moment(get(violent, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
                                 <td>
-                                    <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} />
+                                    <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} onClick={() => history.push(`/violent/view/${get(violent,'_id')}`)} />
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} />
                                     <Trash
                                         onClick={() => deleteViolent(get(violent, '_id'))} className={'cursor-pointer'}

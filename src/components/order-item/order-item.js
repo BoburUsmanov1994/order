@@ -31,7 +31,7 @@ const OrderItem = ({item,...props}) => {
         <StyledOrderItem {...props}>
             <Row className={'mb-24'}>
                 <Col xs={12} >
-                   <Flex className={'hasBorderBottom'}> <h2 className={'mr-16'}>Ф.И.Ш.:</h2><h2>Шохида Наджимова Рахимбердиева</h2></Flex>
+                   <Flex className={'hasBorderBottom'}> <h2 className={'mr-16'}>Ф.И.Ш.:</h2><h2>${get(item,'')}</h2></Flex>
                 </Col>
             </Row>
             <Row>

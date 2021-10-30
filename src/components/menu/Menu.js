@@ -95,14 +95,10 @@ const Menu = ({items, ...props}) => {
         <StyledMenu {...props}>
             <li title={'dashboard'}>
                 <NavLink to={'/'} exact>
-                    <ReactSVG src={dashboardIcon}/> <span className={'text'}>Асосий</span>
+                    <ReactSVG src={dashboardIcon}/> <span className={'text'}>Статистика ойнаси</span>
                 </NavLink>
             </li>
-            <li title={'statistics'}>
-                <NavLink to={'/statistics'} exact>
-                    <ReactSVG src={graphIcon}/> <span className={'text'}>Статистика ойнаси</span>
-                </NavLink>
-            </li>
+
             <li title={'orders'}>
                 <NavLink to={'/order/list'}>
                     <ReactSVG src={appointmentsIcon}/> <span className={'text'}>Ҳимоя ордерлари</span>

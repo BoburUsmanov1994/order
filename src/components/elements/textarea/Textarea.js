@@ -8,6 +8,7 @@ const StyledTextarea = styled.textarea`
   width: 100%;
   min-height: 200px;
   //border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
+  border-color: #E8E8E8;
   border-radius: 5px;
   outline: none;
   font-size: 16px;
@@ -42,7 +43,7 @@ const Textarea = ({
             </Col>
             <Col xs={12}>
                 <Col xs={12}>
-                    <Text xs danger>{error && error.type == 'required' && `${label} is required`}</Text>
+                    <Text xs danger>{error && error.type == 'required' && `${label} майдон тўлдирилиши шарт`}</Text>
                     <Text xs danger>{error && error.type == 'pattern' && `${label} is not valid`}</Text>
                     <Text xs danger>{error && error.type == 'validation' && `${error.message} `}</Text>
                 </Col>

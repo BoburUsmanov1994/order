@@ -59,8 +59,8 @@ const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regi
                                 </Col>
                                 <Col xs={12} className={'text-right mb-16'}>
                                     <Flex justify={'flex-end'}> <Text className={'cursor-pointer'}>Хисоботни экспорт
-                                        қилиш <img src={exportImg} className={'ml-16'}
-                                                   alt=""/></Text><RangeCalendar/></Flex>
+                                        қилиш <img src={exportImg} className={'ml-16 mr-16'}
+                                                   alt=""/></Text><RangeCalendar  /></Flex>
                                 </Col>
                                 <Col xs={12}>
                                     <Flex justify={'flex-end'}>

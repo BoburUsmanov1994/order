@@ -93,7 +93,7 @@ const ProfileInfo = ({createdAt='-',role='-',status='-',avatar = avatarLogo,name
                 <Col xs={4}>
                     <Row align={'center '} className={'mb-8'}>
                         <Col xs={4}>
-                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Status:</Text></Flex>
+                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Статус:</Text></Flex>
                         </Col>
                         <Col xs={8}>
                             <Text>{status}</Text>
@@ -101,7 +101,7 @@ const ProfileInfo = ({createdAt='-',role='-',status='-',avatar = avatarLogo,name
                     </Row>
                     <Row align={'center'} className={'mb-8'}>
                         <Col xs={4}>
-                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Role:</Text></Flex>
+                            <Flex align={'center'}><div className="imgbox"><UserCheck size={16}/></div><Text>Рол:</Text></Flex>
                         </Col>
                         <Col xs={8}>
                             <Text>{role}</Text>
@@ -109,7 +109,7 @@ const ProfileInfo = ({createdAt='-',role='-',status='-',avatar = avatarLogo,name
                     </Row>
                     <Row align={'center'} >
                         <Col xs={4}>
-                            <Flex align={'center'}><div className="imgbox"><Calendar  size={16}/></div><Text>Created:</Text></Flex>
+                            <Flex align={'center'}><div className="imgbox"><Calendar  size={16}/></div><Text>Сана:</Text></Flex>
                         </Col>
                         <Col xs={8}>
                             <Text>{moment(createdAt).format('DD-MM-YYYY')}</Text>

@@ -68,7 +68,7 @@ const OrderViewContainer = ({history, id, getOneOrder, entities, order, isFetche
                                                 <Text>Туман/шаҳар: {get(order,'districtId.name','-')}</Text>
                                             </Flex>
                                             <Flex className={'mb-8'}>
-                                                <Text>Маҳалла: {get(order,'mfy.name','-')}</Text>
+                                                <Text>Маҳалла: {get(order,'mfyId.name','-')}</Text>
                                             </Flex>
                                         </Col>
                                     </Row>

@@ -13,16 +13,15 @@ import Text from "../../../components/text";
 import Box from "../../../components/box";
 import victimIcon from "../../../assets/images/icons/victim.png";
 import Button from "../../../components/button";
-import VictimScheme from "../../../schema/VictimScheme";
 import OrderItemDetail from "../../../components/order-item/order-item-detail";
 import ViolentScheme from "../../../schema/ViolentScheme";
 
-const ViolentViewContainer = ({history, id, getOneVictim, entities, victim, isFetched}) => {
+const ViolentViewContainer = ({history, id, getOneViolent, entities, violent, isFetched}) => {
     useEffect(() => {
-        getOneVictim({id});
+        getOneViolent({id});
     }, [id]);
-    victim = Normalizer.Denormalize(victim, VictimScheme, entities);
-    console.log('victim',victim)
+    violent = Normalizer.Denormalize(violent, ViolentScheme, entities);
+
     return (
         <>{isFetched ?
             <><Row className={'mb-32'}>
@@ -35,8 +34,8 @@ const ViolentViewContainer = ({history, id, getOneVictim, entities, victim, isFe
                         <Flex>
                             <img src={shieldImg} className={'mr-16'} alt=""/>
                             <Flex column align={'flex-start'}>
-                                <Title className={'mb-8'} lg>ID:{get(victim, 'citizensId.identitynumber','-')}</Title>
-                                <Text medium md>Жабрланувчи тўғрисида маълумот</Text>
+                                <Title className={'mb-8'} lg>ID:{get(violent, 'citizensId.identitynumber','-')}</Title>
+                                <Text medium md>Зўравон тўғрисида маълумот</Text>
                             </Flex>
                         </Flex>
                     </Col>
@@ -57,7 +56,7 @@ const ViolentViewContainer = ({history, id, getOneVictim, entities, victim, isFe
                                             </Flex>
                                         </Col>
                                         <Col xs={12}>
-                                            <OrderItemDetail item={victim}/>
+                                            <OrderItemDetail item={violent}/>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -68,7 +67,7 @@ const ViolentViewContainer = ({history, id, getOneVictim, entities, victim, isFe
                 <Row className={'mb-48'}>
                     <Col xs={12}>
                         <Flex>
-                            <Button handleClick={() => history.push('/victim/list')} outlined className={'mr-16'}>Ортга</Button>  <Button handleClick={() => window.print()} success>Чоп этиш</Button>
+                            <Button handleClick={() => history.push('/violent/list')} outlined className={'mr-16'}>Ортга</Button>  <Button handleClick={() => window.print()} success>Чоп этиш</Button>
                         </Flex>
                     </Col>
                 </Row>
@@ -80,16 +79,16 @@ const ViolentViewContainer = ({history, id, getOneVictim, entities, victim, isFe
 const mapStateToProps = (state) => {
     return {
         entities: get(state, 'normalizer.entities', {}),
-        victim: get(state, 'normalizer.data.get-one-victim.result.result', {}),
-        isFetched: get(state, 'normalizer.data.get-one-victim.isFetched', false),
+        violent: get(state, 'normalizer.data.get-one-violent.result.result', {}),
+        isFetched: get(state, 'normalizer.data.get-one-violent.isFetched', false),
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getOneVictim: ({id}) => dispatch({
+        getOneViolent: ({id}) => dispatch({
             type: ApiActions.GET_ONE.REQUEST,
             payload: {
-                url: `/victim/${id}`,
+                url: `/violent/${id}`,
                 config: {
                     params: {},
                 },

@@ -64,7 +64,7 @@ const OrderItemDetail = ({item,...props}) => {
                 </Col>
                 <Col>
                     <Flex className={'mb-16'}>
-                        <img src={calendarIcon} className={'mr-16'} alt=""/> <Text>Шахснинг идентификацион коди</Text>
+                        <img src={calendarIcon} className={'mr-16'} alt=""/> <Text>ЖШИР</Text>
                     </Flex>
                     <Text className={'ml-30'}>{get(item,'citizensId.identitynumber','-')}</Text>
                 </Col>

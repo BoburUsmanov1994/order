@@ -87,16 +87,13 @@ const RegionsContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Name', 'Lastname', 'Middlename','Position','Region','District','Account status','Account Role','Created at','Actions']} >
+                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Шахснинг бандлиги','Вилоят/Туман','Фойдалаувчи статуси','Фойдалаувчи роли','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(users) ? users && users.map((user, index) => <tr key={get(user, '_id')}>
                                 <td>{index + 1}</td>
-                                <td>{get(user, 'name', '-')}</td>
-                                <td>{get(user, 'secondname', '-')}</td>
-                                <td>{get(user, 'middlename', '-')}</td>
+                                <td>{`${get(user, 'name', '-')} ${get(user, 'secondname', '-')} ${get(user, 'middlename', '-')}`}</td>
                                 <td>{get(user, 'position', '-')}</td>
-                                <td>{get(user, 'regionId.name', '-')}</td>
-                                <td>{get(user, 'districtsId.name', '-')}</td>
+                                <td>{`${get(user, 'regionId.name', '-')} ${get(user, 'districtsId.name', '-')}`}</td>
                                 <td>{get(user, 'accountstatus.name', '-')}</td>
                                 <td>{get(user, 'accountrole.name', '-')}</td>
                                 <td>{moment(get(user, 'createdAt', '-')).format("DD-MM-YYYY")}</td>

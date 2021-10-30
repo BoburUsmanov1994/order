@@ -14,6 +14,7 @@ min-width: 250px;
   color: #7E7E7E;
   font-family: 'Ubuntu', sans-serif;
   //border: 1px solid ${({error}) => error ? '#E92C2C' : '#E8E8E8'};
+  border-color: #E8E8E8;
   ${({sm}) => sm && css`
     padding: 10px;
     width: 100%;
