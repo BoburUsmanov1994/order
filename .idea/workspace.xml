@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/order-item/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/order-item/order-item-detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/order-item/order-item.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimViewContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolentViewContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/VictimViewPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ViolentViewPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button/Button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/text/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/text/Text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderViewContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderViewContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/Theme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/modules/order/components/violent-step" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -69,7 +83,9 @@
       <workItem from="1634895703565" duration="9047000" />
       <workItem from="1634915427633" duration="20000" />
       <workItem from="1634925879358" duration="123115000" />
-      <workItem from="1635265642214" duration="81729000" />
+      <workItem from="1635265642214" duration="83320000" />
+      <workItem from="1635531071674" duration="11756000" />
+      <workItem from="1635574065191" duration="1377000" />
     </task>
     <servers />
   </component>
@@ -124,37 +140,31 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js</url>
           <line>735</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js</url>
           <line>776</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js</url>
           <line>816</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js</url>
           <line>755</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js</url>
           <line>894</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js</url>
           <line>690</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>

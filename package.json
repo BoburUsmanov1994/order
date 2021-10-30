@@ -12,6 +12,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "normalizr": "^3.6.1",
+    "path-to-regexp": "^0.1.7",
     "rc-checkbox": "^2.3.2",
     "rc-progress": "^3.1.4",
     "react": "^17.0.2",

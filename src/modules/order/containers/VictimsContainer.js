@@ -103,7 +103,7 @@ const VictimsContainer = ({
                                 <td>{get(victim, 'mahallaId.name', '-')}</td>
                                 <td>{moment(get(victim, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
                                 <td>
-                                    <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} />
+                                    <Eye className={'mr-8 cursor-pointer'} onClick={() => history.push(`/victim/view/${get(victim, '_id')}`)} color="#FFC700" size={24} />
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => history.push(`/victim/update/${get(victim,'_id')}`)} />
                                     <Trash
                                         onClick={() => deleteVictim(get(victim, '_id'))} className={'cursor-pointer'}

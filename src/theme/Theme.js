@@ -101,6 +101,10 @@ const GlobalStyles = createGlobalStyle`
     background: #C4C4C4;
     border-radius: 6px;
   }
+  .hasBorderRight{
+    border-right:1px solid #707070;
+    padding-right: 30px !important;
+  }
 .react-confirm-alert-body{
   text-align: center;
   h1{
@@ -133,6 +137,8 @@ const GlobalStyles = createGlobalStyle`
   .react-tabs__tab.react-tabs__tab--selected{
     border-bottom: 1px solid #DE1010;
   }
+  @media print{@page {size: landscape}}
+  
 `;
 const Theme = ({children}) => {
     const open = useSelector(state => get(state,'order.open',storage.get('open') ?? 'open'))

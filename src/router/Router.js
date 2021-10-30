@@ -56,6 +56,7 @@ import OccuredRepetitionPage from "../modules/order/pages/OccuredRepetitionPage"
 import RestrictionOfTypePage from "../modules/order/pages/RestrictionOfTypePage";
 import BehaviorPage from "../modules/order/pages/BehaviorPage";
 import ResultOrderPage from "../modules/order/pages/ResultOrderpage";
+import VictimViewPage from "../modules/order/pages/VictimViewPage";
 
 const Router = () => {
     return (
@@ -78,6 +79,7 @@ const Router = () => {
                             <Route path={'/order/view/:id'} exact component={OrderViewPage}/>
                             <Route path={'/victim/list'} exact component={VictimsPage}/>
                             <Route path={'/victim/update/:id'} exact component={VictimUpdatePage}/>
+                            <Route path={'/victim/view/:id'} exact component={VictimViewPage}/>
                             <Route path={'/violent/list'} exact component={ViolentsPage}/>
                             <Route path={'/regions'} exact component={RegionsPage}/>
                             <Route path={'/districts'} exact component={DistrictsPage}/>
