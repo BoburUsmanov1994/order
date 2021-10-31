@@ -71,8 +71,8 @@ const UserCreateForm = ({
                     <Input  type={'password'} register={register} label={'Парол'} name={'password'} sm/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Position</Label>
-                    <Input defaultValue={get(user,'position')} register={register} label={'Position'} name={'position'} validation={{required: true}}
+                    <Label>Лавозим</Label>
+                    <Input defaultValue={get(user,'position')} register={register} label={'Лавозим'} name={'position'} validation={{required: true}}
                            error={errors?.position} sm/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
@@ -80,35 +80,36 @@ const UserCreateForm = ({
                     <FormSelect defaultValue={get(user,'regionId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'regionId'}
-                                label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regionId}/>
+                                label={'Вилоят'} placeholder={'Танланг'} error={errors?.regionId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>
                     <FormSelect defaultValue={get(user,'districtsId._id')} onChange={({value}) => getNeighborhoodsByDistrict(value)} options={districts}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'districtsId'}
-                                label={'Туман'} placeholder={'Туманни танланг'} error={errors?.districtsId}/>
+                                label={'Туман'} placeholder={'Танланг'} error={errors?.districtsId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Маҳалла</Label>
                     <FormSelect defaultValue={get(user,'mfyId._id')} options={neighborhoods}
                                 setValue={setValue} Controller={Controller} control={control}
                                 name={'mfyId'}
-                                label={'Маҳалла'} placeholder={'Маҳаллани танланг'}/>
+                                label={'Маҳалла'} placeholder={'Танланг'}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Status</Label>
+                    <Label>Фойдалаувчи статуси</Label>
                     <FormSelect defaultValue={get(user,'accountstatus._id')} options={statusList}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'status'}
-                                label={'Status'} placeholder={'Танланг'} error={errors?.status}/>
+                                label={'Фойдалаувчи статуси'} placeholder={'Танланг'} error={errors?.status}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Role</Label>
+                    <Label>Фойдалаувчи роли
+                    </Label>
                     <FormSelect defaultValue={get(user,'accountrole._id')} options={roles}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'role'}
-                                label={'Role'} placeholder={'Танланг'} error={errors?.role}/>
+                                label={'Фойдалаувчи роли'} placeholder={'Танланг'} error={errors?.role}/>
                 </Col>
             </Row>
             <Row>

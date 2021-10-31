@@ -63,8 +63,8 @@ const UserCreateForm = ({
                            error={errors?.password} sm/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Position</Label>
-                    <Input register={register} label={'Position'} name={'position'} validation={{required: true}}
+                    <Label>Лавозим</Label>
+                    <Input register={register} label={'Лавозим'} name={'position'} validation={{required: true}}
                            error={errors?.position} sm/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
@@ -72,35 +72,35 @@ const UserCreateForm = ({
                     <FormSelect onChange={({value}) => getDistrictsByRegion(value)} options={regions}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'regionId'}
-                                label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regionId}/>
+                                label={'Вилоят'} placeholder={'Танланг'} error={errors?.regionId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>
                     <FormSelect onChange={({value}) => getNeighborhoodsByDistrict(value)} options={districts}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'districtsId'}
-                                label={'Туман'} placeholder={'Туманни танланг'} error={errors?.districtsId}/>
+                                label={'Туман'} placeholder={'Танланг'} error={errors?.districtsId}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Маҳалла</Label>
                     <FormSelect options={neighborhoods}
                                 setValue={setValue} Controller={Controller} control={control}
                                 name={'mfyId'}
-                                label={'Маҳалла'} placeholder={'Маҳаллани танланг'}/>
+                                label={'Маҳалла'} placeholder={'Танланг'}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Status</Label>
+                    <Label>Фойдалаувчи статуси</Label>
                     <FormSelect options={statusList}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'accountstatus'}
-                                label={'Status'} placeholder={'Танланг'} error={errors?.accountstatus}/>
+                                label={'Фойдалаувчи статуси'} placeholder={'Танланг'} error={errors?.accountstatus}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
-                    <Label>Role</Label>
+                    <Label>Фойдалаувчи роли</Label>
                     <FormSelect options={roles}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'accountrole'}
-                                label={'Role'} placeholder={'Танланг'} error={errors?.accountrole}/>
+                                label={'Фойдалаувчи роли'} placeholder={'Танланг'} error={errors?.accountrole}/>
                 </Col>
             </Row>
             <Row>

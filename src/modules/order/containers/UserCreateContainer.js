@@ -15,7 +15,6 @@ import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
 import ApiService from "../ApiService";
 import {toast} from "react-toastify";
 import Loader from "../../../components/loader";
-import UserScheme from "../../../schema/UserScheme";
 
 
 const UserCreateContainer = ({

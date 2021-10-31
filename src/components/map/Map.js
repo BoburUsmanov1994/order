@@ -3,8 +3,9 @@ import styled from "styled-components";
 import {isEqual,isNil} from "lodash";
 import classNames from "classnames";
 import {useHistory} from "react-router-dom";
-
 import popupImg from "../../assets/images/popup.png";
+import {getPosition} from "../../utils";
+
 
 const StyledMap = styled.div`
   position: relative;
@@ -13,7 +14,6 @@ const StyledMap = styled.div`
     path:hover {
       cursor: pointer;
       fill: #57B8FF;
-
     }
 
     .active {
@@ -28,8 +28,9 @@ const StyledMap = styled.div`
     min-height: 100px;
     background-color: #131523;
     position: absolute;
-    top: -50px;
-    left: ${({x,theme:{open}}) => isEqual(open,'open')  ?  x - 400  + 'px' : x-200 + 'px' };
+    top: 0px;
+    margin-left: -75px;
+    left: ${({x,theme:{open}}) => isEqual(open,'open')  ?  x   + 'px' : x + 'px' };
     border-radius: 7px;
     z-index: 9999;
     padding: 15px;
@@ -65,12 +66,12 @@ const StyledMap = styled.div`
     &:after {
       position: absolute;
       content: "";
-      top: 110%;
-      left: 50%;
+      top: 0%;
+      left: 75px;
       width: 1px;
       z-index: 9;
-      height: ${({y,theme:{open}}) => isEqual(open,'open')  ? y-375 + 'px' : y - 400 + 'px'};
-      transform: translateX(-100%);
+      height: ${({y,theme:{open}}) =>  y+ 'px'};
+      transform: translateX(-50%);
       border-left: 1px dashed #131522;
     }
 
@@ -84,9 +85,9 @@ const StyledMap = styled.div`
       background-clip: content-box;
       content: "";
       position: absolute;
-      top: ${({y,theme:{open}}) => isEqual(open,'open')  ? y-275 + 'px' : y - 300 + 'px'};
-      left: 50%;
-      transform: translateX(-60%);
+      top: ${({y,theme:{open}}) => y+ 'px'};
+      left: 75px;
+      transform: translateX(-50%);
     }
 
     .bottom {
@@ -102,9 +103,11 @@ const Map = ({
     }, ...props
              }) => {
     const history = useHistory();
-    const [coordinate, setCoordinate] = useState({x: 520, y: 566});
+    const [coordinate, setCoordinate] = useState({x: 0, y: 0});
     const setActiveSvg = (e, id) => {
-        setCoordinate({x: e.clientX, y: e.pageY});
+        console.log(e)
+        const {x,y} = getPosition(e.nativeEvent)
+        setCoordinate({x, y});
         setActive(id)
     }
     return (
@@ -123,7 +126,6 @@ const Map = ({
                         items && items.map(({_id, pathd, transform}) => {
                                 if (transfer) {
                                     return <path key={_id}
-                                                 onDoubleClick={() => history.push(`/region/${_id}`)}
                                                  onClick={(e) => setActiveSvg(e, _id)}
                                                  className={classNames({active: isEqual(_id, active)})}
                                                  transform={transform}
@@ -133,7 +135,6 @@ const Map = ({
                                                  strokeLinejoin="round" strokeWidth={2}/>
                                 }
                                     return <path key={_id}
-                                                 onDoubleClick={() => history.push(`/region/${_id}`)}
                                                  onClick={(e) => setActiveSvg(e, _id)}
                                                  className={classNames({active: isEqual(_id, active)})}
                                                   d={pathd}
