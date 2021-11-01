@@ -1,9 +1,10 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, {Navigation} from 'swiper';
 import styled from "styled-components";
 import classNames from "classnames";
 import {isEqual} from "lodash";
+import {useHistory} from "react-router-dom";
 import "swiper/swiper.min.css";
 import arrowPrev from "../../assets/images/icons/arrow-prev.png";
 import arrowNext from "../../assets/images/icons/arrow-next.png";
@@ -74,14 +75,15 @@ const Slider = ({
                     items = [], active, setActive = () => {
     }, ...props
                 }) => {
-
+    const history = useHistory();
     return (
         <>
         {items.length > 0 && <StyledSlider {...props}>
             <Swiper  slidesPerView={4} spaceBetween={0} navigation={true} className="mySwiper">
                 {
                     items && items.map(({_id, name}) => <SwiperSlide
-                        className={classNames({active: isEqual(_id, active)})} onClick={() => setActive(_id)}
+                        className={classNames({active: isEqual(_id, active)})}
+                        onDoubleClick={() => history.push(`/region/${_id}`)} onClick={() => setActive(_id)}
                         key={_id}>{name}</SwiperSlide>)
                 }
             </Swiper>

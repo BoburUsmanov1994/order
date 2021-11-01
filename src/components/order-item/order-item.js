@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {Row,Col} from 'react-grid-system';
 import {get} from "lodash";
+import moment from "moment";
 import Flex from "../flex/Flex";
 import teamIcon from "../../assets/images/icons/team.png";
 import flagIcon from "../../assets/images/icons/flag.png";
@@ -31,7 +32,7 @@ const OrderItem = ({item,...props}) => {
         <StyledOrderItem {...props}>
             <Row className={'mb-24'}>
                 <Col xs={12} >
-                   <Flex className={'hasBorderBottom'}> <h2 className={'mr-16'}>Ф.И.Ш.:</h2><h2>${get(item,'')}</h2></Flex>
+                   <Flex className={'hasBorderBottom'}> <h2 className={'mr-16'}>Ф.И.Ш.:</h2><h2>{`${get(item,'citizensId.secondname','-')} ${get(item,'citizensId.name','-')} ${get(item,'citizensId.middlename','-')}`}</h2></Flex>
                 </Col>
             </Row>
             <Row>
@@ -39,20 +40,19 @@ const OrderItem = ({item,...props}) => {
                     <Flex className={'mb-16'}>
                         <img src={teamIcon} className={'mr-16'} alt=""/> <Text>Фуқаролиги</Text>
                     </Flex>
-                    <Text className={'ml-30'}>Ўзбекистон Республикаси
-                        фуқароси</Text>
+                    <Text className={'ml-30'}>{get(item,'citizensId.citizenshipId.name','-')}</Text>
                 </Col>
                 <Col xs={4}>
                     <Flex className={'mb-16'}>
                         <img src={flagIcon} className={'mr-16'} alt=""/> <Text>Миллати</Text>
                     </Flex>
-                    <Text className={'ml-30'}>Ўзбек</Text>
+                    <Text className={'ml-30'}>{get(item,'citizensId.nationality','-')}</Text>
                 </Col>
                 <Col xs={4}>
                     <Flex className={'mb-16'}>
                         <img src={calendarIcon} className={'mr-16'} alt=""/> <Text>Туғилган санаси</Text>
                     </Flex>
-                    <Text className={'ml-30'}>Ўзбек</Text>
+                    <Text className={'ml-30'}>{moment.unix(get(item,'citizensId.dateofbirthday')).format("DD-MM_YYYY")}</Text>
                 </Col>
             </Row>
         </StyledOrderItem>

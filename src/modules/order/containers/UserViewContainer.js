@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Col, Row} from "react-grid-system";
 import {connect} from "react-redux";
-import {get} from "lodash";
+import {get, isEmpty} from "lodash";
 import {withRouter} from "react-router-dom";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import ApiActions from "../../../services/api/Actions";
@@ -12,6 +12,9 @@ import ProfileInfo from "../../../components/profile-info/ProfileInfo";
 import Box from "../../../components/box";
 import Label from "../../../components/elements/label";
 import Title from "../../../components/title";
+import moment from "moment";
+import {Edit, Eye, Trash} from "react-feather";
+import {Table} from "../../../components/table";
 
 const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched}) => {
     useEffect(() => {
@@ -83,7 +86,22 @@ const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched})
                             </TabPanel>
                             <TabPanel>
                                <Box>
-                                   <h2>No order</h2>
+                                   <Table  columns={['ID', 'Ҳимоя ордер серияси','Вилоят/Туман','Ордер берилган\n' +
+                                   'вақти','Actions']} >
+                                       {
+                                           !isEmpty(get(user,'orders')) ? get(user,'orders') && get(user,'orders').map((order, index) => <tr key={get(order, '_id')}>
+                                               <td>{index + 1}</td>
+                                               <td>{`${get(order, 'protectionorderseries', '-')} `}</td>
+                                               <td>{`${get(order, 'regiId.name', '-')}/${get(order, 'districtId.name', '-')}/${get(order, 'mfyId.name', '-')}`}</td>
+                                               <td>{moment(get(order, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
+                                               <td>
+                                                   <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} onClick={() => history.push(`/order/view/${get(order, '_id')}`)}/>
+                                               </td>
+                                           </tr>) : <tr>
+                                               <td colSpan={5}>Маълумот мавжуд эмас</td>
+                                           </tr>
+                                       }
+                                   </Table>
                                </Box>
                             </TabPanel>
                         </Tabs>
