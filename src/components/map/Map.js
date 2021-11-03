@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {isEqual,isNil} from "lodash";
+import {isEqual,isNil,get} from "lodash";
 import classNames from "classnames";
 import {useHistory} from "react-router-dom";
 import popupImg from "../../assets/images/popup.png";
@@ -99,13 +99,12 @@ const StyledMap = styled.div`
   }
 `;
 const Map = ({
-                nopopup = false,transfer=false, transform = "translate(-333 -759)",viewBox="0 0 1000 652",items=[],active, setActive = () => {
+                 popup={},nopopup = false,transfer=false, transform = "translate(-333 -759)",viewBox="0 0 1000 652",items=[],active, setActive = () => {
     }, ...props
              }) => {
     const history = useHistory();
     const [coordinate, setCoordinate] = useState({x: 0, y: 0});
     const setActiveSvg = (e, id) => {
-        console.log(e)
         const {x,y} = getPosition(e.nativeEvent)
         setCoordinate({x, y});
         setActive(id)
@@ -114,9 +113,9 @@ const Map = ({
         <StyledMap {...coordinate} {...props}>
             {!isNil(active) && !nopopup && <div className="popup">
                 <ul>
-                    <li><span className={'circle'}></span>Умумий сони <span className={'count'}>13.3k</span></li>
-                    <li><span className={'circle warning'}></span>Жабрланганлар  <span className={'count'}>15.1k</span></li>
-                    <li><span className={'circle info'}></span>Айбдорлар.   <span className={'count'}>9.2k</span></li>
+                    <li><span className={'circle'}></span>Умумий сони <span className={'count'}>{get(popup,'all')}</span></li>
+                    <li><span className={'circle warning'}></span>Жабрланганлар  <span className={'count'}>{get(popup,'victims')}</span></li>
+                    <li><span className={'circle info'}></span>Айбдорлар   <span className={'count'}>{get(popup,'violents')}</span></li>
                 </ul>
                 <img src={popupImg} className={'bottom'} alt=""/>
             </div>}

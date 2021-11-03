@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {get} from "lodash";
+import {get,find,isEqual} from "lodash";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import SubHeaderBox from "../../../components/subheader";
@@ -24,20 +24,26 @@ import ApiActions from "../../../services/api/Actions";
 import RegionScheme from "../../../schema/RegionScheme";
 import Normalizer from "../../../services/normalizer";
 import DistrictScheme from "../../../schema/DistrictScheme";
+import {statistics} from "../../../mock";
 
 const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regions, districts,setDistrictListTrigger}) => {
     const [active, setActive] = useState(null);
+    const [popup, setPopup] = useState(null);
     useEffect(() => {
         setDistrictListTrigger();
         getRegionList({});
     }, [])
     useEffect(() => {
         if (active) {
-            getDistrictsList({regId: active})
+            getDistrictsList({regId: active});
+            debugger
+            setPopup(find(statistics,item => isEqual(get(item,'id'),active)))
         }
     }, [active])
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities);
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
+    console.log(popup,active)
+
     return (
         <>
             <Row className={'mb-16'}>
@@ -50,7 +56,7 @@ const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regi
                     </Row>
                     <Row>
                         <Col xs={7}>
-                            <Map  items={regions} active={active} setActive={setActive}/>
+                            <Map popup={popup}  items={regions} active={active} setActive={setActive}/>
                         </Col>
                         <Col xs={5}>
                             <Row>

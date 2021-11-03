@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {Col, Row} from "react-grid-system";
 import {Controller, useForm} from "react-hook-form";
@@ -26,6 +26,7 @@ const DistrictCreateForm = ({
     const onSubmit = (data) => {
         createDistrict(data);
     }
+
     return (
         <StyledRegionCreateForm onSubmit={handleSubmit(onSubmit)} {...props}>
             <Row>

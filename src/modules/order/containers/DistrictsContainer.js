@@ -177,7 +177,7 @@ const DistrictsContainer = ({
                     {isFetched ? <Table current={get(filter, 'page', 0)}
                                         paginate={({selected}) => setFilter(filter => ({...filter, page: selected}))}
                                         totalItems={totalItems}
-                                        columns={['ID', 'Вилоят ID', 'Туман номи', 'Базага ёзилган сана', 'Actions']}
+                                        columns={['ID', 'Вилоят ', 'Туман номи', 'Базага ёзилган сана', 'Actions']}
                                         rows={regions}>
                         {
                             !isEmpty(districts) ? districts.map((district, index) => <tr key={get(district, '_id')}>
