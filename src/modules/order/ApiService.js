@@ -445,6 +445,16 @@ class ApiService{
     static DeleteResultOrder = (id) => {
         return request.delete(`/resultorder/${id}`);
     }
+
+    static StatisticsPlaceActionCounts = () => {
+        return request.get(`/orders/statistics/placeectioncounts`);
+    }
+
+    static StatisticsOrderCounts = () => {
+        return request.get(`/orders/statistics/ordercounts`);
+    }
+
+
 }
 
 export default ApiService;

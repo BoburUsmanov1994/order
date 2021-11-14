@@ -21,7 +21,6 @@ const UserViewContainer = ({history, id, getOneUser, entities, user, isFetched})
         getOneUser({id});
     }, [id]);
     user = Normalizer.Denormalize(user, UserScheme, entities);
-    console.log(user);
     return (
         <>{isFetched ?
             <><Row className={'mb-32'}>

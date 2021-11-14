@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {get,find,isEqual} from "lodash";
+import {capitalize, find, get, isEqual} from "lodash";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import SubHeaderBox from "../../../components/subheader";
@@ -25,30 +25,44 @@ import RegionScheme from "../../../schema/RegionScheme";
 import Normalizer from "../../../services/normalizer";
 import DistrictScheme from "../../../schema/DistrictScheme";
 import {statistics} from "../../../mock";
+import Actions from "../Actions";
 
-const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regions, districts,setDistrictListTrigger}) => {
+const HomeContainer = ({
+                           history,
+                           getRegionList,
+                           getDistrictsList,
+                           entities,
+                           regions,
+                           districts,
+                           setDistrictListTrigger,
+                           statisticsPlaceActionCounts,
+                           statistics_place_action_counts,
+                           statisticsOrderCounts,
+                           statistics_order_counts
+                       }) => {
     const [active, setActive] = useState(null);
     const [popup, setPopup] = useState(null);
     useEffect(() => {
         setDistrictListTrigger();
         getRegionList({});
+        statisticsPlaceActionCounts();
+        statisticsOrderCounts();
     }, [])
     useEffect(() => {
         if (active) {
             getDistrictsList({regId: active});
-            debugger
             setPopup(find(statistics,item => isEqual(get(item,'id'),active)))
         }
     }, [active])
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities);
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
-    console.log(popup,active)
+
 
     return (
         <>
             <Row className={'mb-16'}>
                 <Col xs={10}>
-                    <SubHeaderBox/>
+                    <SubHeaderBox items={statistics_order_counts}/>
                     <Row className={'mt-16 mb-16'}>
                         <Col xs={12}>
                             <Title>Худудлар бўйича статистика</Title>
@@ -107,12 +121,14 @@ const HomeContainer = ({history, getRegionList, getDistrictsList, entities, regi
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Flex wrap justify={'space-between'}>
-                                            <Card className={'mb-8'} title={'Оилада'} percent={15} count={'339,259'} danger/>
-                                            <Card className={'mb-8'} title={'Таълим муассасасида'} percent={23} count={'339,259'} success/>
-                                            <Card className={'mb-8'} title={'Кўчада'} percent={23} count={'339,259'} primary/>
-                                            <Card className={'mb-8'} title={'Жамоат жойида'} percent={23} count={'339,259'} warning/>
-                                            <Card className={'mb-8'} title={'Иш жойида'} percent={23} count={'339,259'} primary/>
+                                        <Flex wrap>
+                                            {
+                                                get(statistics_place_action_counts, 'placeectioncounts', []).map((item, index) =>
+                                                    <Card key={index} className={'mb-8'}
+                                                          title={capitalize(get(item, 'placename', '-'))}
+                                                          percent={get(statistics_place_action_counts, `persrnage[${index}].plpers`, '-')}
+                                                          count={get(item, 'placcount', '-')} success/>)
+                                            }
                                         </Flex>
                                     </Col>
                                 </Row>
@@ -179,6 +195,8 @@ const mapStateToProps = (state) => {
         entities: get(state, 'normalizer.entities', {}),
         regions: get(state, 'normalizer.data.region-list.result.region', []),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
+        statistics_place_action_counts: get(state, 'order.statistics_place_action_counts.data', {}),
+        statistics_order_counts:get(state, 'order.statistics_order_counts.data', {}),
     }
 }
 
@@ -226,6 +244,14 @@ const mapDispatchToProps = (dispatch) => {
                 scheme: {},
                 storeName: 'district-list',
             },
+        }),
+        statisticsPlaceActionCounts: () => dispatch({
+            type: Actions.STATISTICS_PLACE_ACTION_COUNTS.REQUEST,
+            payload: {},
+        }),
+        statisticsOrderCounts: () => dispatch({
+            type: Actions.STATISTICS_ORDER_COUNTS.REQUEST,
+            payload: {},
         })
 
     }

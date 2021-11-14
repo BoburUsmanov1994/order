@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/mock/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/district/DistrictCreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/district/DistrictCreateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/card/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/card/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/Sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Sagas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/DistrictsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/DistrictsContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UserViewContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UserViewContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +83,9 @@
       <workItem from="1635702843976" duration="15182000" />
       <workItem from="1635829016527" duration="1479000" />
       <workItem from="1635871984399" duration="207000" />
-      <workItem from="1635875488527" duration="3251000" />
+      <workItem from="1635875488527" duration="4106000" />
+      <workItem from="1636610255682" duration="2408000" />
+      <workItem from="1636823181559" duration="11290000" />
     </task>
     <servers />
   </component>
@@ -108,7 +114,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
-          <line>49</line>
+          <line>63</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

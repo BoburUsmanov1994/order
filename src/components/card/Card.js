@@ -7,6 +7,8 @@ const StyledCard = styled.div`
   width: 180px;
   padding: 15px;
   border-radius: 30px;
+  margin-right: 15px;
+  margin-bottom: 15px;
   .card{
     &__title{
       color: #4B4279;

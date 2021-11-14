@@ -181,7 +181,7 @@ const DistrictsContainer = ({
                                         rows={regions}>
                         {
                             !isEmpty(districts) ? districts.map((district, index) => <tr key={get(district, '_id')}>
-                                <td>{index + 1}</td>
+                                <td>{(index+1)+get(filter, 'page', 0)*20}</td>
                                 <td>{get(district, 'regiId.name', '-')}</td>
                                 <td>{get(district, 'name', '-')}</td>
                                 <td>{moment(get(district, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
