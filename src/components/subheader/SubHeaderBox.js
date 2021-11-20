@@ -12,12 +12,12 @@ const StyledSubHeaderBox = styled.div`
     
   }
 `;
-const SubHeaderBox = ({items,...props}) => {
+const SubHeaderBox = ({items = {},...props}) => {
     return (
         <StyledSubHeaderBox {...props}>
             <Row>
                 <Col xs={3}>
-                    <SubHeaderItem title={'Умумий ордерлар сони'} percent={100} count={sum(get(items,'orederscount').map(({statuscount})=>statuscount))} success subtitle={'Охирги янгиланиш (1 кун)'}/>
+                    <SubHeaderItem title={'Умумий ордерлар сони'} percent={100} count={sum(get(items,'orederscount',[]).map(({statuscount})=>statuscount))} success subtitle={'Охирги янгиланиш (1 кун)'}/>
                 </Col>
                 <Col xs={3}>
                     <SubHeaderItem title={'Янги берилган ордерлар'} percent={get(find(get(items,'persrnage'),item => isEqual(get(item,'name'),'янги берилган')),'per','-')} count={get(find(get(items,'orederscount'),item => isEqual(get(item,'statusname'),'янги берилган')),'statuscount','-')} subtitle={'Охирги янгиланиш (4 кун)'} info  hasBorderLeft/>

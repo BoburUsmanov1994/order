@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Progressbar from "./Progressbar";
+import {get,capitalize} from "lodash";
 
 const StyledProgressBox = styled.div`
   border: 1px solid #707070;
@@ -11,12 +12,16 @@ const StyledProgressBox = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
-const ProgressBox = (props) => {
+
+const colors = ['#DC3539', '#2457F6', '#EB9B37'];
+const ProgressBox = ({items, ...props}) => {
     return (
         <StyledProgressBox {...props}>
-            <Progressbar percent={57} text={'Умумий ордерлар сони'} color={'#DC3539'} />
-            <Progressbar percent={88} text={'Жабрланувчилар'} color={'#2457F6'} />
-            <Progressbar percent={30} text={'Айбдорлар'} color={'#EB9B37'} />
+            {
+                get(items, 'persrnage', []).map((item, index) => <Progressbar percent={get(item, 'per', '-')}
+                                                                              text={capitalize(get(item, 'name', '-'))}
+                                                                              color={get(colors, `[${index}]`)}/>)
+            }
         </StyledProgressBox>
     );
 };

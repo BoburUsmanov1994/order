@@ -9,7 +9,7 @@ import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import RegionScheme from "../../../schema/RegionScheme";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil} from "lodash";
+import {get, isEmpty, isNil,includes} from "lodash";
 import Normalizer from "../../../services/normalizer";
 import {Edit, Trash} from 'react-feather';
 import ApiService from "../ApiService";
@@ -22,10 +22,12 @@ import DistrictCreateForm from "../components/district/DistrictCreateForm";
 import DistrictUpdateForm from "../components/district/DistrictUpdateForm";
 import Select from "../../../components/elements/select/Select";
 import Flex from "../../../components/flex/Flex";
+import config from "../../../config";
 
 
 const DistrictsContainer = ({
                                 history,
+                                user,
                                 getRegionList,
                                 districts,
                                 entities,
@@ -44,14 +46,30 @@ const DistrictsContainer = ({
     const [show, setShow] = useState(false);
     const [district_id, setDistrictId] = useState(null);
     const [filter, setFilter] = useState({page: 0});
-    const [region, setRegion] = useState(null);
+    const [region, setRegion] = useState(includes([config.ROLES.REGION_ADMIN],get(user,'accountrole.name')) ? get(user,'regionId._id'):'');
 
     useEffect(() => {
         getRegionList({});
     }, []);
+
     useEffect(() => {
-        setDistrictListTrigger();
-        getDistrictsList({...filter});
+        if(includes([config.ROLES.REGION_ADMIN],get(user,'accountrole.name')))
+        setRegion(get(user,'regionId._id'));
+    },[get(user,'regionId._id')])
+
+    useEffect(() => {
+        if (region) {
+            getDistrictsListByRegion({regId: region});
+        } else {
+            getDistrictsList({...filter});
+        }
+    }, [region]);
+
+    useEffect(() => {
+        if (includes([config.ROLES.ADMIN],get(user,'accountrole.name'))) {
+            setDistrictListTrigger();
+            getDistrictsList({...filter});
+        }
     }, [filter]);
 
     useEffect(() => {
@@ -61,13 +79,7 @@ const DistrictsContainer = ({
         }
     }, [district_id])
 
-    useEffect(() => {
-        if (region) {
-            getDistrictsListByRegion({regId: region});
-        }else{
-            getDistrictsList({...filter});
-        }
-    }, [region])
+
 
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities).map(({_id, name}) => ({
         value: _id,
@@ -92,7 +104,7 @@ const DistrictsContainer = ({
                 toast.error(`${error.response.data}`)
             }
         })
-    }
+    };
     const updateDistrict = (params) => {
         setLoading(true);
         ApiService.UpdateDistrict(district_id, params).then((res) => {
@@ -109,7 +121,7 @@ const DistrictsContainer = ({
                 toast.error(`${error.response.data}`)
             }
         })
-    }
+    };
     const deleteDistrict = (id) => {
         confirmAlert({
             title: 'Ишончингиз комилми?',
@@ -140,6 +152,7 @@ const DistrictsContainer = ({
         });
     };
 
+
     return (
         <>
             <Row className={'mb-24'}>
@@ -163,8 +176,9 @@ const DistrictsContainer = ({
                 </Col>
                 <Col xs={7}>
                     <Flex justify={'flex-end'}>
-                        <Select defaultValue={{value:null,label:"Барчаси"}} options={[{value:null,label:"Барчаси"},...regions]} placeholder={'Вилоятни танланг'}
-                                handleChange={({value}) => setRegion(value)} className={'mr-16'}/>
+                        {!isEmpty(regions) && <Select defaultValue={region} options={[{value: null, label: "Барчаси"}, ...regions]}
+                                placeholder={'Вилоятни танланг'}
+                                handleChange={({value}) => setRegion(value)} className={'mr-16'}/>}
                         <Button success lg thin handleClick={() => {
                             setDistrictId(null);
                             setShow(true)
@@ -212,6 +226,7 @@ const mapStateToProps = (state) => {
         isFetched: get(state, 'normalizer.data.districts-list.isFetched', false),
         isFetchedDistrict: get(state, 'normalizer.data.get-one-district.isFetched', false),
         totalItems: get(state, 'normalizer.data.districts-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) => {

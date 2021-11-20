@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {get, isEqual} from "lodash";
+import {get} from "lodash";
 import Provider from "../../context/auth/AuthProvider";
 import {connect} from 'react-redux';
 import Actions from "../../modules/auth/Actions";
@@ -20,9 +20,7 @@ class Auth extends Component {
             isAuthenticated,
             isFetched,
             user,
-            departments,
-            pages,
-            permissions,
+            role
 
         } = this.props;
 
@@ -31,13 +29,10 @@ class Auth extends Component {
             isAuthenticated,
             isFetched,
             user,
-            departments,
-            pages,
-            permissions,
-            userCan: (items=[], can = "") => {
-                return hasAccess(items, can);
+            role,
+            userCan: (roles=[]) => {
+                return hasAccess(roles, role);
             }
-
         }}>
             {children}
         </Provider>
@@ -59,9 +54,7 @@ const mapStateToProps = (state) => {
         isAuthenticated: get(state, 'auth.isAuthenticated', false),
         isFetched: get(state, 'auth.isFetched', false),
         user: get(state, 'auth.user', {}),
-        departments: get(state, 'auth.user.departments', []),
-        pages: get(state, 'auth.user.pages', []),
-        permissions: get(state, 'auth.user.permissions', []),
+        role: get(state, 'auth.user.accountrole.name')
     };
 }
 

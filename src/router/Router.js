@@ -58,6 +58,8 @@ import BehaviorPage from "../modules/order/pages/BehaviorPage";
 import ResultOrderPage from "../modules/order/pages/ResultOrderpage";
 import VictimViewPage from "../modules/order/pages/VictimViewPage";
 import ViolentViewPage from "../modules/order/pages/ViolentViewPage";
+import HasAccess from "../services/auth/HasAccess";
+import config from "../config";
 
 const Router = () => {
     return (
@@ -65,64 +67,118 @@ const Router = () => {
             <AuthLoader>
                 <LayoutManager>
                     <IsAuth>
-                        <Switch>
-                            <Route path={'/'} exact component={HomePage}/>
-                            <Route path={'/region/:id'} exact component={RegionPage}/>
-                            <Route path={'/users'} exact component={UsersPage}/>
-                            <Route path={'/user/create'} exact component={UserCreatePage}/>
-                            <Route path={'/user/update/:id'} exact component={UserUpdatePage}/>
-                            <Route path={'/user/view/:id'} exact component={UserViewPage}/>
-                            <Route path={'/order/create'} exact component={OrderCreatePage}/>
-                            <Route path={'/order/update/:id'} exact component={OrderUpdatePage}/>
-                            <Route path={'/order/list'} exact component={OrderListPage}/>
-                            <Route path={'/order/attach/victim/:id'} exact component={AttachVictimToOrderPage}/>
-                            <Route path={'/order/attach/violent/:id'} exact component={AttachViolentToOrderPage}/>
-                            <Route path={'/order/view/:id'} exact component={OrderViewPage}/>
-                            <Route path={'/victim/list'} exact component={VictimsPage}/>
-                            <Route path={'/victim/update/:id'} exact component={VictimUpdatePage}/>
-                            <Route path={'/victim/view/:id'} exact component={VictimViewPage}/>
-                            <Route path={'/violent/list'} exact component={ViolentsPage}/>
-                            <Route path={'/violent/view/:id'} exact component={ViolentViewPage}/>
-                            <Route path={'/regions'} exact component={RegionsPage}/>
-                            <Route path={'/districts'} exact component={DistrictsPage}/>
-                            <Route path={'/neighborhoods'} exact component={NeighborhoodsPage}/>
-                            <Route path={'/ranks'} exact component={RanksPage}/>
-                            <Route path={'/account-roles'} exact component={AccountRolesPage}/>
-                            <Route path={'/positions'} exact component={PositionPage}/>
-                            <Route path={'/account-status'} exact component={AccountStatusPage}/>
-                            <Route path={'/status-order'} exact component={StatusOrderPage}/>
-                            <Route path={'/person-violence'} exact component={PersonViolencePage}/>
-                            <Route path={'/working-place'} exact component={WorkingPlacePage}/>
-                            <Route path={'/violence-type'} exact component={ViolenceTypePage}/>
-                            <Route path={'/restrictions-type'} exact component={RestrictionsTypePage}/>
-                            <Route path={'/state-violence'} exact component={StateViolencePage}/>
-                            <Route path={'/social-status'} exact component={SocialStatusPage}/>
-                            <Route path={'/send-preparation'} exact component={SendPreparationPage}/>
-                            <Route path={'/reason-violence'} exact component={ReasonViolencePage}/>
-                            <Route path={'/criminal-case'} exact component={CriminalCasePage}/>
-                            <Route path={'/criminal-codex'} exact component={CriminalCodexPage}/>
-                            <Route path={'/administrative'} exact component={AdministrativePage}/>
-                            <Route path={'/administrative-codex'} exact component={AdministrativeCodexPage}/>
-                            <Route path={'/citizenship'} exact component={CitizenshipPage}/>
-                            <Route path={'/ages'} exact component={AgesPage}/>
-                            <Route path={'/education'} exact component={EducationPage}/>
-                            <Route path={'/family-position'} exact component={FamilyPositionPage}/>
-                            <Route path={'/conditionperson'} exact component={PersonConditionPage}/>
-                            <Route path={'/guardianship'} exact component={GuardianshipPage}/>
-                            <Route path={'/basis-termination'} exact component={BasisTerminationPage}/>
-                            <Route path={'/action-person-violence'} exact component={ActionPersonViolencePage}/>
-                            <Route path={'/condition-person-violence'} exact component={ConditionPersonViolencePage}/>
-                            <Route path={'/occured-repetation'} exact component={OccuredRepetitionPage}/>
-                            <Route path={'/restrictions-of-type'} exact component={RestrictionOfTypePage}/>
-                            <Route path={'/behavior'} exact component={BehaviorPage}/>
-                            <Route path={'/result-order'} exact component={ResultOrderPage}/>
-                            <Route path={'/logout'} exact component={LogoutPage}/>
-                            <Route path={'/403'} exact component={ForbiddenPage}/>
-                            <Route path={'/404'} exact component={NotFoundPage}/>
-                            <Route path={'*'}>
-                                <Redirect to={'/404'}/>
-                            </Route>
-                        </Switch>
+                        <HasAccess>
+                            {({userCan}) => <Switch>
+                                <Route path={'/'} exact component={HomePage}/>
+                                <Route path={'/region/:id'} exact
+                                       render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) ?
+                                           <RegionPage/> : <ForbiddenPage/>}/>
+                                <Route path={'/users'} exact
+                                       render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) ?
+                                           <UsersPage/> : <ForbiddenPage/>}/>
+                                <Route path={'/user/create'} exact  render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) ?
+                                    <UserCreatePage/> : <ForbiddenPage/>}/>
+                                <Route path={'/user/update/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) ?
+                                    <UserUpdatePage/> : <ForbiddenPage/>} />
+                                <Route path={'/user/view/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) ?
+                                    <UserViewPage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/create'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <OrderCreatePage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/update/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <OrderUpdatePage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/list'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <OrderListPage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/attach/victim/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <AttachVictimToOrderPage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/attach/violent/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <AttachViolentToOrderPage/> : <ForbiddenPage/>} />
+                                <Route path={'/order/view/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <OrderViewPage/> : <ForbiddenPage/>} />
+                                <Route path={'/victim/list'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <VictimsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/victim/update/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <VictimUpdatePage/> : <ForbiddenPage/>} />
+                                <Route path={'/victim/view/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <VictimViewPage/> : <ForbiddenPage/>} />
+                                <Route path={'/violent/list'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <ViolentsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/violent/view/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <ViolentViewPage/> : <ForbiddenPage/>} />
+                                <Route path={'/regions'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <RegionsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/districts'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN]) ?
+                                    <DistrictsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/neighborhoods'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <NeighborhoodsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/ranks'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <RanksPage/> : <ForbiddenPage/>} />
+                                <Route path={'/account-roles'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <AccountRolesPage/> : <ForbiddenPage/>}  />
+                                <Route path={'/positions'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <PositionPage/> : <ForbiddenPage/>}  />
+                                <Route path={'/account-status'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <AccountStatusPage/> : <ForbiddenPage/>} />
+                                <Route path={'/status-order'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <StatusOrderPage/> : <ForbiddenPage/>} />
+                                <Route path={'/person-violence'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <PersonViolencePage/> : <ForbiddenPage/>} />
+                                <Route path={'/working-place'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <WorkingPlacePage/> : <ForbiddenPage/>} />
+                                <Route path={'/violence-type'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <ViolenceTypePage/> : <ForbiddenPage/>} />
+                                <Route path={'/restrictions-type'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <RestrictionsTypePage/> : <ForbiddenPage/>} />
+                                <Route path={'/state-violence'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <StateViolencePage/> : <ForbiddenPage/>} />
+                                <Route path={'/social-status'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <SocialStatusPage/> : <ForbiddenPage/>} />
+                                <Route path={'/send-preparation'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <SendPreparationPage/> : <ForbiddenPage/>} />
+                                <Route path={'/reason-violence'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <ReasonViolencePage/> : <ForbiddenPage/>} />
+                                <Route path={'/criminal-case'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <CriminalCasePage/> : <ForbiddenPage/>} />
+                                <Route path={'/criminal-codex'} render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <CriminalCodexPage/> : <ForbiddenPage/>} exact />
+                                <Route path={'/administrative'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <AdministrativePage/> : <ForbiddenPage/>} />
+                                <Route path={'/administrative-codex'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <AdministrativeCodexPage/> : <ForbiddenPage/>} />
+                                <Route path={'/citizenship'} exact  render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <CitizenshipPage/> : <ForbiddenPage/>} />
+                                <Route path={'/ages'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <AgesPage/> : <ForbiddenPage/>} />
+                                <Route path={'/education'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <EducationPage/> : <ForbiddenPage/>} />
+                                <Route path={'/family-position'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <FamilyPositionPage/> : <ForbiddenPage/>} />
+                                <Route path={'/conditionperson'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <PersonConditionPage/> : <ForbiddenPage/>} />
+                                <Route path={'/guardianship'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <GuardianshipPage/> : <ForbiddenPage/>} />
+                                <Route path={'/basis-termination'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <BasisTerminationPage/> : <ForbiddenPage/>}  />
+                                <Route path={'/action-person-violence'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <ActionPersonViolencePage/> : <ForbiddenPage/>} />
+                                <Route path={'/condition-person-violence'} exact
+                                       render={() => userCan([config.ROLES.ADMIN]) ?
+                                           <ConditionPersonViolencePage/> : <ForbiddenPage/>} />
+                                <Route path={'/occured-repetation'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <OccuredRepetitionPage/> : <ForbiddenPage/>} />
+                                <Route path={'/restrictions-of-type'} exact component={RestrictionOfTypePage}/>
+                                <Route path={'/behavior'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <BehaviorPage/> : <ForbiddenPage/>} />
+                                <Route path={'/result-order'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <ResultOrderPage/> : <ForbiddenPage/>} />
+                                <Route path={'/logout'} exact component={LogoutPage}/>
+                                <Route path={'/403'} exact component={ForbiddenPage}/>
+                                <Route path={'/404'} exact component={NotFoundPage}/>
+                                <Route path={'*'}>
+                                    <Redirect to={'/404'}/>
+                                </Route>
+                            </Switch>}
+                        </HasAccess>
+
                     </IsAuth>
                     <IsGuest>
                         <Switch>

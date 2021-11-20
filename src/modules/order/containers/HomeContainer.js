@@ -38,16 +38,27 @@ const HomeContainer = ({
                            statisticsPlaceActionCounts,
                            statistics_place_action_counts,
                            statisticsOrderCounts,
-                           statistics_order_counts
+                           statistics_order_counts,
+                           statisticsTypeViolence,
+                           statistics_type_violence,
+                           statisticsVictimCount,
+                           getMonthlyStatistics
                        }) => {
     const [active, setActive] = useState(null);
     const [popup, setPopup] = useState(null);
+    const [orderFilter,setOrderFilter] = useState({from:  null,to:null,regId:null,distId:null,mfyId:null});
     useEffect(() => {
         setDistrictListTrigger();
         getRegionList({});
         statisticsPlaceActionCounts();
-        statisticsOrderCounts();
-    }, [])
+        statisticsTypeViolence();
+        statisticsVictimCount();
+        getMonthlyStatistics();
+    }, []);
+
+    useEffect(() => {
+        statisticsOrderCounts({...orderFilter});
+    },[orderFilter])
     useEffect(() => {
         if (active) {
             getDistrictsList({regId: active});
@@ -92,7 +103,7 @@ const HomeContainer = ({
                     </Row>
                 </Col>
                 <Col xs={2}>
-                    <ProgressBox/>
+                    <ProgressBox items={statistics_order_counts}/>
                 </Col>
             </Row>
             <Row className={'mb-24'}>
@@ -136,24 +147,10 @@ const HomeContainer = ({
                             </Col>
                             <Col xs={5}>
                                 <Row>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '} increase/>
-                                    </Col>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '} decrease/>
-                                    </Col>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '}/>
-                                    </Col>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '}/>
-                                    </Col>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '}/>
-                                    </Col>
-                                    <Col xs={4} className={'mb-16'}>
-                                        <Type title={'Жинсий зўравонлик '}/>
-                                    </Col>
+                                    {get(statistics_type_violence,'typeviolence',[]).map((item,index) => <Col key={index} xs={4} className={'mb-16'}>
+                                        <Type title={get(item,'typeviolence','-')} count={get(item,'typeviolencecount','-')} increase/>
+                                    </Col>)}
+
                                 </Row>
                             </Col>
                         </Row>
@@ -197,6 +194,7 @@ const mapStateToProps = (state) => {
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         statistics_place_action_counts: get(state, 'order.statistics_place_action_counts.data', {}),
         statistics_order_counts:get(state, 'order.statistics_order_counts.data', {}),
+        statistics_type_violence:get(state, 'order.statistics_type_violence.data', {}),
     }
 }
 
@@ -249,8 +247,20 @@ const mapDispatchToProps = (dispatch) => {
             type: Actions.STATISTICS_PLACE_ACTION_COUNTS.REQUEST,
             payload: {},
         }),
-        statisticsOrderCounts: () => dispatch({
+        statisticsOrderCounts: (params) => dispatch({
             type: Actions.STATISTICS_ORDER_COUNTS.REQUEST,
+            payload: {params},
+        }),
+        statisticsTypeViolence: () => dispatch({
+            type: Actions.STATISTICS_TYPE_VIOLENCE.REQUEST,
+            payload: {},
+        }),
+        statisticsVictimCount: () => dispatch({
+            type: Actions.STATISTICS_VICTIM_COUNT.REQUEST,
+            payload: {},
+        }),
+        getMonthlyStatistics: () => dispatch({
+            type: Actions.GET_MONTHLY_STATISTICS.REQUEST,
             payload: {},
         })
 

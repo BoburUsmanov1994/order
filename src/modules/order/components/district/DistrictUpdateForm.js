@@ -87,6 +87,14 @@ const DistrictUpdateForm = ({
                                   error={errors?.pathd} noshadow sm/>
                     </Col>
                 </Row>
+                <Row className={'mb-24'}>
+                    <Col xs={12}>
+                        <Label>Circle dot</Label>
+                        <Textarea defaultValue={get(district, 'circle')} register={register} label={'Circle dot'}
+                                  name={'circle'}
+                                  noshadow sm/>
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs={12} className={'text-center'}>
                         <Button type={'submit'} success>Сақлаш</Button>

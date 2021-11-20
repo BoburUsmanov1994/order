@@ -450,8 +450,28 @@ class ApiService{
         return request.get(`/orders/statistics/placeectioncounts`);
     }
 
-    static StatisticsOrderCounts = () => {
-        return request.get(`/orders/statistics/ordercounts`);
+    static StatisticsOrderCounts = ({from = null, to = null, regId = null, distId = null, mfyId = null}) => {
+        return request.get(`/orders/statistics/ordercounts`, {
+            headers: {
+                'from': `${from}`,
+                'to': `${to}`,
+                'regId': `${regId}`,
+                'distId': `${distId}`,
+                'mfyId': `${mfyId}`,
+            },
+        });
+    }
+
+    static StatisticsTypeViolence = () => {
+        return request.get(`/orders/statistics/typeviolence`);
+    }
+
+    static StatisticsVictimCount = () => {
+        return request.get(`/statistics/victimcount`);
+    }
+
+    static MonthlyStatistics = () => {
+        return request.get(`/statistics/monthly`);
     }
 
 

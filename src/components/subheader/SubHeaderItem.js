@@ -80,7 +80,7 @@ const SubHeaderItem = ({title='',subtitle='',percent,count,hasBorderLeft=false, 
     return (
         <StyledSubHeaderItem hasBorderLeft={hasBorderLeft} {...props}>
             <p className="title">{title}</p>
-            <h2>{percent} <span className={'count'}>{count} <img src={rightArrow} alt=""/></span></h2>
+            <h2>{count} <span className={'count'}>{percent} <img src={rightArrow} alt=""/></span></h2>
             <p className="subtitle">{subtitle}</p>
         </StyledSubHeaderItem>
     );

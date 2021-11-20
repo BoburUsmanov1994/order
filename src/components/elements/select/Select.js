@@ -33,13 +33,12 @@ const customStyles = {
         display: 'none'
     })
 };
-const BaseSelect = ({options = [],region,defaultValue="",placeholder = 'Танлаш',handleChange = (value) => {console.log(value)},...props}) => {
+const BaseSelect = ({options = [],defaultValue="",placeholder = 'Танлаш',handleChange = (value) => {console.log(value)},...props}) => {
     return (
         <StyledSelect {...props}>
             <Select
                 clearIndicator={true}
                 options={options}
-                value={region}
                 placeholder={placeholder}
                 onChange={(value) => handleChange(value)}
                 styles={customStyles}

@@ -11,15 +11,11 @@ const removeDetectClick = () => {
     window.removeEventListener('click',addDetectClick,false);
 }
 
-const hasAccess = (items = [], can = '') => {
+const hasAccess = (roles = [], can = '') => {
     let access = false;
-    can = can.split(' ');
-    items = items.map(({name}) => name);
-    can.map(item => {
-        if (includes(items, item)) {
+        if (includes(roles, can)) {
             access = true;
         }
-    })
     return access;
 }
 
