@@ -8,18 +8,21 @@ import Title from "../../../components/title";
 import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil} from "lodash";
+import {get, isEmpty,isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
-import {Edit, Trash,Eye} from 'react-feather';
+import {Edit, Eye, Trash} from 'react-feather';
 import ApiService from "../ApiService";
 import Loader from "../../../components/loader";
 import {toast} from "react-toastify";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import VictimScheme from "../../../schema/VictimScheme";
+import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
 
 
 const VictimsContainer = ({
                               history,
+                              user,
                               getVictimsList,
                               entities,
                               victims,
@@ -36,7 +39,13 @@ const VictimsContainer = ({
         getVictimsList({...filter})
     }, [filter]);
 
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+        victims = victims.filter(item => isEqual(get(item,'regId._id'),get(user,'regionId._id')));
+    }
 
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.USER)){
+        victims = victims.filter(item => isEqual(get(item,'destId._id'),get(user,'districtsId._id')));
+    }
 
     const deleteVictim = (id) => {
         confirmAlert({
@@ -101,9 +110,12 @@ const VictimsContainer = ({
                                 <td>
                                     <Eye className={'mr-8 cursor-pointer'} onClick={() => history.push(`/victim/view/${get(victim, '_id')}`)} color="#FFC700" size={24} />
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => history.push(`/victim/update/${get(victim,'_id')}`)} />
-                                    <Trash
-                                        onClick={() => deleteVictim(get(victim, '_id'))} className={'cursor-pointer'}
-                                        color="#E3111A" size={24}/></td>
+                                    <HasAccess>
+                                        {({userCan}) => userCan([config.ROLES.ADMIN]) && <Trash
+                                            onClick={() => deleteVictim(get(victim, '_id'))} className={'cursor-pointer'}
+                                            color="#E3111A" size={24}/>}
+                                    </HasAccess>
+                                    </td>
                             </tr>) : <tr>
                                 <td colSpan={9}>Маълумот мавжуд эмас</td>
                             </tr>
@@ -121,6 +133,7 @@ const mapStateToProps = (state) => {
         victims: get(state, 'normalizer.data.victim-list.result.data', []),
         isFetched: get(state, 'normalizer.data.victim-list.isFetched', false),
         totalItems:get(state, 'normalizer.data.victim-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) => {

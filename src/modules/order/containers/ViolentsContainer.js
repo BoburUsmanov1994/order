@@ -8,27 +8,30 @@ import Title from "../../../components/title";
 import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil} from "lodash";
+import {get, isEmpty, isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
-import {Edit, Trash,Eye} from 'react-feather';
+import {Edit, Eye, Trash} from 'react-feather';
 import ApiService from "../ApiService";
 import Loader from "../../../components/loader";
 import {toast} from "react-toastify";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import ViolentScheme from "../../../schema/ViolentScheme";
+import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
 
 
 const ViolentsContainer = ({
-                              history,
+                               history,
+                               user,
                                getViolentsList,
-                              entities,
+                               entities,
                                violents,
-                              isFetched,
-                              totalItems,
-                              setListTrigger
-                          }) => {
+                               isFetched,
+                               totalItems,
+                               setListTrigger
+                           }) => {
     const [loading, setLoading] = useState(false);
-    const [filter, setFilter] = useState({page:0});
+    const [filter, setFilter] = useState({page: 0});
     violents = Normalizer.Denormalize(violents, [ViolentScheme], entities);
 
     useEffect(() => {
@@ -36,7 +39,14 @@ const ViolentsContainer = ({
         getViolentsList({...filter})
     }, [filter]);
 
+    console.log(violents)
+    if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+        violents = violents.filter(item => isEqual(get(item, 'regId._id'), get(user, 'regionId._id')));
+    }
 
+    if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
+        violents = violents.filter(item => isEqual(get(item, 'destId._id'), get(user, 'districtsId._id')));
+    }
 
     const deleteViolent = (id) => {
         confirmAlert({
@@ -101,9 +111,14 @@ const ViolentsContainer = ({
                                 <td>
                                     <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} onClick={() => history.push(`/violent/view/${get(violent,'_id')}`)} />
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} />
-                                    <Trash
-                                        onClick={() => deleteViolent(get(violent, '_id'))} className={'cursor-pointer'}
-                                        color="#E3111A" size={24}/></td>
+                                    <HasAccess>
+                                        {
+                                            ({userCan}) =>userCan([config.ROLES.ADMIN]) &&  <Trash
+                                                onClick={() => deleteViolent(get(violent, '_id'))} className={'cursor-pointer'}
+                                                color="#E3111A" size={24}/>
+                                        }
+                                    </HasAccess>
+                                    </td>
                             </tr>) : <tr>
                                 <td colSpan={12}>Маълумот мавжуд эмас</td>
                             </tr>
@@ -121,6 +136,7 @@ const mapStateToProps = (state) => {
         violents: get(state, 'normalizer.data.violent-list.result.data', []),
         isFetched: get(state, 'normalizer.data.violent-list.isFetched', false),
         totalItems:get(state, 'normalizer.data.violent-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) => {
