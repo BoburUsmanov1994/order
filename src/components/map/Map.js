@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {isEqual,isNil,get} from "lodash";
+import {isEqual,isNil,get,isEmpty} from "lodash";
 import classNames from "classnames";
 import {useHistory} from "react-router-dom";
 import popupImg from "../../assets/images/popup.png";
@@ -15,7 +15,10 @@ const StyledMap = styled.div`
       cursor: pointer;
       fill: #57B8FF;
     }
-
+    circle:hover{
+      cursor: pointer;
+      fill: #57B8FF;
+    }
     .active {
       fill: #57B8FF !important;
       box-shadow: 0 7px 15px rgba(0,0,0,0.16);
@@ -109,6 +112,7 @@ const Map = ({
         setCoordinate({x, y});
         setActive(id)
     }
+    const dots = items.filter(item => !isEmpty(get(item,'circle')));
     return (
         <StyledMap {...coordinate} {...props}>
             {!isNil(active) && !nopopup && <div className="popup">
@@ -144,6 +148,13 @@ const Map = ({
                             }
                         )
 
+                    }
+                    {
+
+                    }
+                    {
+                      dots.map(({_id, circle}) => <circle  key={_id} onClick={(e) => setActiveSvg(e, _id)}
+                                                           className={classNames({active: isEqual(_id, active)})} xmlns="http://www.w3.org/2000/svg"   cx="3.5" cy="3.5" r="3.5" transform={circle} fill="#db1b1b"/>)
                     }
                 </g>
             </svg>

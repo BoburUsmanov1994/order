@@ -3,24 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/elements/select/Select.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/select/Select.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/progressbar/ProgressBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/ProgressBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/type/Type.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/type/Type.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/Actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/Reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Reducers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/Sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Sagas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/district/DistrictCreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/district/DistrictCreateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/district/DistrictUpdateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/district/DistrictUpdateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/DistrictsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/DistrictsContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/Map.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +80,7 @@
       <workItem from="1636823181559" duration="11997000" />
       <workItem from="1636932692675" duration="17446000" />
       <workItem from="1637217675531" duration="13465000" />
-      <workItem from="1637319498789" duration="11378000" />
+      <workItem from="1637319498789" duration="16955000" />
     </task>
     <servers />
   </component>
