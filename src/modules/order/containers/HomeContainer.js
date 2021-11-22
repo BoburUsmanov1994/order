@@ -44,7 +44,8 @@ const HomeContainer = ({
                            statisticsTypeViolence,
                            statistics_type_violence,
                            statisticsVictimCount,
-                           getMonthlyStatistics
+                           getMonthlyStatistics,
+                           statistics_victim_count
                        }) => {
     const [active, setActive] = useState(null);
     const [popup, setPopup] = useState(null);
@@ -167,7 +168,7 @@ const HomeContainer = ({
                                 <CustomAreaChart height={250} />
                             </Col>
                             <Col xs={5}>
-                                <Statistics />
+                                <Statistics data={statistics_victim_count} />
                             </Col>
                         </Row>
                     </Box>
@@ -203,6 +204,7 @@ const mapStateToProps = (state) => {
         statistics_place_action_counts: get(state, 'order.statistics_place_action_counts.data', {}),
         statistics_order_counts:get(state, 'order.statistics_order_counts.data', {}),
         statistics_type_violence:get(state, 'order.statistics_type_violence.data', {}),
+        statistics_victim_count:get(state, 'order.statistics_victim_count.data', {}),
         user:get(state,'auth.user',{})
     }
 }
