@@ -106,6 +106,10 @@ const OrderCreateContainer = ({
     if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
         regions = regions.filter(item => isEqual(get(item,'value'),get(user,'regionId._id')));
     }
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.USER)){
+        regions = regions.filter(item => isEqual(get(item,'value'),get(user,'regionId._id')));
+        districts = districts.filter(item => isEqual(get(item,'value'),get(user,'districtsId._id')));
+    }
 
     return (
         <>

@@ -64,7 +64,7 @@ const OrderUpdateForm = ({
                     <Label>Вилоят</Label>
                     <HasAccess>
                         {
-                            ({userCan}) => <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN])} defaultValue={get(order,'regiId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
+                            ({userCan}) => <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])} defaultValue={get(order,'regiId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
                                                        setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                                        name={'regiId'}
                                                        label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regiId}/>
@@ -74,10 +74,15 @@ const OrderUpdateForm = ({
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>
-                    <FormSelect defaultValue={get(order,'districtId._id')} onChange={({value}) => getNeighborhoodsByDistrict(value)} options={districts}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
-                                name={'districtId'}
-                                label={'Туман'} placeholder={'Туманни танланг'} error={errors?.districtId}/>
+                    <HasAccess>
+                        {
+                            ({userCan}) => <FormSelect isDisabled={userCan([config.ROLES.USER])} defaultValue={get(order,'districtId._id')} onChange={({value}) => getNeighborhoodsByDistrict(value)} options={districts}
+                                                       setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                                       name={'districtId'}
+                                                       label={'Туман'} placeholder={'Туманни танланг'} error={errors?.districtId}/>
+                        }
+                    </HasAccess>
+
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Маҳалла</Label>
