@@ -37,61 +37,64 @@ const RegionContainer = ({history,id,entities,getDistrictsList,districts,region,
     region = Normalizer.Denormalize(region,RegionScheme,entities);
     return (
         <>{ isFetched ? <>
-            <Row className={'mb-32'}>
+            <Row className={'mb-16'}>
                 <Col xs={10}>
                     <SubHeaderBox className={'mb-32'}/>
-                    <Row align={'center'} className={'mb-32'}>
-                        <Col xs={5}>
-                            <Title sm>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
-                        </Col>
+                    <Row className={'mb-32'} align={'center'} gutterWidth={60}>
                         <Col xs={4}>
-                            <Flex>
-                                <Radio className={'mr-16'} label={'Умумий ордерлар сони'} danger/>
-                                <Radio className={'mr-16'} label={'Жабрланувчилар'} warning/>
-                                <Radio label={'Айбдорлар'} primary/>
-                            </Flex>
+                            <Title md>{(get(region,'name'))} худудлари бўйича статистика  </Title>
                         </Col>
-                        <Col xs={3} className={'text-right'}>
+                        <Col xs={6}>
+                            <Slider active={active} setActive={setActive} items={districts} />
+                        </Col>
+                        <Col xs={2} className={'text-right'}>
                             <Flex justify={'flex-end'}>
-                                <Text>Саралаш</Text>
-                                <RangeCalendar/>
+                                <Text className={'cursor-pointer'}>Хисоботни экспорт
+                                    қилиш <img src={exportImg} className={'ml-16'}
+                                               alt=""/></Text>
                             </Flex>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={12}>
-                            <CustomAreaChart type={'monotone'}/>
+                    <Row className={'mb-32'}>
+                        <Col xs={5}>
+                            <Row>
+                                <Col xs={12}>
+                                    <Map nopopup transfer viewBox={get(region,'viewBox','')} transform={get(region,'transform','')} items={districts} setActive={setActive} active={active} />
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
+
                 </Col>
                 <Col xs={2}>
                     <ProgressBox/>
                 </Col>
             </Row>
-            <Row className={'mb-32'} align={'center'} gutterWidth={60}>
+
+            <Row align={'center'} className={'mb-32'}>
+                <Col xs={5}>
+                    <Title md>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
+                </Col>
                 <Col xs={4}>
-                    <Title md>{(get(region,'name'))} худудлари бўйича статистика  </Title>
+                    <Flex>
+                        <Radio className={'mr-16'} label={'Умумий ордерлар сони'} danger/>
+                        <Radio className={'mr-16'} label={'Жабрланувчилар'} warning/>
+                        <Radio label={'Айбдорлар'} primary/>
+                    </Flex>
                 </Col>
-                <Col xs={6}>
-                    <Slider active={active} setActive={setActive} items={districts} />
-                </Col>
-                <Col xs={2} className={'text-right'}>
-                   <Flex justify={'flex-end'}>
-                       <Text className={'cursor-pointer'}>Хисоботни экспорт
-                           қилиш <img src={exportImg} className={'ml-16'}
-                                      alt=""/></Text>
-                   </Flex>
+                <Col xs={3} className={'text-right'}>
+                    <Flex justify={'flex-end'}>
+                        <Text>Саралаш</Text>
+                        <RangeCalendar/>
+                    </Flex>
                 </Col>
             </Row>
             <Row className={'mb-32'}>
-                <Col xs={5}>
-                    <Row>
-                        <Col xs={12}>
-                            <Map nopopup transfer viewBox={get(region,'viewBox','')} transform={get(region,'transform','')} items={districts} setActive={setActive} active={active} />
-                        </Col>
-                    </Row>
+                <Col xs={12}>
+                    <CustomAreaChart type={'monotone'}/>
                 </Col>
             </Row>
+
             <Row className={'mb-24'}>
                 <Col xs={8}>
                     <Title md>Тазйиқ ва зўравонликдан жабрланган хотин - қизларни ҳисобга олиш ягона

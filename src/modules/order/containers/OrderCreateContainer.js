@@ -3,7 +3,7 @@ import {Col, Row} from "react-grid-system";
 import Title from "../../../components/title";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {get} from "lodash";
+import {get,isEqual} from "lodash";
 import RegionScheme from "../../../schema/RegionScheme";
 import ApiActions from "../../../services/api/Actions";
 import DistrictScheme from "../../../schema/DistrictScheme";
@@ -17,10 +17,12 @@ import StatusOrderScheme from "../../../schema/StatusOrderScheme";
 import BasisOrderScheme from "../../../schema/BasisOrderScheme";
 import BasisTerminationScheme from "../../../schema/BasisTerminationScheme";
 import ResultOrderScheme from "../../../schema/ResultOrderScheme";
+import config from "../../../config";
 
 
 const OrderCreateContainer = ({
                                   history,
+                                  user,
                                   entities,
                                   regions,
                                   districts,
@@ -101,6 +103,10 @@ const OrderCreateContainer = ({
         })
     }
 
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+        regions = regions.filter(item => isEqual(get(item,'value'),get(user,'regionId._id')));
+    }
+
     return (
         <>
             <Row className={'mb-48'}>
@@ -135,6 +141,7 @@ const mapStateToProps = (state) => {
         basisOrder: get(state, 'normalizer.data.basis-order-list.result.basisorder', []),
         basisTermination: get(state, 'normalizer.data.basis-termination-list.result.basistermination', []),
         resultOrder: get(state, 'normalizer.data.result-order-list.result.resultorder', []),
+        user:get(state,'auth.user',{})
     }
 }
 

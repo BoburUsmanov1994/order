@@ -19,6 +19,7 @@ import Loader from "../../../components/loader";
 
 const UserCreateContainer = ({
                                  history,
+                                 user,
                                  entities,
                                  regions,
                                  districts,
@@ -90,7 +91,7 @@ const UserCreateContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    <UserCreateForm neighborhoods={neighborhoods} regions={regions} districts={districts} statusList={status} roles={roles}
+                    <UserCreateForm user={user} neighborhoods={neighborhoods} regions={regions} districts={districts} statusList={status} roles={roles}
                                     getDistrictsByRegion={getDistrictsByRegion} getNeighborhoodsByDistrict={getNeighborhoodsByDistrict} create={create}/>
                 </Col>
             </Row>
@@ -106,6 +107,7 @@ const mapStateToProps = (state) => {
         status: get(state, 'normalizer.data.status-list.result.accounts', []),
         roles: get(state, 'normalizer.data.role-list.result.accounts', []),
         neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
+        user: get(state, 'auth.user', {})
     }
 }
 

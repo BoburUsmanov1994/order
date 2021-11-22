@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {get, isEmpty, isEqual} from "lodash";
+import {get, includes, isEmpty, isEqual} from "lodash";
 import moment from "moment";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
@@ -23,9 +23,12 @@ import RegionScheme from "../../../schema/RegionScheme";
 import RangeCalendar from "../../../components/range-calendar";
 import DistrictScheme from "../../../schema/DistrictScheme";
 import classNames from "classnames";
+import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
 
 const OrderListContainer = ({
                                 history,
+                                user,
                                 orders,
                                 entities,
                                 isFetched,
@@ -49,6 +52,12 @@ const OrderListContainer = ({
         useEffect(() => {
             getOrdersList({...filter});
             getRegionList({});
+            if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
+                setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
+            }
+            if (includes([config.ROLES.USER], get(user, 'accountrole.name'))) {
+                setFilter(filter => ({...filter,distId: get(user,'districtsId._id')}));
+            }
         }, []);
 
         useEffect(() => {
@@ -56,6 +65,10 @@ const OrderListContainer = ({
                 getOrdersListByFilter(filter);
             }
         }, [filter]);
+
+        useEffect(()=>{
+            getDistrictsList({regId:get(filter,'regId')});
+        },[get(filter,'regId')])
 
 
         orders = Normalizer.Denormalize(orders, [OrderScheme], entities);
@@ -67,6 +80,16 @@ const OrderListContainer = ({
             value: _id,
             label: name
         }));
+
+        if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+            orders = orders.filter(item => isEqual(get(item, 'regiId._id'), get(user, 'regionId._id')));
+            regions = regions.filter(item => isEqual(get(item, 'value'), get(user, 'regionId._id')));
+
+        }
+
+        if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
+            orders = orders.filter(item => isEqual(get(item, 'creatorId._id'), get(user, '_id')));
+        }
         const deleteOrder = (id) => {
             confirmAlert({
                 title: 'Ишончингиз комилми?',
@@ -105,18 +128,22 @@ const OrderListContainer = ({
         }
 
         const setRegion = (value) => {
-            getDistrictsList({regId:value});
+           setFilter(filter => ({...filter,regId: value}));
         }
+
         const clearFilter = () => {
-                    setFilter(filter => ({ page: 0,
-                        seriya: null,
-                        regId: null,
-                        distId: null,
-                        from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
-                        to: moment().format("YYYY-MM-DD")}));
-                        getOrdersList({...filter});
+            setFilter(filter => ({
+                page: 0,
+                seriya: null,
+                regId: null,
+                distId: null,
+                from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
+                to: moment().format("YYYY-MM-DD")
+            }));
+            getOrdersList({...filter});
 
         }
+
         return (
             <>{isFetched ? <>
                 <Row className={'mb-24'}>
@@ -143,18 +170,29 @@ const OrderListContainer = ({
                                     <OrderSearch defaultValue={get(filter, 'seriya')}
                                                  search={(val) => setFilter(filter => ({...filter, seriya: val}))}
                                                  className={'mr-8 mb-8'}/>
-                                    <Select defaultValue={get(filter,'regId')} handleChange={(values) => {
-                                        setRegion(get(values, 'value'));
-                                        setFilter(filter => ({...filter, regId: get(values, 'value')}))
-                                    }} options={regions} placeholder={'Вилоятни танланг'}
-                                            className={'mr-8 mb-8'}/>
-                                    <Select
-                                        defaultValue={get(filter,'distId')}
-                                        handleChange={({value}) => setFilter(filter => ({...filter, distId: value}))}
-                                        options={districts} placeholder={'Туман'} className={'mr-8 mb-8'}/>
-                                    <RangeCalendar handleCalendar={handleCalendar} lg/>
+                                                 <HasAccess>
+                                                     {
+                                                         ({userCan}) => <Select isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])}  defaultValue={get(filter,'regId')} handleChange={(values) => {
+                                                             setRegion(get(values, 'value'));
+                                                             setFilter(filter => ({...filter, regId: get(values, 'value')}))
+                                                         }} options={regions} placeholder={'Вилоятни танланг'}
+                                                                                className={'mr-8 mb-8'}/>
+                                                     }
+                                                 </HasAccess>
+                                    <HasAccess>
+                                        {
+                                            ({userCan}) =>  <Select isDisabled={userCan([config.ROLES.USER])}
+                                                defaultValue={get(filter,'distId')}
+                                                handleChange={({value}) => setFilter(filter => ({...filter, distId: value}))}
+                                                options={districts} placeholder={'Туман'} className={'mr-8 mb-8'}/>
+                                        }
+                                    </HasAccess>
 
-                                    <Button className={'mb-8'} danger back handleClick={clearFilter}>Тозалаш</Button>
+
+                                    <RangeCalendar handleCalendar={handleCalendar} lg/>
+                                    <HasAccess>
+                                        {({userCan}) =>userCan([config.ROLES.ADMIN]) && <Button className={'mb-8'} danger back handleClick={clearFilter}>Тозалаш</Button>}
+                                    </HasAccess>
                                 </Flex>
                             </Col>
                         </Row>
@@ -189,9 +227,15 @@ const OrderListContainer = ({
                                          onClick={() => history.push(`/order/view/${get(order, '_id')}`)}/>
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24}
                                           onClick={() => history.push(`/order/update/${get(order, '_id')}`)}/>
-                                    <Trash
-                                        onClick={() => deleteOrder(get(order, '_id'))} className={'cursor-pointer'}
-                                        color="#E3111A" size={24}/></td>
+                                    <HasAccess>
+                                        {
+                                            ({userCan}) => userCan([config.ROLES.ADMIN]) && <Trash
+                                                onClick={() => deleteOrder(get(order, '_id'))}
+                                                className={'cursor-pointer'}
+                                                color="#E3111A" size={24}/>
+                                        }
+                                    </HasAccess>
+                                </td>
                             </tr>) : <tr>
                                 <td colSpan={12}>Маълумот мавжуд эмас</td>
                             </tr>
@@ -215,6 +259,7 @@ const mapStateToProps = (state) =>
         regions: get(state, 'normalizer.data.region-list.result.region', []),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         totalItems: get(state, 'normalizer.data.order-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) =>

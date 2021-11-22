@@ -7,6 +7,8 @@ import Input from "../../../../components/elements/input";
 import {Controller, useForm} from "react-hook-form";
 import FormSelect from "../../../../components/elements/form-select";
 import Button from "../../../../components/button";
+import HasAccess from "../../../../services/auth/HasAccess";
+import config from "../../../../config";
 
 const StyledUserCreateForm = styled.form`
 `;
@@ -77,10 +79,16 @@ const UserCreateForm = ({
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Вилоят</Label>
-                    <FormSelect defaultValue={get(user,'regionId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
-                                name={'regionId'}
-                                label={'Вилоят'} placeholder={'Танланг'} error={errors?.regionId}/>
+                    <HasAccess>
+                        {
+                            ({userCan}) => <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN])} defaultValue={get(user, 'regionId._id')}
+                                        onChange={({value}) => getDistrictsByRegion(value)} options={regions}
+                                        setValue={setValue} Controller={Controller} rule={{required: true}}
+                                        control={control}
+                                        name={'regionId'}
+                                        label={'Вилоят'} placeholder={'Танланг'} error={errors?.regionId}/>
+                        }
+                    </HasAccess>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>
@@ -106,10 +114,15 @@ const UserCreateForm = ({
                 <Col xs={3} className={'mb-24'}>
                     <Label>Фойдалаувчи роли
                     </Label>
-                    <FormSelect defaultValue={get(user,'accountrole._id')} options={roles}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
-                                name={'role'}
-                                label={'Фойдалаувчи роли'} placeholder={'Танланг'} error={errors?.role}/>
+                    <HasAccess>
+                        {
+                            ({userCan}) =><FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN])} defaultValue={get(user,'accountrole._id')} options={roles}
+                                                      setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                                      name={'role'}
+                                                      label={'Фойдалаувчи роли'} placeholder={'Танланг'} error={errors?.role}/>
+                        }
+                    </HasAccess>
+
                 </Col>
             </Row>
             <Row>

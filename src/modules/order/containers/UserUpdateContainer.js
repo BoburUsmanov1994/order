@@ -23,6 +23,7 @@ import UserUpdateForm from "../components/user/UserUpdateForm";
 const UserUpdateContainer = ({
                                  id,
                                  history,
+                                 profile,
                                  user,
                                  isFetched,
                                  entities,
@@ -141,6 +142,7 @@ const mapStateToProps = (state) => {
         status: get(state, 'normalizer.data.status-list.result.accounts', []),
         roles: get(state, 'normalizer.data.role-list.result.accounts', []),
         neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
+        profile:get(state,'auth.user',{})
     }
 }
 

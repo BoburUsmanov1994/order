@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from "styled-components";
 import {Col, Row} from "react-grid-system";
+import {get,isEqual,includes} from "lodash";
 import Label from "../../../../components/elements/label";
 import Input from "../../../../components/elements/input";
 import {Controller, useForm} from "react-hook-form";
 import FormSelect from "../../../../components/elements/form-select";
 import Button from "../../../../components/button";
+import config from "../../../../config";
 
 const StyledUserCreateForm = styled.form`
 `;
 const UserCreateForm = ({
+                            user = {},
                             regions = [],
                             districts = [],
                             neighborhoods = [],
@@ -19,7 +22,7 @@ const UserCreateForm = ({
                             },
                             getDistrictsByRegion = () => {
                             },
-                            getNeighborhoodsByDistrict = () =>{
+                            getNeighborhoodsByDistrict = () => {
 
                             },
                             ...props
@@ -28,6 +31,11 @@ const UserCreateForm = ({
     const onSubmit = (data) => {
         create(data);
     }
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+        regions = regions.filter(item => isEqual(get(item,'value'),get(user,'regionId._id')));
+        roles = roles.filter(role => includes([config.ROLES.USER],get(role,'label')));
+    }
+
     return (
         <StyledUserCreateForm onSubmit={handleSubmit(onSubmit)} {...props}>
             <Row className={'mb-48'}>

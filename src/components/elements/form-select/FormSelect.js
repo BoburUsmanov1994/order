@@ -63,8 +63,11 @@ const FormSelect = ({
                         Controller,
                         control,
                         rule = {},
-                        onChange = (value) => { console.log(value)},
-                        isMulti = false, ...props
+                        onChange = (value) => {
+                            console.log(value)
+                        },
+                        isMulti = false,
+                        isDisabled = false, ...props
                     }) => {
     const [selectedValue, setSelectedValue] = useState(defaultValue)
     useEffect(() => {
@@ -95,6 +98,7 @@ const FormSelect = ({
                                 styles={customStyles}
                                 components={{DropdownIndicator}}
                                 isMulti={isMulti}
+                                isDisabled={isDisabled}
                                 value={
                                     isMulti ? selectedValue : options.filter(option =>
                                         option.value === selectedValue)

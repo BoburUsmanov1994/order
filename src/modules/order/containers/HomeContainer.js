@@ -26,9 +26,11 @@ import Normalizer from "../../../services/normalizer";
 import DistrictScheme from "../../../schema/DistrictScheme";
 import {statistics} from "../../../mock";
 import Actions from "../Actions";
+import config from "../../../config";
 
 const HomeContainer = ({
                            history,
+                           user,
                            getRegionList,
                            getDistrictsList,
                            entities,
@@ -48,6 +50,9 @@ const HomeContainer = ({
     const [popup, setPopup] = useState(null);
     const [orderFilter,setOrderFilter] = useState({from:  null,to:null,regId:null,distId:null,mfyId:null});
     useEffect(() => {
+        if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+            history.push(`/region/${get(user,'regionId._id')}`);
+        }
         setDistrictListTrigger();
         getRegionList({});
         statisticsPlaceActionCounts();
@@ -67,7 +72,6 @@ const HomeContainer = ({
     }, [active])
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities);
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
-
 
     return (
         <>
@@ -165,7 +169,7 @@ const HomeContainer = ({
                     </Box>
                 </Col>
             </Row>
-            <Row className={'mb-24'}>
+            <Row className={'mb-24'} >
                 <Col xs={12}>
                     <Title>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
                 </Col>
@@ -175,7 +179,7 @@ const HomeContainer = ({
                         <Radio className={'mr-16'} label={'Жабрланувчилар'} warning/>
                         <Radio className={'mr-16'} label={'Айбдорлар'} primary/>
                         <Flex className={'ml-48'}>
-                            <Text>Саралаш</Text><RangeCalendar/>
+                            <Text className={'mr-8'}>Саралаш</Text><RangeCalendar/>
                         </Flex>
                     </Flex>
                 </Col>
@@ -195,6 +199,7 @@ const mapStateToProps = (state) => {
         statistics_place_action_counts: get(state, 'order.statistics_place_action_counts.data', {}),
         statistics_order_counts:get(state, 'order.statistics_order_counts.data', {}),
         statistics_type_violence:get(state, 'order.statistics_type_violence.data', {}),
+        user:get(state,'auth.user',{})
     }
 }
 

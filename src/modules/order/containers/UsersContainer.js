@@ -8,18 +8,21 @@ import Title from "../../../components/title";
 import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil} from "lodash";
+import {get, isEmpty,isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
-import {Edit, Trash,Eye} from 'react-feather';
+import {Edit, Eye, Trash} from 'react-feather';
 import ApiService from "../ApiService";
 import Loader from "../../../components/loader";
 import {toast} from "react-toastify";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import UserScheme from "../../../schema/UserScheme";
+import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
 
 
 const RegionsContainer = ({
                               history,
+                              user,
                               getUsersList,
                               entities,
                               users,
@@ -66,7 +69,9 @@ const RegionsContainer = ({
             ]
         });
     };
-
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)) {
+        users = users.filter(item=>isEqual(get(item,'regionId._id'),get(user,'regionId._id')));
+    }
     return (
         <>
             <Row className={'mb-24'}>
@@ -100,9 +105,14 @@ const RegionsContainer = ({
                                 <td>
                                     <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} onClick={() => history.push(`/user/view/${get(user, '_id')}`)}/>
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => history.push(`/user/update/${get(user, '_id')}`)}/>
-                                <Trash
-                                    onClick={() => deleteUser(get(user, '_id'))} className={'cursor-pointer'}
-                                    color="#E3111A" size={24}/></td>
+                                    <HasAccess>
+                                        {
+                                            ({userCan}) =>userCan(config.ROLES.ADMIN) && <Trash
+                                                onClick={() => deleteUser(get(user, '_id'))} className={'cursor-pointer'}
+                                                color="#E3111A" size={24}/>
+                                        }
+                                    </HasAccess>
+                                </td>
                             </tr>) : <tr>
                                 <td colSpan={4}>Маълумот мавжуд эмас</td>
                             </tr>
@@ -120,6 +130,7 @@ const mapStateToProps = (state) => {
         users: get(state, 'normalizer.data.users-list.result.users', []),
         isFetched: get(state, 'normalizer.data.users-list.isFetched', false),
         totalItems:get(state, 'normalizer.data.users-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) => {

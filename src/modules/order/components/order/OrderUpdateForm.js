@@ -10,6 +10,8 @@ import Button from "../../../../components/button";
 import Textarea from "../../../../components/elements/textarea";
 import Calendar from "../../../../components/elements/calendar";
 import {get} from "lodash";
+import HasAccess from "../../../../services/auth/HasAccess";
+import config from "../../../../config";
 
 const StyledOrderUpdateForm = styled.form`
 `;
@@ -60,10 +62,15 @@ const OrderUpdateForm = ({
 
                 <Col xs={3} className={'mb-24'}>
                     <Label>Вилоят</Label>
-                    <FormSelect defaultValue={get(order,'regiId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
-                                name={'regiId'}
-                                label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regiId}/>
+                    <HasAccess>
+                        {
+                            ({userCan}) => <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN])} defaultValue={get(order,'regiId._id')} onChange={({value}) => getDistrictsByRegion(value)} options={regions}
+                                                       setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                                       name={'regiId'}
+                                                       label={'Вилоят'} placeholder={'Вилоятни танланг'} error={errors?.regiId}/>
+                        }
+                    </HasAccess>
+
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Туман</Label>

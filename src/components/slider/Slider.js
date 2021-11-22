@@ -21,7 +21,8 @@ const StyledSlider = styled.div`
       display: inline-block;
       left: -30px;
       z-index: 99;
-      top: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
       background-image: url(${arrowPrev});
       background-repeat: no-repeat;
@@ -36,7 +37,8 @@ const StyledSlider = styled.div`
       display: inline-block;
       right: -10px;
       z-index: 99;
-      top: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
       background-image: url(${arrowNext});
       background-repeat: no-repeat;
