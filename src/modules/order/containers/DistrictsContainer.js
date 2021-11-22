@@ -23,6 +23,7 @@ import DistrictUpdateForm from "../components/district/DistrictUpdateForm";
 import Select from "../../../components/elements/select/Select";
 import Flex from "../../../components/flex/Flex";
 import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
 
 
 const DistrictsContainer = ({
@@ -176,9 +177,13 @@ const DistrictsContainer = ({
                 </Col>
                 <Col xs={7}>
                     <Flex justify={'flex-end'}>
-                        {!isEmpty(regions) && <Select defaultValue={region} options={[{value: null, label: "Барчаси"}, ...regions]}
-                                placeholder={'Вилоятни танланг'}
-                                handleChange={({value}) => setRegion(value)} className={'mr-16'}/>}
+                        {!isEmpty(regions) && <HasAccess>
+                            {
+                                ({userCan}) => <Select isDisabled={userCan([config.ROLES.REGION_ADMIN])}  defaultValue={region} options={[{value: null, label: "Барчаси"}, ...regions]}
+                                                        placeholder={'Вилоятни танланг'}
+                                                        handleChange={({value}) => setRegion(value)} className={'mr-16'}/>
+                            }
+                        </HasAccess>}
                         <Button success lg thin handleClick={() => {
                             setDistrictId(null);
                             setShow(true)
