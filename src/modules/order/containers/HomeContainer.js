@@ -53,6 +53,10 @@ const HomeContainer = ({
         if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
             history.push(`/region/${get(user,'regionId._id')}`);
         }
+        if(isEqual(get(user,'accountrole.name'),config.ROLES.USER)){
+            history.push(`/order/list`);
+        }
+
         setDistrictListTrigger();
         getRegionList({});
         statisticsPlaceActionCounts();

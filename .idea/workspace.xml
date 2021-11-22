@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/elements/form-select/FormSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/form-select/FormSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/elements/select/Select.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/select/Select.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slider/Slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slider/Slider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/order/OrderUpdateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/order/OrderUpdateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/user/UserCreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/user/UserCreateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/user/UserUpdateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/user/UserUpdateForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderCreateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderCreateContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UserUpdateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UserUpdateContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UsersContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UsersContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +79,7 @@
       <workItem from="1636823181559" duration="11997000" />
       <workItem from="1636932692675" duration="17446000" />
       <workItem from="1637217675531" duration="13465000" />
-      <workItem from="1637319498789" duration="24655000" />
+      <workItem from="1637319498789" duration="24910000" />
     </task>
     <servers />
   </component>
@@ -121,7 +108,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
-          <line>78</line>
+          <line>82</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
