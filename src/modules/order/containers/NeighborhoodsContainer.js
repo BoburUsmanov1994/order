@@ -41,7 +41,8 @@ const NeighborhoodsContainer = ({
                                     totalItems,
                                     setListTrigger,
                                     getNeighborhoodsList,
-                                    getDistrictsListByRegion
+                                    getDistrictsListByRegion,
+                                    getNeighborhoodsByRegion
                                 }) => {
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
@@ -67,6 +68,7 @@ const NeighborhoodsContainer = ({
     useEffect(() => {
         if (region) {
             getDistrictsListByRegion({regId: region});
+            getNeighborhoodsByRegion({region});
         }
     }, [region])
 
@@ -254,6 +256,25 @@ const mapDispatchToProps = (dispatch) => {
                 type: ApiActions.GET_ALL.REQUEST,
                 payload: {
                     url: '/mfy',
+                    config: {
+                        params: {
+                            page: page + 1,
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getNeighborhoodsByRegion: ({region = null, page = 0, size = 20}) => {
+            const storeName = 'neighborhoods-list';
+            const entityName = 'neighborhood';
+            const scheme = {mfy: [NeighborhoodScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/mfy/regId/${region}`,
                     config: {
                         params: {
                             page: page + 1,

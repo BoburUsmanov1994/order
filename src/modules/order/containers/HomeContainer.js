@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {capitalize, find, get, isEqual} from "lodash";
+import {capitalize, find, get, isEqual,round} from "lodash";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import SubHeaderBox from "../../../components/subheader";
@@ -145,7 +145,7 @@ const HomeContainer = ({
                                                 get(statistics_place_action_counts, 'placeectioncounts', []).map((item, index) =>
                                                     <Card key={index} className={'mb-8'}
                                                           title={capitalize(get(item, 'placename', '-'))}
-                                                          percent={get(statistics_place_action_counts, `persrnage[${index}].plpers`, '-')}
+                                                          percent={round(get(statistics_place_action_counts, `persrnage[${index}].plpers`, '-'),2)}
                                                           count={get(item, 'placcount', '-')} success/>)
                                             }
                                         </Flex>
