@@ -9,7 +9,7 @@ import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import RegionScheme from "../../../schema/RegionScheme";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil,includes} from "lodash";
+import {get, isEmpty, isNil,includes,isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
 import {Edit, Trash} from 'react-feather';
 import ApiService from "../ApiService";
@@ -153,6 +153,9 @@ const DistrictsContainer = ({
         });
     };
 
+    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+        regions = regions.filter(item => isEqual(get(item,'value'),get(user,'regionId._id')));
+    }
 
     return (
         <>
@@ -208,9 +211,15 @@ const DistrictsContainer = ({
                                     setDistrictId(get(district, '_id'));
                                     setShow(true);
                                 }
-                                }/><Trash
-                                    onClick={() => deleteDistrict(get(district, '_id'))} className={'cursor-pointer'}
-                                    color="#E3111A" size={24}/></td>
+                                }/>
+                                <HasAccess>
+                                    {
+                                        ({userCan}) => userCan([config.ROLES.ADMIN]) && <Trash
+                                            onClick={() => deleteDistrict(get(district, '_id'))} className={'cursor-pointer'}
+                                            color="#E3111A" size={24}/>
+                                    }
+                                </HasAccess>
+                                </td>
                             </tr>) : <tr>
                                 <td colSpan={5}>Маълумот мавжуд эмас</td>
                             </tr>

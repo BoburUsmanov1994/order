@@ -171,7 +171,7 @@ const Menu = ({items, ...props}) => {
                             </li>
                         </MenuParent>
                         }
-                        {userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN]) &&
+                        {userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) &&
                         <MenuParent icon={bookmarkIcon} name={'Умумий маълумотлар'}>
                             {
                                userCan([config.ROLES.ADMIN]) && <li title={'regions'}>
@@ -180,11 +180,12 @@ const Menu = ({items, ...props}) => {
                                     </NavLink>
                                 </li>
                             }
-                            <li title={'districts'}>
+                            {userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN]) && <li title={'districts'}>
                                 <NavLink to={'/districts'}>
                                     <ReactSVG src={clipboardIcon}/><span className={'text'}>Туманлар</span>
                                 </NavLink>
                             </li>
+                            }
                             <li>
                                 <NavLink to={'/neighborhoods'}>
                                     <ReactSVG src={clipboardIcon}/><span className={'text'}>Маҳаллалар</span>
