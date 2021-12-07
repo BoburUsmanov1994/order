@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/statistics/Statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statistics/Statistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/user/UserCreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/user/UserCreateForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/Theme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../XB/new-xb-uz-react" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -81,7 +87,12 @@
       <workItem from="1636823181559" duration="11997000" />
       <workItem from="1636932692675" duration="17446000" />
       <workItem from="1637217675531" duration="13465000" />
-      <workItem from="1637319498789" duration="36007000" />
+      <workItem from="1637319498789" duration="36631000" />
+      <workItem from="1638005455413" duration="5285000" />
+      <workItem from="1638442574483" duration="626000" />
+      <workItem from="1638541714261" duration="5985000" />
+      <workItem from="1638855375123" duration="1566000" />
+      <workItem from="1638857161777" duration="828000" />
     </task>
     <servers />
   </component>
@@ -110,7 +121,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
-          <line>83</line>
+          <line>106</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

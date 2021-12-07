@@ -4,7 +4,7 @@ import Router from "./router";
 import Theme from "./theme";
 import Store from "./store";
 import Auth from "./services/auth/Auth";
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 ReactDOM.render(

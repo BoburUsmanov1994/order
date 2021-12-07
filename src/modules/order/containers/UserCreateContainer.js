@@ -15,6 +15,7 @@ import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
 import ApiService from "../ApiService";
 import {toast} from "react-toastify";
 import Loader from "../../../components/loader";
+import RankScheme from "../../../schema/RankScheme";
 
 
 const UserCreateContainer = ({
@@ -30,13 +31,16 @@ const UserCreateContainer = ({
                                  status,
                                  getRoleList,
                                  roles,
-                                 getNeighborhoodsListByDistrict
+                                 getNeighborhoodsListByDistrict,
+                                 getRankList,
+                                 ranks
                              }) => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         getRegionList({});
         getStatusList({});
         getRoleList({});
+        getRankList({});
     }, [])
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities).map(({_id, name}) => ({
         value: _id,
@@ -52,6 +56,8 @@ const UserCreateContainer = ({
     }));;
     status = Normalizer.Denormalize(status, [StatusScheme], entities).map(({_id, name}) => ({value: _id, label: name}));
     roles = Normalizer.Denormalize(roles, [RoleScheme], entities).map(({_id, name}) => ({value: _id, label: name}));
+    ranks = Normalizer.Denormalize(ranks, [RankScheme], entities).map(({_id, name}) => ({value: _id, label: name}));
+
     const getDistrictsByRegion = (regId) => {
         getDistrictsListByRegion({regId});
     }
@@ -91,7 +97,7 @@ const UserCreateContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    <UserCreateForm user={user} neighborhoods={neighborhoods} regions={regions} districts={districts} statusList={status} roles={roles}
+                    <UserCreateForm user={user} neighborhoods={neighborhoods} regions={regions} districts={districts} statusList={status} roles={roles} ranks={ranks}
                                     getDistrictsByRegion={getDistrictsByRegion} getNeighborhoodsByDistrict={getNeighborhoodsByDistrict} create={create}/>
                 </Col>
             </Row>
@@ -107,7 +113,8 @@ const mapStateToProps = (state) => {
         status: get(state, 'normalizer.data.status-list.result.accounts', []),
         roles: get(state, 'normalizer.data.role-list.result.accounts', []),
         neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
-        user: get(state, 'auth.user', {})
+        user: get(state, 'auth.user', {}),
+        ranks: get(state, 'normalizer.data.rank-list.result.zvaniya', []),
     }
 }
 
@@ -209,6 +216,25 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
 
+        getRankList: ({page = 0, size = 20}) => {
+            const storeName = 'rank-list';
+            const entityName = 'item';
+            const scheme = {zvaniya: [RankScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: '/zvaniya',
+                    config: {
+                        params: {
+                            page: page + 1,
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
         setDistrictListTrigger: () => dispatch({
             type: ApiActions.GET_ALL.TRIGGER,
             payload: {

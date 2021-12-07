@@ -27,6 +27,7 @@ import DistrictScheme from "../../../schema/DistrictScheme";
 import {statistics} from "../../../mock";
 import Actions from "../Actions";
 import config from "../../../config";
+import UserScheme from "../../../schema/UserScheme";
 
 const HomeContainer = ({
                            history,
@@ -45,7 +46,18 @@ const HomeContainer = ({
                            statistics_type_violence,
                            statisticsVictimCount,
                            getMonthlyStatistics,
-                           statistics_victim_count
+                           statistics_victim_count,
+                           getVictimWorkingPlace,
+                           getAdministratives,
+                           getAdministrativesCodex,
+                           getAgesVictim,
+                           getAgesViolent,
+                           getBasisOrder,
+                           getResultOrder,
+                           getVictimEducation,
+                           getVictimCitizenship,
+                           getCriminalCase,
+                           getCriminalCodex
                        }) => {
     const [active, setActive] = useState(null);
     const [popup, setPopup] = useState(null);
@@ -64,6 +76,17 @@ const HomeContainer = ({
         statisticsTypeViolence();
         statisticsVictimCount();
         getMonthlyStatistics();
+        getVictimWorkingPlace({});
+        getAdministratives({});
+        getAdministrativesCodex({});
+        getAgesVictim({});
+        getAgesViolent({});
+        getBasisOrder({});
+        getResultOrder({});
+        getVictimEducation({});
+        getVictimCitizenship({});
+        getCriminalCase({});
+        getCriminalCodex({})
     }, []);
 
     useEffect(() => {
@@ -273,7 +296,211 @@ const mapDispatchToProps = (dispatch) => {
         getMonthlyStatistics: () => dispatch({
             type: Actions.GET_MONTHLY_STATISTICS.REQUEST,
             payload: {},
-        })
+        }),
+        getVictimWorkingPlace: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/vicworkingplace`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                        'distId': `${distId}`,
+                        'mfyId': `${mfyId}`,
+                    },
+                },
+                storeName: 'statistics-victim-working-place',
+            },
+        }),
+        getAdministratives: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/administratives`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-administratives',
+            },
+        }),
+        getAdministrativesCodex: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/administrativescodex`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-administratives-codex',
+            },
+        }),
+        getAgesVictim: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/agesvictim`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-ages-victim',
+            },
+        }),
+        getAgesViolent: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/agesviolent`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-ages-violent',
+            },
+        }),
+        getBasisOrder: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/basisorder`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-basis-order',
+            },
+        }),
+        getBasisTermination: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/basistermination`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-basis-termination',
+            },
+        }),
+        getResultOrder: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/resultorder`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-result-order',
+            },
+        }),
+        getVictimEducation: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/viceducation`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-victim-education',
+            },
+        }),
+        getVictimCitizenship: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/viccitizenship`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-victim-citizenship',
+            },
+        }),
+        getCriminalCase: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/criminalcase`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-criminalcase',
+            },
+        }),
+        getCriminalCodex: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/criminalcodex`,
+                config: {
+                    params: {},
+                    // headers: {
+                    //     'from': `${from}`,
+                    //     'to': `${to}`,
+                    //     'regId': `${regId}`,
+                    //     'distId': `${distId}`,
+                    //     'mfyId': `${mfyId}`,
+                    // },
+                },
+                storeName: 'statistics-criminalcodex',
+            },
+        }),
 
     }
 }

@@ -142,7 +142,7 @@ const Statistics = ({data = {},...props}) => {
                 <div className="right"></div>
             </div>
             <div className="statistics__center">
-                <div className="statistics__center_item" style={{width: `${round((get(head(get(data,'statistics')),'countviolent',0)*100/(get(head(get(data,'statistics')),'countviolent',0)+get(head(get(data,'statistics')),'countvictim',0)+get(head(get(data,'statistics')),'countcriminalcasecount',0)+get(head(get(data,'statistics')),'administrativeworkcount',0))),2)}%`}}>
+                <div className="statistics__center_item" style= {{width: `${round((get(head(get(data,'statistics')),'countviolent',0)*100/(get(head(get(data,'statistics')),'countviolent',0)+get(head(get(data,'statistics')),'countvictim',0)+get(head(get(data,'statistics')),'countcriminalcasecount',0)+get(head(get(data,'statistics')),'administrativeworkcount',0))),2)}%`}}>
                     <h2>{get(head(get(data,'statistics')),'countviolent','-')}</h2>
                     <p>{get(head(get(data,'statistics')),'countviolentname','-')}</p>
                 </div>

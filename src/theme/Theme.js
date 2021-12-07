@@ -5,6 +5,7 @@ import {get} from "lodash";
 import Wrapper from "../components/wrapper";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-tabs/style/react-tabs.css';
+import 'react-toastify/dist/ReactToastify.css';
 import storage from "../services/local-storage";
 
 const GlobalStyles = createGlobalStyle`

@@ -1,15 +1,31 @@
 import React from 'react';
 import styled from "styled-components";
 import {Col, Row} from "react-grid-system";
-import {get,isEqual,includes} from "lodash";
+import {get, includes, isEqual} from "lodash";
 import Label from "../../../../components/elements/label";
 import Input from "../../../../components/elements/input";
 import {Controller, useForm} from "react-hook-form";
 import FormSelect from "../../../../components/elements/form-select";
 import Button from "../../../../components/button";
 import config from "../../../../config";
-
+import InputMask from "react-input-mask";
+import classNames from "classnames";
 const StyledUserCreateForm = styled.form`
+    .form__phone{
+      min-width: 250px;
+      padding: 15px 25px;
+      border-radius: 5px;
+      border: 1px solid #707070;
+      outline: none;
+      font-size: 16px;
+      font-weight: 300;
+      color: #7E7E7E;
+      font-family: 'Ubuntu',sans-serif;
+      border-color: #E8E8E8;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+    }
 `;
 const UserCreateForm = ({
                             user = {},
@@ -17,6 +33,7 @@ const UserCreateForm = ({
                             districts = [],
                             neighborhoods = [],
                             roles = [],
+                            ranks = [],
                             statusList = [],
                             create = () => {
                             },
@@ -74,6 +91,31 @@ const UserCreateForm = ({
                     <Label>Лавозим</Label>
                     <Input register={register} label={'Лавозим'} name={'position'} validation={{required: true}}
                            error={errors?.position} sm/>
+                </Col>
+                <Col xs={3} className={'mb-24'}>
+                    <Label>Zvaniya</Label>
+                    <FormSelect  options={ranks}
+                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                name={'zvaniya'}
+                                label={'Zvaniya'} placeholder={'Танланг'} error={errors?.zvaniya}/>
+                </Col>
+                <Col xs={3} className={'mb-24'}>
+                    <Label>Телефон рақам</Label>
+                   <div>
+                       <Controller
+                           as={InputMask}
+                           control={control}
+                           name={'phone'}
+                           defaultValue=""
+                           rules={{required: true, pattern: /^[0-9-)(]*$/}}
+                           render={({field}) => <InputMask value={props.value}
+                                                           onChange={props.onChange}   {...field}
+                                                           className={classNames('form-control form__phone', {error: errors['phone']})}
+                                                           mask="(99)999-99-99" maskChar={null}/>}
+                       />
+                   </div>
+                    {errors.phone && errors['phone']['type'] == 'required' &&
+                    <span className={'text-danger'}> Mайдон тўлдирилиши шарт</span>}
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Вилоят</Label>
