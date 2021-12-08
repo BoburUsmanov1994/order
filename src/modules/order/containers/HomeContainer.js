@@ -314,19 +314,19 @@ const mapDispatchToProps = (dispatch) => {
                 storeName: 'statistics-victim-working-place',
             },
         }),
-        getAdministratives: ({from=null,to=null,regId=null,distId=null,mfyId=null}) => dispatch({
+        getAdministratives: ({from='',to='',regId='',distId='',mfyId=''}) => dispatch({
             type: ApiActions.GET_ONE.REQUEST,
             payload: {
                 url: `/statistics/administratives`,
                 config: {
                     params: {},
-                    // headers: {
-                    //     'from': `${from}`,
-                    //     'to': `${to}`,
-                    //     'regId': `${regId}`,
-                    //     'distId': `${distId}`,
-                    //     'mfyId': `${mfyId}`,
-                    // },
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                        'distId': `${distId}`,
+                        'mfyId': `${mfyId}`,
+                    },
                 },
                 storeName: 'statistics-administratives',
             },
