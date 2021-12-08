@@ -51,15 +51,15 @@ const Dropdown = ({
     }, ...props
                   }) => {
     const [open, setOpen] = useState(false);
-    const handleChange = (e, id) => {
+    const handleChange = (e, name) => {
         if (e.target.checked) {
-            if (!includes(activeItems, id)) {
-                setActiveItems(prev => [...prev, id])
+            if (!includes(activeItems, name)) {
+                setActiveItems(prev => [...prev, name])
             }
         }
         if (!e.target.checked) {
-            const index = findIndex(activeItems, item => item == id);
-            if (includes(activeItems, id)) {
+            const index = findIndex(activeItems, item => item == name);
+            if (includes(activeItems, name)) {
                 setActiveItems([...slice(activeItems, 0, index), ...slice(activeItems, index + 1, activeItems.length)]);
             }
         }
@@ -70,10 +70,10 @@ const Dropdown = ({
                 <div className="dropdown__btn" onClick={() => setOpen(open => !open)}>График танланг</div>
                 {open && <div className="dropdown__box">
                     {
-                        items && items.map(({id, name}) => <CustomCheckbox className={'dropdown__checkbox'} key={id}
-                                                                           handleChange={(e) => handleChange(e, id)}
+                        items && items.map(({name},index) => <CustomCheckbox className={'dropdown__checkbox'} key={index}
+                                                                           handleChange={(e) => handleChange(e, name)}
                                                                            label={name}
-                                                                           defaultChecked={includes(activeItems, id)}/>)
+                                                                           defaultChecked={includes(activeItems, name)}/>)
                     }
 
                 </div>}

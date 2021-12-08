@@ -52,7 +52,7 @@ const OrderItem = ({item,...props}) => {
                     <Flex className={'mb-16'}>
                         <img src={calendarIcon} className={'mr-16'} alt=""/> <Text>Туғилган санаси</Text>
                     </Flex>
-                    <Text className={'ml-30'}>{moment.unix(get(item,'citizensId.dateofbirthday')).format("DD-MM_YYYY")}</Text>
+                    <Text className={'ml-30'}>{moment(get(item,'citizensId.dateofbirthday')).format("DD-MM-YYYY")}</Text>
                 </Col>
             </Row>
         </StyledOrderItem>

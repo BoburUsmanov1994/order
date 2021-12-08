@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {get,isEqual} from "lodash";
 import {Cell, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
 import {Col, Row} from "react-grid-system";
 import exportImg from "../../assets/images/icons/export.png";
@@ -10,14 +11,9 @@ const StyledCustomPieChart = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
   padding: 25px 15px;
   border-radius: 10px;
-  width: 70%;
+  width: 100%;
   margin-bottom: 30px;
-
-  .recharts-default-tooltip {
-    //background-color: #322A7D !important;
-    //color: #fff !important;
-  }
-
+  
   .chart {
     &__head {
       display: flex;
@@ -46,14 +42,9 @@ const StyledCustomPieChart = styled.div`
     }
   }
 `;
-const CustomPieChart = ({name,id,...props}) => {
-    const COLORS = ['#FF8E00', '#E3111A', '#2BCC71', '#5453CD']
-    const data = [
-        {name: 'Ўрта', value: 1400},
-        {name: 'Маълумоти йўқ', value: 1567},
-        {name: 'Ўрта махсус ', value: 1398},
-        {name: 'Олий', value: 900},
-    ];
+const CustomPieChart = ({name,data,...props}) => {
+    const COLORS = ['#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412']
+
     return (
         <StyledCustomPieChart {...props}>
             <div className="chart__head">
@@ -81,18 +72,23 @@ const CustomPieChart = ({name,id,...props}) => {
             </div>
             <div className="chart__bottom">
                 <Row>
-                    <Col xs={6}>
-                        <Dot title={'Ўрта махсус '} percent={'85.7'} success />
-                    </Col>
-                    <Col xs={6}>
-                        <Dot title={'Маълумоти йўқ'} percent={'14.9'} danger />
-                    </Col>
-                    <Col xs={6}>
-                        <Dot title={'Олий'} percent={'9'} primary />
-                    </Col>
-                    <Col xs={6}>
-                        <Dot title={'Ўрта'} percent={'11.9'} warning />
-                    </Col>
+                    {
+                        data && data.map((item,index) => <Col className={'mb-24'} key={index} xs={6}>
+                            {
+                                isEqual(index % 4,0) && <Dot title={get(item, 'name')} percent={get(item, 'value')} success/>
+                            }
+                            {
+                                isEqual(index % 4,1) && <Dot title={get(item, 'name')} percent={get(item, 'value')} danger/>
+                            }
+                            {
+                                isEqual(index % 4,2) && <Dot title={get(item, 'name')} percent={get(item, 'value')} primary/>
+                            }
+                            {
+                                isEqual(index % 4,3) && <Dot title={get(item, 'name')} percent={get(item, 'value')} warning/>
+                            }
+                        </Col>)
+                    }
+
                 </Row>
             </div>
         </StyledCustomPieChart>

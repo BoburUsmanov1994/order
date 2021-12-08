@@ -447,7 +447,7 @@ class ApiService{
     }
 
     static StatisticsPlaceActionCounts = () => {
-        return request.get(`/orders/statistics/placeectioncounts`);
+        return request.get(`/statistics/vicplaceection`);
     }
 
     static StatisticsOrderCounts = ({from = null, to = null, regId = null, distId = null, mfyId = null}) => {
