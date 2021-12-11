@@ -6,6 +6,7 @@ import Wrapper from "../components/wrapper";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-tabs/style/react-tabs.css';
 import 'react-toastify/dist/ReactToastify.css';
+import "nprogress/nprogress.css";
 import storage from "../services/local-storage";
 
 const GlobalStyles = createGlobalStyle`
@@ -39,6 +40,11 @@ const GlobalStyles = createGlobalStyle`
   .img-fluid{
     max-width: 100%;
     height: auto;
+  }
+  #nprogress .bar {
+    background: #21D59B !important;
+    height: 4px !important;
+    z-index: 99999 !important;
   }
   .text-center {
     text-align: center;

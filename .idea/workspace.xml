@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/chart/AreaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chart/AreaChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chart/PieChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chart/PieChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dropdown/Dropdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dropdown/Dropdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/order-item/order-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-item/order-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/Theme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +40,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../paybek-inc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -95,7 +98,9 @@
       <workItem from="1638541714261" duration="5985000" />
       <workItem from="1638855375123" duration="1566000" />
       <workItem from="1638857161777" duration="1232000" />
-      <workItem from="1638894172249" duration="19206000" />
+      <workItem from="1638894172249" duration="20726000" />
+      <workItem from="1639138085328" duration="614000" />
+      <workItem from="1639138752444" duration="4575000" />
     </task>
     <servers />
   </component>
@@ -124,7 +129,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
-          <line>86</line>
+          <line>90</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -184,12 +189,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
-          <line>739</line>
+          <line>747</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
-          <line>858</line>
+          <line>866</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>

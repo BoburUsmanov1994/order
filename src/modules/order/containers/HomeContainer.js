@@ -17,7 +17,6 @@ import Box from "../../../components/box";
 import Select from "./../../../components/elements/select";
 import Card from "../../../components/card";
 import Type from "../../../components/type";
-import Radio from "../../../components/elements/radio";
 import CustomAreaChart from "../../../components/chart/AreaChart";
 import Statistics from "../../../components/statistics";
 import ApiActions from "../../../services/api/Actions";
@@ -28,7 +27,7 @@ import {statistics} from "../../../mock";
 import Actions from "../Actions";
 import config from "../../../config";
 import PieChartList from "../components/pie-chart-list/pie-chart-list";
-import Dropdown from "../../../components/dropdown";
+import moment from "moment";
 
 const HomeContainer = ({
                            history,
@@ -46,12 +45,14 @@ const HomeContainer = ({
                            statisticsTypeViolence,
                            statistics_type_violence,
                            statisticsVictimCount,
-                           getMonthlyStatistics,
+                           getRepublicMonthlyStatistics,
                            statistics_victim_count,
+                           republicMonthlyStatistics
                        }) => {
     const [active, setActive] = useState(null);
     const [popup, setPopup] = useState(null);
     const [orderFilter,setOrderFilter] = useState({from:  null,to:null,regId:null,distId:null,mfyId:null});
+    const [filterMonthlyStatistic,setFilterMonthlyStatistics] = useState({from:'',to:''});
     useEffect(() => {
         if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
             history.push(`/region/${get(user,'regionId._id')}`);
@@ -65,7 +66,6 @@ const HomeContainer = ({
         statisticsPlaceActionCounts();
         statisticsTypeViolence();
         statisticsVictimCount();
-        getMonthlyStatistics();
 
     }, []);
 
@@ -77,7 +77,11 @@ const HomeContainer = ({
             getDistrictsList({regId: active});
             setPopup(find(statistics,item => isEqual(get(item,'id'),active)))
         }
-    }, [active])
+    }, [active]);
+
+    useEffect(()=>{
+        getRepublicMonthlyStatistics({...filterMonthlyStatistic});
+    },[filterMonthlyStatistic]);
     regions = Normalizer.Denormalize(regions, [RegionScheme], entities);
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
 
@@ -178,27 +182,24 @@ const HomeContainer = ({
                 </Col>
             </Row>
             <Row className={'mb-24'} >
-                <Col xs={12}>
+                <Col xs={8}>
                     <Title>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
                 </Col>
-                <Col xs={12}>
+                <Col xs={4}>
                     <Flex className={'mb-32'} justify={'flex-end'}>
-                        <Radio className={'mr-16'} label={'Умумий ордерлар сони'} danger/>
-                        <Radio className={'mr-16'} label={'Жабрланувчилар'} warning/>
-                        <Radio className={'mr-16'} label={'Айбдорлар'} primary/>
                         <Flex className={'ml-48'}>
-                            <Text className={'mr-8'}>Саралаш</Text><RangeCalendar/>
+                            <Text className={'mr-8'}>Саралаш</Text><RangeCalendar handleCalendar={({startDate,endDate})=>setFilterMonthlyStatistics({from:moment(startDate).format("YYYY-MM-DD"),to:moment(endDate).format("YYYY-MM-DD")})}/>
                         </Flex>
                     </Flex>
                 </Col>
                 <Col xs={12} className={'mb-48'}>
-                    <CustomAreaChart type={'monotone'}/>
+                    {get(republicMonthlyStatistics,'isFetched') && <CustomAreaChart data={get(republicMonthlyStatistics,'result.statistics').map(({month,total}) => ({name:month,y:total}))} type={'monotone'}/>}
                 </Col>
 
             </Row>
             <Row className={'mb-24'}>
                 <Col xs={12}>
-                    <PieChartList />
+                    <PieChartList startDate={get(filterMonthlyStatistic,'from')} endDate={get(filterMonthlyStatistic,'to')} />
                 </Col>
             </Row>
         </>
@@ -214,7 +215,8 @@ const mapStateToProps = (state) => {
         statistics_order_counts:get(state, 'order.statistics_order_counts.data', {}),
         statistics_type_violence:get(state, 'order.statistics_type_violence.data', {}),
         statistics_victim_count:get(state, 'order.statistics_victim_count.data', {}),
-        user:get(state,'auth.user',{})
+        user:get(state,'auth.user',{}),
+        republicMonthlyStatistics:get(state, 'normalizer.data.republic-monthly-statistics', {}),
     }
 }
 
@@ -279,9 +281,19 @@ const mapDispatchToProps = (dispatch) => {
             type: Actions.STATISTICS_VICTIM_COUNT.REQUEST,
             payload: {},
         }),
-        getMonthlyStatistics: () => dispatch({
-            type: Actions.GET_MONTHLY_STATISTICS.REQUEST,
-            payload: {},
+        getRepublicMonthlyStatistics: ({from = '', to = ''}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/monthly`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                    },
+                },
+                storeName: 'republic-monthly-statistics',
+            },
         }),
     }
 }

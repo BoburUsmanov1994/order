@@ -88,6 +88,8 @@ const PieChartList = ({
                           statisticsViolentStateViolences,
                           statisticsViolentPersonViolences,
                           statisticsConditionViolentPersonViolences,
+                          startDate = '',
+                          endDate = '',
                           ...props
                       }) => {
     const [items, setItems] = useState([]);
@@ -133,6 +135,12 @@ const PieChartList = ({
         getViolentPersonViolences({...filter});
         getViolentConditionPersonViolences({...filter});
     }, [filter]);
+
+    useEffect(()=>{
+        if(startDate && endDate) {
+            setFilter(filter => ({...filter,from: startDate,to: endDate}));
+        }
+    },[startDate,endDate])
 
     useEffect(() => {
         if (get(statisticsBasisOrder, 'isFetched')) {

@@ -26,7 +26,7 @@ const SubHeaderBox = ({items = {},...props}) => {
                     <SubHeaderItem title={'Муддати узайтирилган ордерлар'} subtitle={'Охирги янгиланиш (1 кун)'} percent={round(get(find(get(items,'persrnage'),item => isEqual(get(item,'name'),'узайтирилган')),'per','-'),2)} count={get(find(get(items,'orederscount'),item => isEqual(get(item,'statusname'),'узайтирилган')),'statuscount','-')} warning hasBorderLeft/>
                 </Col>
                 <Col xs={3}>
-                    <SubHeaderItem title={'Муддати тугаган ордерлар'} subtitle={'Охирги янгиланиш (1 соат)'} percent={get(find(get(items,'persrnage'),item => isEqual(get(item,'name'),'тугатилган')),'per','-')} count={get(find(get(items,'orederscount'),item => isEqual(get(item,'statusname'),'тугатилган')),'statuscount','-')} success hasBorderLeft/>
+                    <SubHeaderItem title={'Муддати тугаган ордерлар'} subtitle={'Охирги янгиланиш (1 соат)'} percent={round(get(find(get(items,'persrnage'),item => isEqual(get(item,'name'),'тугатилган')),'per','-'),2)} count={get(find(get(items,'orederscount'),item => isEqual(get(item,'statusname'),'тугатилган')),'statuscount','-')} success hasBorderLeft/>
                 </Col>
             </Row>
         </StyledSubHeaderBox>

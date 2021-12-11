@@ -44,7 +44,18 @@ const StyledCustomPieChart = styled.div`
 `;
 const CustomPieChart = ({name,data,...props}) => {
     const COLORS = ['#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412']
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.25;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+        return (
+            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${(percent * 100).toFixed(2)}%`}
+            </text>
+        );
+    };
     return (
         <StyledCustomPieChart {...props}>
             <div className="chart__head">
@@ -56,7 +67,11 @@ const CustomPieChart = ({name,data,...props}) => {
                     <PieChart height={250}>
                         <Pie
                             data={data}
-                            innerRadius={80}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            innerRadius={20}
                             outerRadius={100}
                             fill="#8884d8"
                             paddingAngle={0}

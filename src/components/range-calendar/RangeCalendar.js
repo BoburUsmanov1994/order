@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled,{css} from "styled-components";
 import {DateRangePicker} from 'react-date-range';
 import moment from "moment";
@@ -75,8 +75,10 @@ const RangeCalendar = ({handleCalendar = () => {},...props}) => {
 
     const handleSelect = ({selection}) => {
         setSelectionRange(selection);
-        handleCalendar(selection);
     }
+    useEffect(()=>{
+        handleCalendar(selectionRange);
+    },[selectionRange])
     return (
         <StyledRangeCalendar {...props}>
             <div className="calendar">
