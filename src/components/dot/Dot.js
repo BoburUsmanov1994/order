@@ -55,7 +55,7 @@ const Dot = ({title='',percent=0,...props}) => {
         <StyledDot {...props}>
             <div className="dot">
                 <div className="dot__circle"></div>
-                <div className="dot__text"><span className={'title'}>{title}</span><span className={'percent'}>{percent}%</span></div>
+                <div className="dot__text"><span className={'title'}>{title}</span><span className={'percent'}>{percent}</span></div>
             </div>
         </StyledDot>
     );

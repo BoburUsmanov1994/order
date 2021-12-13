@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {isEqual} from "lodash";
+import {isEqual,get} from "lodash";
 import classNames from "classnames";
 
 const StyledList = styled.ul`
@@ -43,11 +43,10 @@ li{
   }
 }
 `;
-const List = ({items = [],...props}) => {
-    const [active,setActive] = useState(null);
+const List = ({items = [],setOrderFilter=()=>{},orderFilter={},...props}) => {
     return (
         <StyledList {...props}>
-            {items && items.map(({_id,name},index) =>  <li className={classNames({active:isEqual(_id,active)})} key={_id} onClick={() => setActive(_id)}>{`${index+1}. ${name}`}</li>) }
+            {items && items.map(({_id,name},index) =>  <li className={classNames({active:isEqual(_id,get(orderFilter,'distId'))})} key={_id} onClick={() => setOrderFilter(_id)}>{`${index+1}. ${name}`}</li>) }
         </StyledList>
     );
 };

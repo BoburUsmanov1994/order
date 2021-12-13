@@ -7,12 +7,17 @@
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chart/AreaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chart/AreaChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chart/PieChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chart/PieChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dot/Dot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dot/Dot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/list/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list/List.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/subheader/SubHeaderBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/slider/Slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slider/Slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/type/Type.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/type/Type.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UserCreateContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/Theme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../XB/hrms-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -100,7 +105,11 @@
       <workItem from="1638857161777" duration="1232000" />
       <workItem from="1638894172249" duration="20726000" />
       <workItem from="1639138085328" duration="614000" />
-      <workItem from="1639138752444" duration="4575000" />
+      <workItem from="1639138752444" duration="16501000" />
+      <workItem from="1639222301936" duration="46000" />
+      <workItem from="1639227101913" duration="10916000" />
+      <workItem from="1639256285447" duration="5877000" />
+      <workItem from="1639285329878" duration="13134000" />
     </task>
     <servers />
   </component>
@@ -129,7 +138,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
-          <line>90</line>
+          <line>129</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -189,13 +198,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
-          <line>747</line>
+          <line>789</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
-          <line>866</line>
+          <line>908</line>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
+          <line>208</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js</url>
+          <line>493</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js</url>
+          <line>355</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

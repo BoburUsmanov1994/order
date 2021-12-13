@@ -52,11 +52,11 @@ const StyledRangeCalendar = styled.div`
   .calendar{
     &__input{
       height: 48px;
-      width: 225px;
+      min-width: 225px;
       border-radius: 60px;
       border:1px solid #BFB7B7;
       span{
-        font-size: 13px;
+        font-size: 14px;
       }
     }
     &__range{
@@ -75,6 +75,7 @@ const RangeCalendar = ({handleCalendar = () => {},...props}) => {
 
     const handleSelect = ({selection}) => {
         setSelectionRange(selection);
+        setShow(false);
     }
     useEffect(()=>{
         handleCalendar(selectionRange);

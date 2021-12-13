@@ -64,8 +64,7 @@ const Type = ({title = '',count = 0, percent = 0,increase=false,decrease=false, 
                         {count}
                     </h2>
                     <div className={'column'}>
-                        {/*<div className="bold">минг</div>*/}
-                        <Badge percent={percent} success increase={increase} decrease={decrease}/>
+                        <Badge percent={percent+'%'} success increase={increase} decrease={decrease}/>
                     </div>
                 </div>
             </div>

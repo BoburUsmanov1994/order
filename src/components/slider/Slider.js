@@ -85,7 +85,8 @@ const Slider = ({
                 {
                     items && items.map(({_id, name}) => <SwiperSlide
                         className={classNames({active: isEqual(_id, active)})}
-                        onDoubleClick={() => history.push(`/region/${_id}`)} onClick={() => setActive(_id)}
+                        onDoubleClick={() => history.push(`/region/${_id}`)}
+                        onClick={() => setActive(_id)}
                         key={_id}>{name}</SwiperSlide>)
                 }
             </Swiper>

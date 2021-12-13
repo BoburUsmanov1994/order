@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
-import {get,isEqual} from "lodash";
-import {Cell, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
+import {get,isEqual,round} from "lodash";
 import {Col, Row} from "react-grid-system";
 import exportImg from "../../assets/images/icons/export.png";
+import { PieChart } from 'react-minimal-pie-chart';
 import Dot from "../dot";
 
 const StyledCustomPieChart = styled.div`
@@ -13,6 +13,7 @@ const StyledCustomPieChart = styled.div`
   border-radius: 10px;
   width: 100%;
   margin-bottom: 30px;
+
   
   .chart {
     &__head {
@@ -35,6 +36,7 @@ const StyledCustomPieChart = styled.div`
     &__center {
       padding-top: 20px;
       padding-bottom: 15px;
+      height: 250px;
     }
 
     &__bottom {
@@ -44,18 +46,10 @@ const StyledCustomPieChart = styled.div`
 `;
 const CustomPieChart = ({name,data,...props}) => {
     const COLORS = ['#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412']
-    const RADIAN = Math.PI / 180;
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 0.25;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    const chartData = data.filter(({percent}) => percent > 0).map(({name,percent},index) => ({title:name,value:round(percent,2),color:COLORS[index]}));
+    const listData = data.filter(({value}) => value > 0).map(({name,value},index) => ({name:name,value:round(value,2)}));
+    console.log("DATA",data,listData)
 
-        return (
-            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${(percent * 100).toFixed(2)}%`}
-            </text>
-        );
-    };
     return (
         <StyledCustomPieChart {...props}>
             <div className="chart__head">
@@ -63,32 +57,22 @@ const CustomPieChart = ({name,data,...props}) => {
                 <img src={exportImg} alt=""/>
             </div>
             <div className="chart__center">
-                <ResponsiveContainer width="100%" height={250}>
-                    <PieChart height={250}>
-                        <Pie
-                            data={data}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={renderCustomizedLabel}
-                            innerRadius={20}
-                            outerRadius={100}
-                            fill="#8884d8"
-                            paddingAngle={0}
-                            dataKey="value"
-                        >
-                            {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index]}/>
-                            ))}
-                        </Pie>
-                        <Tooltip className={'tooltip'}/>
-                    </PieChart>
-                </ResponsiveContainer>
+                <PieChart
+                    lineWidth={80} paddingAngle={5}
+                    label={({ dataEntry }) => dataEntry.value+'%'}
+                    labelStyle={{
+                        fontSize: '6px',
+                        fontFamily: 'sans-serif',
+                        fill:'#fff'
+                    }}
+                    data={chartData}
+                />;
+
             </div>
             <div className="chart__bottom">
                 <Row>
                     {
-                        data && data.map((item,index) => <Col className={'mb-24'} key={index} xs={6}>
+                        listData && listData.map((item,index) => <Col className={'mb-24'} key={index} xs={6}>
                             {
                                 isEqual(index % 4,0) && <Dot title={get(item, 'name')} percent={get(item, 'value')} success/>
                             }

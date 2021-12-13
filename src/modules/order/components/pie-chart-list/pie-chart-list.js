@@ -91,7 +91,8 @@ const PieChartList = ({
                           startDate = '',
                           endDate = '',
                           ...props
-                      }) => {
+                      }) =>
+{
     const [items, setItems] = useState([]);
     const [activeItems, setActiveItems] = useState([]);
     const [filter, setFilter] = useState({from: '2020-01-01', to: '2021-12-31', regId: '', distId: '', mfyId: ''})
@@ -146,9 +147,10 @@ const PieChartList = ({
         if (get(statisticsBasisOrder, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsBasisOrder, 'result.message', '-'),
-                data: get(statisticsBasisOrder, 'result.persentages', []).map((item) => ({
+                data: get(statisticsBasisOrder, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsBasisOrder, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -158,13 +160,15 @@ const PieChartList = ({
     }, [statisticsBasisOrder]);
 
 
+
     useEffect(() => {
         if (get(statisticsBasisTermination, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsBasisTermination, 'result.message', '-'),
-                data: get(statisticsBasisTermination, 'result.persentages', []).map((item) => ({
+                data: get(statisticsBasisTermination, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsBasisTermination, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -176,9 +180,10 @@ const PieChartList = ({
         if (get(statisticsResultOrder, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsResultOrder, 'result.message', '-'),
-                data: get(statisticsResultOrder, 'result.persentages', []).map((item) => ({
+                data: get(statisticsResultOrder, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsResultOrder, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -190,9 +195,10 @@ const PieChartList = ({
         if (get(statisticsAgesVictim, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsAgesVictim, 'result.message', '-'),
-                data: get(statisticsAgesVictim, 'result.persentages', []).map((item) => ({
+                data: get(statisticsAgesVictim, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsAgesVictim, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -204,9 +210,10 @@ const PieChartList = ({
         if (get(statisticsVictimWorkingPlace, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimWorkingPlace, 'result.message', '-'),
-                data: get(statisticsVictimWorkingPlace, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimWorkingPlace, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimWorkingPlace, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -218,9 +225,10 @@ const PieChartList = ({
         if (get(statisticsVictimConditionPerson, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimConditionPerson, 'result.message', '-'),
-                data: get(statisticsVictimConditionPerson, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimConditionPerson, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimConditionPerson, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -232,9 +240,10 @@ const PieChartList = ({
         if (get(statisticsVictimFamilyPosition, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimFamilyPosition, 'result.message', '-'),
-                data: get(statisticsVictimFamilyPosition, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimFamilyPosition, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimFamilyPosition, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -246,9 +255,10 @@ const PieChartList = ({
         if (get(statisticsVictimSocialStatus, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimSocialStatus, 'result.message', '-'),
-                data: get(statisticsVictimSocialStatus, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimSocialStatus, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimSocialStatus, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -260,9 +270,10 @@ const PieChartList = ({
         if (get(statisticsVictimEducation, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimEducation, 'result.message', '-'),
-                data: get(statisticsVictimEducation, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimEducation, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: get(item, 'persentages')
+                    percent: get(item, 'persentages'),
+                    value: round(get(statisticsVictimEducation, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -274,9 +285,10 @@ const PieChartList = ({
         if (get(statisticsVictimPlaceAction, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimPlaceAction, 'result.message', '-'),
-                data: get(statisticsVictimPlaceAction, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimPlaceAction, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimPlaceAction, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -288,9 +300,10 @@ const PieChartList = ({
         if (get(statisticsVictimOccuredRepetitions, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimOccuredRepetitions, 'result.message', '-'),
-                data: get(statisticsVictimOccuredRepetitions, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimOccuredRepetitions, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimOccuredRepetitions, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -302,9 +315,10 @@ const PieChartList = ({
         if (get(statisticsVictimSendPreparations, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimSendPreparations, 'result.message', '-'),
-                data: get(statisticsVictimSendPreparations, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimSendPreparations, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimSendPreparations, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -316,9 +330,10 @@ const PieChartList = ({
         if (get(statisticsVictimTypeViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimTypeViolences, 'result.message', '-'),
-                data: get(statisticsVictimTypeViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimTypeViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimTypeViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -330,9 +345,10 @@ const PieChartList = ({
         if (get(statisticsVictimTypeRestrictions, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimTypeRestrictions, 'result.message', '-'),
-                data: get(statisticsVictimTypeRestrictions, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimTypeRestrictions, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimTypeRestrictions, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -344,9 +360,10 @@ const PieChartList = ({
         if (get(statisticsVictimGuardianships, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimGuardianships, 'result.message', '-'),
-                data: get(statisticsVictimGuardianships, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimGuardianships, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    peercent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimGuardianships, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -358,9 +375,10 @@ const PieChartList = ({
         if (get(statisticsVictimCitizenship, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsVictimCitizenship, 'result.message', '-'),
-                data: get(statisticsVictimCitizenship, 'result.persentages', []).map((item) => ({
+                data: get(statisticsVictimCitizenship, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsVictimCitizenship, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -372,9 +390,10 @@ const PieChartList = ({
         if (get(statisticsViolentAdministratives, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentAdministratives, 'result.message', '-'),
-                data: get(statisticsViolentAdministratives, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentAdministratives, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentage'), 2)
+                    percent: round(get(item, 'persentage'), 2),
+                    value: round(get(statisticsViolentAdministratives, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -386,9 +405,10 @@ const PieChartList = ({
         if (get(statisticsViolentAdministrativesCodex, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentAdministrativesCodex, 'result.message', '-'),
-                data: get(statisticsViolentAdministrativesCodex, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentAdministrativesCodex, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentage'), 2)
+                    percent: round(get(item, 'persentage'), 2),
+                    value: round(get(statisticsViolentAdministrativesCodex, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -400,9 +420,10 @@ const PieChartList = ({
         if (get(statisticsViolentAges, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentAges, 'result.message', '-'),
-                data: get(statisticsViolentAges, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentAges, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentAges, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -414,9 +435,10 @@ const PieChartList = ({
         if (get(statisticsViolentCriminalCase, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentCriminalCase, 'result.message', '-'),
-                data: get(statisticsViolentCriminalCase, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentCriminalCase, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentCriminalCase, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -428,9 +450,10 @@ const PieChartList = ({
         if (get(statisticsViolentCriminalCodex, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentCriminalCodex, 'result.message', '-'),
-                data: get(statisticsViolentCriminalCodex, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentCriminalCodex, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentCriminalCodex, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -442,9 +465,10 @@ const PieChartList = ({
         if (get(statisticsViolentGender, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentGender, 'result.message', '-'),
-                data: get(statisticsViolentGender, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentGender, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentGender, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -456,9 +480,10 @@ const PieChartList = ({
         if (get(statisticsViolentCitizens, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentCitizens, 'result.message', '-'),
-                data: get(statisticsViolentCitizens, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentCitizens, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentCitizens, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -470,9 +495,10 @@ const PieChartList = ({
         if (get(statisticsViolentEducations, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentEducations, 'result.message', '-'),
-                data: get(statisticsViolentEducations, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentEducations, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentEducations, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -484,9 +510,10 @@ const PieChartList = ({
         if (get(statisticsViolentFamilyPosition, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentFamilyPosition, 'result.message', '-'),
-                data: get(statisticsViolentFamilyPosition, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentFamilyPosition, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentFamilyPosition, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -498,9 +525,10 @@ const PieChartList = ({
         if (get(statisticsViolentSocialStatus, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentSocialStatus, 'result.message', '-'),
-                data: get(statisticsViolentSocialStatus, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentSocialStatus, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentSocialStatus, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -512,9 +540,10 @@ const PieChartList = ({
         if (get(statisticsViolentWorkingPlace, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentWorkingPlace, 'result.message', '-'),
-                data: get(statisticsViolentWorkingPlace, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentWorkingPlace, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentWorkingPlace, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -526,9 +555,10 @@ const PieChartList = ({
         if (get(statisticsViolentConditionPerson, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentConditionPerson, 'result.message', '-'),
-                data: get(statisticsViolentConditionPerson, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentConditionPerson, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentConditionPerson, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -540,9 +570,10 @@ const PieChartList = ({
         if (get(statisticsViolentPlaceAction, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentPlaceAction, 'result.message', '-'),
-                data: get(statisticsViolentPlaceAction, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentPlaceAction, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentPlaceAction, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -554,9 +585,10 @@ const PieChartList = ({
         if (get(statisticsViolentRestrictionOfTypes, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentRestrictionOfTypes, 'result.message', '-'),
-                data: get(statisticsViolentRestrictionOfTypes, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentRestrictionOfTypes, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentRestrictionOfTypes, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -568,9 +600,10 @@ const PieChartList = ({
         if (get(statisticsViolentTypeViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentTypeViolences, 'result.message', '-'),
-                data: get(statisticsViolentTypeViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentTypeViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentTypeViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -582,9 +615,10 @@ const PieChartList = ({
         if (get(statisticsViolentOccurredRepetitions, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentOccurredRepetitions, 'result.message', '-'),
-                data: get(statisticsViolentOccurredRepetitions, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentOccurredRepetitions, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentOccurredRepetitions, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -596,9 +630,10 @@ const PieChartList = ({
         if (get(statisticsViolentActionPersonViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentActionPersonViolences, 'result.message', '-'),
-                data: get(statisticsViolentActionPersonViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentActionPersonViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentActionPersonViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -610,9 +645,10 @@ const PieChartList = ({
         if (get(statisticsViolentCauseViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentCauseViolences, 'result.message', '-'),
-                data: get(statisticsViolentCauseViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentCauseViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentCauseViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -624,9 +660,10 @@ const PieChartList = ({
         if (get(statisticsViolentBehaviors, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentBehaviors, 'result.message', '-'),
-                data: get(statisticsViolentBehaviors, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentBehaviors, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentBehaviors, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -638,9 +675,10 @@ const PieChartList = ({
         if (get(statisticsViolentStateViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentStateViolences, 'result.message', '-'),
-                data: get(statisticsViolentStateViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentStateViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentStateViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -652,9 +690,10 @@ const PieChartList = ({
         if (get(statisticsViolentPersonViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsViolentPersonViolences, 'result.message', '-'),
-                data: get(statisticsViolentPersonViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsViolentPersonViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsViolentPersonViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
@@ -666,15 +705,18 @@ const PieChartList = ({
         if (get(statisticsConditionViolentPersonViolences, 'isFetched')) {
             const data = unionBy(items, [{
                 name: get(statisticsConditionViolentPersonViolences, 'result.message', '-'),
-                data: get(statisticsConditionViolentPersonViolences, 'result.persentages', []).map((item) => ({
+                data: get(statisticsConditionViolentPersonViolences, 'result.persentages', []).map((item,index) => ({
                     name: get(item, 'name'),
-                    value: round(get(item, 'persentages'), 2)
+                    percent: round(get(item, 'persentages'), 2),
+                    value: round(get(statisticsConditionViolentPersonViolences, `result.statistics[${index}].count`), 2)
                 }))
             }], 'name')
             setItems(data);
             setActiveItems(activeItems => [...activeItems, get(statisticsConditionViolentPersonViolences, 'result.message', '-')]);
         }
     }, [statisticsConditionViolentPersonViolences]);
+
+
 
 
     return (

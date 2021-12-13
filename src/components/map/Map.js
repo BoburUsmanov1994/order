@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {isEqual,isNil,get,isEmpty} from "lodash";
+import {isEqual,isNil,get,isEmpty,isObject} from "lodash";
 import classNames from "classnames";
 import {useHistory} from "react-router-dom";
 import popupImg from "../../assets/images/popup.png";
@@ -102,24 +102,22 @@ const StyledMap = styled.div`
   }
 `;
 const Map = ({
-                 popup={},nopopup = false,transfer=false, transform = "translate(-333 -759)",viewBox="0 0 1000 652",items=[],active, setActive = () => {
+                 info={},coordinate={x: 0, y: 0},setCoordinate=()=>{},nopopup = false,transfer=false, transform = "translate(-333 -759)",viewBox="0 0 1000 652",items=[],active, setFilter = () => {
     }, ...props
              }) => {
-    const history = useHistory();
-    const [coordinate, setCoordinate] = useState({x: 0, y: 0});
     const setActiveSvg = (e, id) => {
         const {x,y} = getPosition(e.nativeEvent)
         setCoordinate({x, y});
-        setActive(id)
+        setFilter(id);
     }
     const dots = items.filter(item => !isEmpty(get(item,'circle')));
     return (
         <StyledMap {...coordinate} {...props}>
-            {!isNil(active) && !nopopup && <div className="popup">
+            {active && !nopopup && <div className="popup">
                 <ul>
-                    <li><span className={'circle'}></span>Умумий сони <span className={'count'}>{get(popup,'all')}</span></li>
-                    <li><span className={'circle warning'}></span>Жабрланганлар  <span className={'count'}>{get(popup,'victims')}</span></li>
-                    <li><span className={'circle info'}></span>Айбдорлар   <span className={'count'}>{get(popup,'violents')}</span></li>
+                    {
+                        get(info,'orederscount',[]).map((item,index) => isObject(item) && <li key={index}><span className={'circle warning'}></span>{get(item,'statusname')}  <span className={'count'}>{get(item,'statuscount')}</span></li>)
+                    }
                 </ul>
                 <img src={popupImg} className={'bottom'} alt=""/>
             </div>}

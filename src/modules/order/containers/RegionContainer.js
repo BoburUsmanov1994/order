@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
 import {get, includes} from "lodash";
 import {connect} from "react-redux";
@@ -23,23 +23,35 @@ import Map from "../../../components/map";
 import ContentLoader from "../../../components/loader/ContentLoader";
 
 
-const RegionContainer = ({history,id,entities,getDistrictsList,districts,region,isFetched,getOneRegion}) => {
+const RegionContainer = ({
+                             history,
+                             id,
+                             entities,
+                             getDistrictsList,
+                             districts,
+                             region,
+                             isFetched,
+                             getOneRegion,
+                             getRegionStatisticsOrderCounts,
+                             regionStatistics,
+                             ...props
+                         }) => {
     const [items] = useState([]);
-    const [activeItems,setActiveItems] = useState([1,2,3]);
     const [active, setActive] = useState(null);
 
-    useEffect(()=>{
-        getOneRegion({region_id:id});
-        getDistrictsList({regId:id});
-    },[id]);
+    useEffect(() => {
+        getOneRegion({region_id: id});
+        getDistrictsList({regId: id});
+        getRegionStatisticsOrderCounts({regId:id})
+    }, [id]);
 
-    districts = Normalizer.Denormalize(districts,[DistrictScheme],entities);
-    region = Normalizer.Denormalize(region,RegionScheme,entities);
+    districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
+    region = Normalizer.Denormalize(region, RegionScheme, entities);
     return (
-        <>{ isFetched ? <>
+        <>{isFetched ? <>
             <Row className={'mb-16'}>
                 <Col xs={10}>
-                    <SubHeaderBox className={'mb-32'}/>
+                    <SubHeaderBox  items={get(regionStatistics,'result',{})} className={'mb-32'}/>
                     <Row className={'mb-32'} align={'center'} gutterWidth={60}>
                         <Col xs={4}>
                             <Title md>{(get(region,'name'))} худудлари бўйича статистика  </Title>
@@ -67,25 +79,17 @@ const RegionContainer = ({history,id,entities,getDistrictsList,districts,region,
 
                 </Col>
                 <Col xs={2}>
-                    <ProgressBox/>
+                    <ProgressBox items={get(regionStatistics,'result',{})}/>
                 </Col>
             </Row>
 
             <Row align={'center'} className={'mb-32'}>
-                <Col xs={5}>
+                <Col xs={6}>
                     <Title md>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
                 </Col>
-                <Col xs={4}>
-                    <Flex>
-                        <Radio className={'mr-16'} label={'Умумий ордерлар сони'} danger/>
-                        <Radio className={'mr-16'} label={'Жабрланувчилар'} warning/>
-                        <Radio label={'Айбдорлар'} primary/>
-                    </Flex>
-                </Col>
-                <Col xs={3} className={'text-right'}>
+                <Col xs={6} className={'text-right'}>
                     <Flex justify={'flex-end'}>
-                        <Text>Саралаш</Text>
-                        <RangeCalendar/>
+                        <RangeCalendar lg/>
                     </Flex>
                 </Col>
             </Row>
@@ -95,22 +99,6 @@ const RegionContainer = ({history,id,entities,getDistrictsList,districts,region,
                 </Col>
             </Row>
 
-            <Row className={'mb-24'}>
-                <Col xs={8}>
-                    <Title md>Тазйиқ ва зўравонликдан жабрланган хотин - қизларни ҳисобга олиш ягона
-                        статистикаси
-                    </Title>
-                </Col>
-                <Col xs={4} className={'text-right'}>
-                    <Dropdown items={items} activeItems={activeItems} setActiveItems={setActiveItems} />
-                </Col>
-            </Row>
-            <Row>
-                {items && items.map(({id, name}) => includes(activeItems, id) && <Col key={id} xs={4}>
-                    <CustomPieChart name={name}/>
-                </Col>)
-                }
-            </Row>
             </>:<ContentLoader />}
         </>
     );
@@ -121,7 +109,7 @@ const mapStateToProps = (state) => {
         region: get(state, 'normalizer.data.get-one-region.result.region', {}),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         isFetched: get(state, 'normalizer.data.get-one-region.isFetched', false),
-
+        regionStatistics:get(state,'normalizer.data.get-region-statistics-order-counts',{})
     }
 }
 
@@ -154,6 +142,21 @@ const mapDispatchToProps = (dispatch) => {
                 scheme: {region: RegionScheme},
                 storeName: 'get-one-region',
                 entityName: 'region',
+            },
+        }),
+        getRegionStatisticsOrderCounts: ({from = '', to = '', regId = ''}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/orders/statistics/ordercounts`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                    },
+                },
+                storeName: 'get-region-statistics-order-counts',
             },
         }),
     }

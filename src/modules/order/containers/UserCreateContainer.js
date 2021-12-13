@@ -53,7 +53,7 @@ const UserCreateContainer = ({
     neighborhoods = Normalizer.Denormalize(neighborhoods,[NeighborhoodScheme],entities).map(({_id, name}) => ({
         value: _id,
         label: name
-    }));;
+    }));
     status = Normalizer.Denormalize(status, [StatusScheme], entities).map(({_id, name}) => ({value: _id, label: name}));
     roles = Normalizer.Denormalize(roles, [RoleScheme], entities).map(({_id, name}) => ({value: _id, label: name}));
     ranks = Normalizer.Denormalize(ranks, [RankScheme], entities).map(({_id, name}) => ({value: _id, label: name}));

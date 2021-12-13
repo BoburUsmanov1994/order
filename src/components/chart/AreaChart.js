@@ -15,7 +15,7 @@ const CustomAreaChart = ({data = [],type='',...props}) => {
                     height={400}
                     data={data}
                     margin={{
-                        top: 0,
+                        top: 15,
                         right: 0,
                         left: 0,
                         bottom: 0,

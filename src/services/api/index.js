@@ -20,7 +20,7 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
-    NProgress.inc(0);
+    NProgress.inc();
     const token = get(JSON.parse(storage.get('token')),'token',null);
     if (token) {
             config.headers['auth'] = `${token}`
