@@ -64,9 +64,10 @@ const OrderListContainer = ({
             if (get(filter,'regId') || get(filter,'seriya') || get(filter,'distId')) {
                 getOrdersListByFilter(filter);
             }
-        }, [filter]);
+        }, []);
 
         useEffect(()=>{
+
             getDistrictsList({regId:get(filter,'regId')});
         },[get(filter,'regId')])
 

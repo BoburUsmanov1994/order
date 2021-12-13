@@ -71,6 +71,7 @@ const RegionsContainer = ({
     };
     if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)) {
         users = users.filter(item=>isEqual(get(item,'regionId._id'),get(user,'regionId._id')));
+        totalItems = users.length;
     }
     return (
         <>
@@ -114,7 +115,7 @@ const RegionsContainer = ({
                                     </HasAccess>
                                 </td>
                             </tr>) : <tr>
-                                <td colSpan={4}>Маълумот мавжуд эмас</td>
+                                <td colSpan={8}>Маълумот мавжуд эмас</td>
                             </tr>
                         }
                     </Table> : <ContentLoader />}
