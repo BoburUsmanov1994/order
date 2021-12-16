@@ -38,6 +38,8 @@ const RegionContainer = ({
                              get_region_monthly_statistics,
                              getNeighborhoodsListByDistrict,
                              neighborhoods,
+                             orderStatisticsForMap,
+                             getStatisticsOrderCounts,
                              ...rest
                          }) => {
     const [items] = useState([]);
@@ -58,12 +60,13 @@ const RegionContainer = ({
         if (get(filter, 'distId')) {
             getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
         }
+        getStatisticsOrderCounts({...filter});
     }, [id, filter])
 
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
     region = Normalizer.Denormalize(region, RegionScheme, entities);
     neighborhoods = Normalizer.Denormalize(neighborhoods, [NeighborhoodScheme], entities);
-    console.log('neighborhoods', neighborhoods)
+    console.log('orderStatisticsForMap',orderStatisticsForMap)
     return (
         <>{isFetched ? <>
             <Row className={'mb-16'}>
@@ -104,10 +107,10 @@ const RegionContainer = ({
                         <Col xs={6}>
                             <Row>
                                 <Col xs={12}>
-                                    <Map nopopup transfer viewBox={get(region, 'viewBox', '')}
+                                    <Map  transfer viewBox={get(region, 'viewBox', '')}
                                          transform={get(region, 'transform', '')} items={districts}
                                          setCoordinate={setCoordinate} coordinate={coordinate}
-                                         info={{}}
+                                         info={get(orderStatisticsForMap, 'result', {})}
                                          active={get(filter, 'distId')}
                                          setFilter={(value) => setFilter(filter => ({
                                              ...filter,
@@ -165,6 +168,8 @@ const mapStateToProps = (state) => {
         regionStatistics: get(state, 'normalizer.data.get-region-statistics-order-counts', {}),
         get_region_monthly_statistics: get(state, 'normalizer.data.get-region-monthly-statistics', {}),
         neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
+        orderStatisticsForMap: get(state, 'normalizer.data.get-statistics-order-counts', {}),
+
     }
 }
 
@@ -248,6 +253,23 @@ const mapDispatchToProps = (dispatch) => {
                     },
                 },
                 storeName: 'get-region-monthly-statistics',
+            },
+        }),
+        getStatisticsOrderCounts: ({from = '', to = '', regId = '', distId = '', mfyId = ''}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/orders/statistics/ordercounts`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                        'distId': `${distId}`,
+                        'mfyId': `${mfyId}`,
+                    },
+                },
+                storeName: 'get-statistics-order-counts',
             },
         }),
     }
