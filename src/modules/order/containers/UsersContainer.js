@@ -160,7 +160,7 @@ const mapDispatchToProps = (dispatch) => {
         getUsersListByFilter: ({page = 0, size = 20,regId='',distId='',mfyId=''}) => {
             const storeName = 'users-list';
             const entityName = 'user';
-            const scheme = {orederes: [UserScheme]};
+            const scheme = {users: [UserScheme]};
             dispatch({
                 type: ApiActions.GET_ALL.REQUEST,
                 payload: {
