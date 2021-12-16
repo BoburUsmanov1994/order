@@ -34,6 +34,8 @@ const RegionContainer = ({
                              getOneRegion,
                              getRegionStatisticsOrderCounts,
                              regionStatistics,
+                             getMonthlyStatistics,
+                             get_region_monthly_statistics,
                              ...props
                          }) => {
     const [items] = useState([]);
@@ -43,6 +45,7 @@ const RegionContainer = ({
         getOneRegion({region_id: id});
         getDistrictsList({regId: id});
         getRegionStatisticsOrderCounts({regId:id})
+        getMonthlyStatistics({regId:id});
     }, [id]);
 
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
@@ -95,7 +98,14 @@ const RegionContainer = ({
             </Row>
             <Row className={'mb-32'}>
                 <Col xs={12}>
-                    <CustomAreaChart type={'monotone'}/>
+                    <CustomAreaChart type={'monotone'}
+                                     data={get(get_region_monthly_statistics, 'result.statistics', []).map(({
+                                                                                                         month,
+                                                                                                         total
+                                                                                                     }) => ({
+                                         name: month,
+                                         y: total
+                                     }))} height={250}/>
                 </Col>
             </Row>
 
@@ -109,7 +119,8 @@ const mapStateToProps = (state) => {
         region: get(state, 'normalizer.data.get-one-region.result.region', {}),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         isFetched: get(state, 'normalizer.data.get-one-region.isFetched', false),
-        regionStatistics:get(state,'normalizer.data.get-region-statistics-order-counts',{})
+        regionStatistics:get(state,'normalizer.data.get-region-statistics-order-counts',{}),
+        get_region_monthly_statistics:get(state,'normalizer.data.get-region-monthly-statistics',{})
     }
 }
 
@@ -157,6 +168,23 @@ const mapDispatchToProps = (dispatch) => {
                     },
                 },
                 storeName: 'get-region-statistics-order-counts',
+            },
+        }),
+        getMonthlyStatistics: ({from = '', to = '', regId = '', distId = '', mfyId = ''}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/statistics/monthly`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                        'distId': `${distId}`,
+                        'mfyId': `${mfyId}`,
+                    },
+                },
+                storeName: 'get-region-monthly-statistics',
             },
         }),
     }
