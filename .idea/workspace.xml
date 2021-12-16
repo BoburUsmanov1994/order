@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/filter/Filter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/filter/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/Actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/Actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/UsersContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/UsersContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +98,7 @@
       <workItem from="1639459821260" duration="647000" />
       <workItem from="1639465683853" duration="5284000" />
       <workItem from="1639563682723" duration="4202000" />
-      <workItem from="1639568616356" duration="4002000" />
+      <workItem from="1639568616356" duration="4517000" />
     </task>
     <servers />
   </component>
