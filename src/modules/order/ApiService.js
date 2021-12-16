@@ -474,6 +474,10 @@ class ApiService{
         return request.get(`/statistics/monthly`);
     }
 
+    static MvdData = (params) => {
+        return request.post(`/getdata`,{...params});
+    }
+
 
 }
 

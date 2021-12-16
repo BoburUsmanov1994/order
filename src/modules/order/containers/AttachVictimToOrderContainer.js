@@ -32,6 +32,7 @@ import OccuredRepetitionScheme from "../../../schema/OccuredRepetitionScheme";
 import ApiService from "../ApiService";
 import {toast} from "react-toastify";
 import Loader from "../../../components/loader";
+import moment from "moment";
 
 
 const AttachVictimToOrderContainer = ({id,
@@ -235,6 +236,19 @@ const AttachVictimToOrderContainer = ({id,
     const getPermanentNeighborhoodsByDistrict = (districtId) => {
         getPermanentNeighborhoodsListByDistrict({districtId})
     }
+
+    const getDataFromMvd = (passport, brth) => {
+        brth = moment(brth).format('DD.MM.YYYY');
+        if (brth.length == 10) {
+            ApiService.MvdData({passport, brth}).then((res) => {
+                if (res && res.data) {
+                    toast.success('SUCCESS');
+                }
+            }).catch((e) => {
+                toast.error('ERROR');
+            })
+        }
+    }
     return (
         <>
             <Row>
@@ -250,7 +264,8 @@ const AttachVictimToOrderContainer = ({id,
                 <Col xs={12}>
                     <StepWizard isHashEnabled={true}>
                         <StepOneForm victim={victim} reset={reset} hashKey={"one"} genders={genders}
-                                     citizenship={citizenship} ages={ages} saveToLocalStorage={saveToLocalStorage}/>
+                                     citizenship={citizenship} ages={ages} saveToLocalStorage={saveToLocalStorage}
+                                     getDataFromMvd={getDataFromMvd}/>
                         <StepTwoForm hashKey={"two"} victim={victim} reset={reset} education={education}
                                      familyPosition={familyPosition} socialStatus={socialStatus}
                                      workingplace={workingplace} personcondition={personcondition}
@@ -683,6 +698,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
+
 
     }
 }

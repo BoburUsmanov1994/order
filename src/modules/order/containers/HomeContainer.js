@@ -254,11 +254,11 @@ const HomeContainer = ({
                             </Col>
                             <Col xs={5}>
                                 <Row>
-                                    {get(statistics_type_violence, 'result.typeviolence', []).map((item, index) => <Col
+                                    {get(statistics_type_violence, 'result.statistics', []).map((item, index) => <Col
                                         key={index} xs={4} className={'mb-16'}>
-                                        <Type title={get(item, 'typeviolence', '-')}
-                                              percent={get(statistics_type_violence, `result.persrnage[${index}].plpers`, 0)}
-                                              count={get(item, 'typeviolencecount', '-')} increase/>
+                                        <Type title={get(item, 'name', '-')}
+                                              percent={get(statistics_type_violence, `result.persentages[${index}].percent`, 0)}
+                                              count={get(item, 'count', '-')} increase/>
                                     </Col>)}
 
                                 </Row>
@@ -473,7 +473,7 @@ const mapDispatchToProps = (dispatch) => {
         getStatisticsTypeViolence: ({from = '', to = '', regId = '', distId = '', mfyId = ''}) => dispatch({
             type: ApiActions.GET_ONE.REQUEST,
             payload: {
-                url: `/orders/statistics/typeviolence`,
+                url: `/statistics/victypeviolences`,
                 config: {
                     params: {},
                     headers: {

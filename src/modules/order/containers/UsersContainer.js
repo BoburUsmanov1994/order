@@ -40,7 +40,6 @@ const RegionsContainer = ({
     }, [filter]);
 
 
-
     const deleteUser = (id) => {
         confirmAlert({
             title: 'Ишончингиз комилми?',
@@ -73,6 +72,7 @@ const RegionsContainer = ({
         users = users.filter(item=>isEqual(get(item,'regionId._id'),get(user,'regionId._id')));
         totalItems = users.length;
     }
+
     return (
         <>
             <Row className={'mb-24'}>

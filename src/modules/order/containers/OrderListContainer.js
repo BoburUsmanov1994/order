@@ -11,7 +11,7 @@ import ApiService from "../ApiService";
 import {toast} from "react-toastify";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import {Table} from "../../../components/table";
-import {Edit, Eye, MinusCircle, PlusCircle, Trash} from "react-feather";
+import {Edit, Eye, MinusCircle, PlusCircle, Trash, List} from "react-feather";
 import Flex from "../../../components/flex/Flex";
 import OrderSearch from "../components/order/OrderSearch";
 import Select from "../../../components/elements/select/Select";
@@ -25,6 +25,7 @@ import DistrictScheme from "../../../schema/DistrictScheme";
 import classNames from "classnames";
 import config from "../../../config";
 import HasAccess from "../../../services/auth/HasAccess";
+import Filter from "../../../components/filter";
 
 const OrderListContainer = ({
                                 history,
@@ -41,6 +42,7 @@ const OrderListContainer = ({
                                 getDistrictsList
                             }) => {
         const [loading, setLoading] = useState(false);
+        const [open,setOpen] = useState(false);
         const [filter, setFilter] = useState({
             page: 0,
             seriya: null,
@@ -143,13 +145,15 @@ const OrderListContainer = ({
             }));
             getOrdersList({...filter});
 
-        }
+        };
+
 
         return (
             <>{isFetched ? <>
                 <Row className={'mb-24'}>
                     <Col xs={12}>
                         <hr/>
+                        <Filter open={open} setOpen={setOpen} />
                     </Col>
                 </Row>
                 <Row className={'mb-24'} align={'center'}>
@@ -191,6 +195,7 @@ const OrderListContainer = ({
 
 
                                     <RangeCalendar handleCalendar={handleCalendar} lg/>
+                                    <List size={32} color={'#21D59B'} className={'mr-8 cursor-pointer'} onClick={() => setOpen(true)} />
                                     <HasAccess>
                                         {({userCan}) =>userCan([config.ROLES.ADMIN]) && <Button className={'mb-8'} danger back handleClick={clearFilter}>Тозалаш</Button>}
                                     </HasAccess>

@@ -15,9 +15,9 @@ import moment from "moment";
 
 const StyledStepOneForm = styled.form`
 `;
-const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},...props}) => {
+const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},getDataFromMvd=()=>{},reset = () => {},...props}) => {
     const [dateofbirthday,setDateOfBirthday] = useState(get(victim,'dateofbirthday',moment()))
-    const {register, handleSubmit, formState: {errors},setValue,control} = useForm();
+    const {register, handleSubmit, formState: {errors},setValue,getValues,control} = useForm();
 
     useEffect(() => {
         reinitilize();
@@ -26,6 +26,11 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
         saveToLocalStorage({...data,dateofbirthday});
         props.nextStep();
     }
+    useEffect(() =>{
+        if(dateofbirthday && getValues('passportinfo')){
+            getDataFromMvd(getValues('passportinfo'),dateofbirthday);
+        }
+    },[dateofbirthday])
 
     const firstStep = () => {
         reset({firstStep:props.firstStep})
@@ -57,6 +62,10 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
                            error={errors?.passportinfo} defaultValue={get(victim,'passportinfo')} sm/>
                 </Col>
                 <Col xs={3} className={'mb-32'}>
+                    <Label>Туғилган санаси</Label>
+                    <Calendar defaultValue={moment(dateofbirthday).toDate()} onChange={(val) => setDateOfBirthday(val)} sm/>
+                </Col>
+                <Col xs={3} className={'mb-32'}>
                     <Label>ЖШИИР</Label>
                     <Input register={register} label={'ЖШИИР'} name={'identitynumber'} validation={{required: true}}
                            error={errors?.identitynumber} type={'number'} defaultValue={get(victim,'identitynumber')} sm/>
@@ -72,10 +81,6 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
                 <Col xs={3} className={'mb-32'}>
                     <Label>Отасининг исми</Label>
                     <Input register={register} label={'Отасининг исми'} name={'middlename'} defaultValue={get(victim,'middlename')} validation={{required: true}} error={errors?.middlename}  sm/>
-                </Col>
-                <Col xs={3} className={'mb-32'}>
-                    <Label>Туғилган санаси</Label>
-                    <Calendar defaultValue={moment(dateofbirthday).toDate()} onChange={(val) => setDateOfBirthday(val)} sm/>
                 </Col>
                 <Col xs={3} className={'mb-32'}>
                     <Label>Жинси</Label>
