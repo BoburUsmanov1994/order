@@ -165,7 +165,7 @@ const HomeContainer = ({
                                 </Col>
                                 <Col xs={12}>
                                     <Flex justify={'flex-end'}>
-                                        <List orderFilter={orderFilter}
+                                        <List active={get(orderFilter,'distId')}
                                               setOrderFilter={(value) => setOrderFilter(orderFilter => ({
                                                   ...orderFilter,
                                                   distId: value

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {get, includes} from "lodash";
+import {get} from "lodash";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import SubHeaderBox from "../../../components/subheader";
@@ -18,6 +18,9 @@ import Slider from "../../../components/slider";
 import exportImg from "../../../assets/images/icons/export.png";
 import Map from "../../../components/map";
 import ContentLoader from "../../../components/loader/ContentLoader";
+import moment from "moment";
+import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
+import List from "../../../components/list";
 
 
 const RegionContainer = ({
@@ -33,32 +36,47 @@ const RegionContainer = ({
                              regionStatistics,
                              getMonthlyStatistics,
                              get_region_monthly_statistics,
+                             getNeighborhoodsListByDistrict,
+                             neighborhoods,
                              ...rest
                          }) => {
     const [items] = useState([]);
     const [active, setActive] = useState(null);
-    const [filter,setFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
+    const [filter, setFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
+    const [coordinate, setCoordinate] = useState({x: 0, y: 0});
 
     useEffect(() => {
         getOneRegion({region_id: id});
         getDistrictsList({regId: id});
-        getRegionStatisticsOrderCounts({regId:id})
-        getMonthlyStatistics({regId:id});
+        getRegionStatisticsOrderCounts({regId: id})
+
     }, [id]);
+
+
+    useEffect(() => {
+        getMonthlyStatistics({...filter, regId: id});
+        if (get(filter, 'distId')) {
+            getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
+        }
+    }, [id, filter])
 
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
     region = Normalizer.Denormalize(region, RegionScheme, entities);
+    neighborhoods = Normalizer.Denormalize(neighborhoods, [NeighborhoodScheme], entities);
+    console.log('neighborhoods', neighborhoods)
     return (
         <>{isFetched ? <>
             <Row className={'mb-16'}>
                 <Col xs={10}>
-                    <SubHeaderBox  items={get(regionStatistics,'result',{})} className={'mb-32'}/>
-                    <Row className={'mb-32'} align={'center'} gutterWidth={60}>
+                    <SubHeaderBox items={get(regionStatistics, 'result', {})} className={'mb-32'}/>
+                    <Row className={'mb-16'} align={'center'} gutterWidth={60}>
                         <Col xs={4}>
-                            <Title md>{(get(region,'name'))} худудлари бўйича статистика  </Title>
+                            <Title md>{(get(region, 'name'))} худудлари бўйича статистика </Title>
                         </Col>
                         <Col xs={6}>
-                            <Slider active={active} setActive={setActive} items={districts} />
+                            <Slider active={get(filter, 'distId')}
+                                    setActive={(value) => setFilter(filter => ({...filter, distId: value}))}
+                                    items={districts}/>
                         </Col>
                         <Col xs={2} className={'text-right'}>
                             <Flex justify={'flex-end'}>
@@ -68,13 +86,45 @@ const RegionContainer = ({
                             </Flex>
                         </Col>
                     </Row>
+                    <Row className={'mb-24'}>
+                        <Col xs={12}>
+                            <Flex justify={'flex-end'}>
+                                <RangeCalendar lg handleCalendar={({
+                                                                       startDate,
+                                                                       endDate
+                                                                   }) => setFilter(filter => ({
+                                    ...filter,
+                                    from: moment(startDate).format("YYYY-MM-DD"),
+                                    to: moment(endDate).format("YYYY-MM-DD")
+                                }))}/>
+                            </Flex>
+                        </Col>
+                    </Row>
                     <Row className={'mb-32'}>
-                        <Col xs={5}>
+                        <Col xs={6}>
                             <Row>
                                 <Col xs={12}>
-                                    <Map nopopup transfer viewBox={get(region,'viewBox','')} transform={get(region,'transform','')} items={districts} setActive={setActive} active={active} />
+                                    <Map nopopup transfer viewBox={get(region, 'viewBox', '')}
+                                         transform={get(region, 'transform', '')} items={districts}
+                                         setCoordinate={setCoordinate} coordinate={coordinate}
+                                         info={{}}
+                                         active={get(filter, 'distId')}
+                                         setFilter={(value) => setFilter(filter => ({
+                                             ...filter,
+                                             distId: value
+                                         }))}/>
                                 </Col>
                             </Row>
+                        </Col>
+                        <Col xs={6}>
+                            <Flex justify={'flex-end'}>
+                                <List active={get(filter,'mfyId')}
+                                      setOrderFilter={(value) => setFilter(filter => ({
+                                          ...filter,
+                                          mfyId: value
+                                      }))}
+                                      items={neighborhoods}/>
+                            </Flex>
                         </Col>
                     </Row>
 
@@ -85,13 +135,8 @@ const RegionContainer = ({
             </Row>
 
             <Row align={'center'} className={'mb-32'}>
-                <Col xs={6}>
+                <Col xs={12}>
                     <Title md>Тазйиқ ва зўравонликдан жабрланган хотин-қизларни статистикаси</Title>
-                </Col>
-                <Col xs={6} className={'text-right'}>
-                    <Flex justify={'flex-end'}>
-                        <RangeCalendar lg/>
-                    </Flex>
                 </Col>
             </Row>
             <Row className={'mb-32'}>
@@ -113,12 +158,13 @@ const RegionContainer = ({
 };
 const mapStateToProps = (state) => {
     return {
-        entities:get(state,'normalizer.entities',{}),
+        entities: get(state, 'normalizer.entities', {}),
         region: get(state, 'normalizer.data.get-one-region.result.region', {}),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         isFetched: get(state, 'normalizer.data.get-one-region.isFetched', false),
-        regionStatistics:get(state,'normalizer.data.get-region-statistics-order-counts',{}),
-        get_region_monthly_statistics:get(state,'normalizer.data.get-region-monthly-statistics',{})
+        regionStatistics: get(state, 'normalizer.data.get-region-statistics-order-counts', {}),
+        get_region_monthly_statistics: get(state, 'normalizer.data.get-region-monthly-statistics', {}),
+        neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
     }
 }
 
@@ -153,6 +199,25 @@ const mapDispatchToProps = (dispatch) => {
                 entityName: 'region',
             },
         }),
+        getNeighborhoodsListByDistrict: ({districtId, page = 0}) => {
+            const storeName = 'neighborhoods-list';
+            const entityName = 'neighborhood';
+            const scheme = {mfy: [NeighborhoodScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/mfy/distId/${districtId}`,
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
         getRegionStatisticsOrderCounts: ({from = '', to = '', regId = ''}) => dispatch({
             type: ApiActions.GET_ONE.REQUEST,
             payload: {

@@ -43,10 +43,10 @@ li{
   }
 }
 `;
-const List = ({items = [],setOrderFilter=()=>{},orderFilter={},...props}) => {
+const List = ({items = [],setOrderFilter=()=>{},orderFilter={},active=null,...props}) => {
     return (
         <StyledList {...props}>
-            {items && items.map(({_id,name},index) =>  <li className={classNames({active:isEqual(_id,get(orderFilter,'distId'))})} key={_id} onClick={() => setOrderFilter(_id)}>{`${index+1}. ${name}`}</li>) }
+            {items && items.map(({_id,name},index) =>  <li className={classNames({active:isEqual(_id,active)})} key={_id} onClick={() => setOrderFilter(_id)}>{`${index+1}. ${name}`}</li>) }
         </StyledList>
     );
 };
