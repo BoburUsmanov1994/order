@@ -37,6 +37,7 @@ const RegionContainer = ({
                          }) => {
     const [items] = useState([]);
     const [active, setActive] = useState(null);
+    const [filter,setFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
 
     useEffect(() => {
         getOneRegion({region_id: id});

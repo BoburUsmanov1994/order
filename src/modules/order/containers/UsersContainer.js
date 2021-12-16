@@ -20,7 +20,7 @@ import config from "../../../config";
 import HasAccess from "../../../services/auth/HasAccess";
 
 
-const RegionsContainer = ({
+const UsersContainer = ({
                               history,
                               user,
                               getUsersList,
@@ -28,16 +28,28 @@ const RegionsContainer = ({
                               users,
                               isFetched,
                               totalItems,
-                              setListTrigger
+                              setListTrigger,
+                              getUsersListByFilter
                           }) => {
     const [loading, setLoading] = useState(false);
-    const [filter, setFilter] = useState({page:0});
-    users = Normalizer.Denormalize(users, [UserScheme], entities);
+    const [filter, setFilter] = useState({page:0,regId:'',distId:''});
+
+    console.log('users',users)
 
     useEffect(() => {
         setListTrigger();
-        getUsersList({...filter})
+        getUsersListByFilter({...filter})
     }, [filter]);
+
+    useEffect(() =>{
+        if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
+            setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
+        }
+    },[user]);
+
+    users = Normalizer.Denormalize(users, [UserScheme], entities);
+
+
 
 
     const deleteUser = (id) => {
@@ -68,10 +80,8 @@ const RegionsContainer = ({
             ]
         });
     };
-    if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)) {
-        users = users.filter(item=>isEqual(get(item,'regionId._id'),get(user,'regionId._id')));
-        totalItems = users.length;
-    }
+
+
 
     return (
         <>
@@ -96,7 +106,7 @@ const RegionsContainer = ({
                     {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Шахснинг бандлиги','Вилоят/Туман','Фойдалаувчи статуси','Фойдалаувчи роли','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(users) ? users && users.map((user, index) => <tr key={get(user, '_id')}>
-                                <td>{index + 1}</td>
+                                <td>{(index+1)+get(filter, 'page', 0)*20}</td>
                                 <td>{`${get(user, 'name', '-')} ${get(user, 'secondname', '-')} ${get(user, 'middlename', '-')}`}</td>
                                 <td>{get(user, 'position', '-')}</td>
                                 <td>{`${get(user, 'regionId.name', '-')} ${get(user, 'districtsId.name', '-')}`}</td>
@@ -155,6 +165,29 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
+        getUsersListByFilter: ({page = 0, size = 20,regId='',distId='',mfyId=''}) => {
+            const storeName = 'users-list';
+            const entityName = 'user';
+            const scheme = {orederes: [UserScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: '/user/list/filter',
+                    config: {
+                        params: {
+                            page:page+1,
+                        },
+                        headers: {
+                            'regId': `${regId}`,
+                            'distId': `${distId}`,
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
         setListTrigger: () => dispatch({
             type: ApiActions.GET_ALL.TRIGGER,
             payload: {
@@ -165,4 +198,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegionsContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UsersContainer));

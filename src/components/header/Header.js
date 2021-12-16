@@ -4,7 +4,6 @@ import styled from "styled-components";
 import {connect} from "react-redux";
 import Logo from "../logo";
 import Flex from "../flex/Flex";
-import Notification from "../notification";
 import Profile from "../profile";
 import burgerIcon from "../../assets/images/icons/burger.svg";
 import Actions from "../../modules/order/Actions";
