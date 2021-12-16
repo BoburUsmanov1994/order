@@ -34,23 +34,17 @@ const UsersContainer = ({
     const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState({page:0,regId:'',distId:''});
 
-    console.log('users',users)
 
     useEffect(() => {
         setListTrigger();
-        getUsersListByFilter({...filter})
+        if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)) {
+            getUsersListByFilter({...filter,regId: get(user, 'regionId._id')});
+        }else{
+            getUsersListByFilter({...filter});
+        }
     }, [filter]);
 
-    useEffect(() =>{
-        if(isEqual(get(user,'accountrole.name'),config.ROLES.REGION_ADMIN)){
-            setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
-        }
-    },[user]);
-
     users = Normalizer.Denormalize(users, [UserScheme], entities);
-
-
-
 
     const deleteUser = (id) => {
         confirmAlert({
@@ -80,8 +74,6 @@ const UsersContainer = ({
             ]
         });
     };
-
-
 
     return (
         <>
