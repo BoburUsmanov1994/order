@@ -37,7 +37,7 @@ const Header = ({profile,toggleBurger,...props}) => {
                         <Logo/>
                     </Col>
                     <Col xs={5}>
-                       <Flex justify={'flex-end'} align={'center'}> <Notification /><Profile profile={profile}/></Flex>
+                       <Flex justify={'flex-end'} align={'center'}> <Profile profile={profile}/></Flex>
                     </Col>
                 </Row>
             </Container>

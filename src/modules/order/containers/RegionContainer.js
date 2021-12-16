@@ -6,13 +6,10 @@ import {withRouter} from "react-router-dom";
 import SubHeaderBox from "../../../components/subheader";
 import ProgressBox from "../../../components/progressbar";
 import Title from "../../../components/title";
-import Radio from "../../../components/elements/radio";
 import Flex from "../../../components/flex/Flex";
 import Text from "../../../components/text";
 import RangeCalendar from "../../../components/range-calendar";
 import CustomAreaChart from "../../../components/chart/AreaChart";
-import Dropdown from "../../../components/dropdown";
-import {CustomPieChart} from "../../../components/chart";
 import RegionScheme from "../../../schema/RegionScheme";
 import ApiActions from "../../../services/api/Actions";
 import DistrictScheme from "../../../schema/DistrictScheme";
@@ -36,7 +33,7 @@ const RegionContainer = ({
                              regionStatistics,
                              getMonthlyStatistics,
                              get_region_monthly_statistics,
-                             ...props
+                             ...rest
                          }) => {
     const [items] = useState([]);
     const [active, setActive] = useState(null);
