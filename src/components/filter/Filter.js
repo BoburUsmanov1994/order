@@ -27,12 +27,19 @@ const StyledFilter = styled.div`
     }
 
     &__content {
-      width: 450px;
+      width: 500px;
       min-height: 25vh;
       background-color: #fff;
       border-radius: 15px;
       padding: 30px;
       position: relative;
+      overflow-x: hidden;
+      .scrollbar{
+        max-height: 75vh;
+        overflow-y: auto;
+        padding-bottom: 20px;
+        overflow-x: hidden;
+      }
 
       h2 {
         text-align: center;
@@ -52,7 +59,9 @@ const Filter = ({
                 <div className="filter__content">
                     <X className={'filter__close'} size={36} onClick={() => setOpen(false)}/>
                     <h2>Филтрлар</h2>
+                    <div className="scrollbar">
                     {children({register, handleSubmit,  setValue, getValues, control})}
+                    </div>
                 </div>
             </StyledFilter>}
             </>
