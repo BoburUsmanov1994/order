@@ -11,7 +11,7 @@ import ApiService from "../ApiService";
 import {toast} from "react-toastify";
 import ContentLoader from "../../../components/loader/ContentLoader";
 import {Table} from "../../../components/table";
-import {Edit, Eye, MinusCircle, PlusCircle, Trash, List} from "react-feather";
+import {Edit, Eye, List, MinusCircle, PlusCircle, Trash} from "react-feather";
 import Flex from "../../../components/flex/Flex";
 import OrderSearch from "../components/order/OrderSearch";
 import Select from "../../../components/elements/select/Select";
@@ -26,6 +26,13 @@ import classNames from "classnames";
 import config from "../../../config";
 import HasAccess from "../../../services/auth/HasAccess";
 import Filter from "../../../components/filter";
+import FormSelect from "../../../components/elements/form-select";
+import {Controller} from "react-hook-form";
+import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
+import StatusOrderScheme from "../../../schema/StatusOrderScheme";
+import BasisOrderScheme from "../../../schema/BasisOrderScheme";
+import BasisTerminationScheme from "../../../schema/BasisTerminationScheme";
+import ResultOrderScheme from "../../../schema/ResultOrderScheme";
 
 const OrderListContainer = ({
                                 history,
@@ -39,39 +46,73 @@ const OrderListContainer = ({
                                 getRegionList,
                                 regions,
                                 districts,
-                                getDistrictsList
+                                getDistrictsList,
+                                getNeighborhoodsListByDistrict,
+                                neighborhoods,
+                                getOrderStatusList,
+                                ordersStatusList,
+                                basisOrderList,
+                                getBasisOrderList,
+                                getBasisTerminationList,
+                                basisTerminationList,
+                                getResultOrderList,
+                                resultOrderList,
+                                getOrdersListFromFilter,
+                                ...rest
                             }) => {
         const [loading, setLoading] = useState(false);
         const [open,setOpen] = useState(false);
         const [filter, setFilter] = useState({
             page: 0,
-            seriya: null,
-            regId: null,
-            distId: null,
+            regId: '',
+            distId: '',
+            mfyId: '',
             from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
             to: moment().format("YYYY-MM-DD")
         });
+        const [advancedFilter,setAdvancedFilter] = useState({
+            page : 0,
+            size : 20,
+            from : null,
+            to : null,
+            regiId : null,
+            distId : null,
+            mfyId : null,
+            orderstatus : null,
+            basisorder : null,
+            basistermination : null,
+            orederresults : null
+        })
         useEffect(() => {
             getOrdersList({...filter});
             getRegionList({});
+            getOrderStatusList({});
+            getBasisOrderList({});
+            getBasisTerminationList({});
+            getResultOrderList({});
             if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
                 setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
             }
             if (includes([config.ROLES.USER], get(user, 'accountrole.name'))) {
-                setFilter(filter => ({...filter,distId: get(user,'districtsId._id')}));
+                setFilter(filter => ({...filter, distId: get(user, 'districtsId._id')}));
             }
         }, []);
 
         useEffect(() => {
-            if (get(filter,'regId') || get(filter,'seriya') || get(filter,'distId')) {
+            if (get(filter, 'regId') || get(filter, 'seriya') || get(filter, 'distId')) {
                 getOrdersListByFilter(filter);
             }
         }, []);
 
-        useEffect(()=>{
+        useEffect(() => {
+            getDistrictsList({regId: get(filter, 'regId')});
+            setAdvancedFilter(advancedFilter => ({...advancedFilter,regiId: get(filter, 'regId')}))
+        }, [get(filter, 'regId')])
 
-            getDistrictsList({regId:get(filter,'regId')});
-        },[get(filter,'regId')])
+        useEffect(() => {
+            getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
+            setAdvancedFilter(advancedFilter => ({...advancedFilter,distId: get(filter, 'distId')}))
+        }, [get(filter, 'distId')])
 
 
         orders = Normalizer.Denormalize(orders, [OrderScheme], entities);
@@ -80,6 +121,32 @@ const OrderListContainer = ({
             label: name
         }));
         districts = Normalizer.Denormalize(districts, [DistrictScheme], entities).map(({_id, name}) => ({
+            value: _id,
+            label: name
+        }));
+
+        neighborhoods = Normalizer.Denormalize(neighborhoods, [NeighborhoodScheme], entities).map(({_id, name}) => ({
+            value: _id,
+            label: name
+        }));
+        ordersStatusList = Normalizer.Denormalize(ordersStatusList, [StatusOrderScheme], entities).map(({_id, name}) => ({
+            value: _id,
+            label: name
+        }));
+        basisOrderList = Normalizer.Denormalize(basisOrderList, [BasisOrderScheme], entities).map(({_id, name}) => ({
+            value: _id,
+            label: name
+        }));
+
+        basisTerminationList = Normalizer.Denormalize(basisTerminationList, [BasisTerminationScheme], entities).map(({
+                                                                                                                         _id,
+                                                                                                                         name
+                                                                                                                     }) => ({
+            value: _id,
+            label: name
+        }));
+
+        resultOrderList = Normalizer.Denormalize(resultOrderList, [ResultOrderScheme], entities).map(({_id, name}) => ({
             value: _id,
             label: name
         }));
@@ -137,7 +204,6 @@ const OrderListContainer = ({
         const clearFilter = () => {
             setFilter(filter => ({
                 page: 0,
-                seriya: null,
                 regId: null,
                 distId: null,
                 from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
@@ -147,13 +213,94 @@ const OrderListContainer = ({
 
         };
 
+        const onSubmit = (data) => {
+            getOrdersListFromFilter({...filter,...data});
+            setAdvancedFilter({...filter,...data});
+            setOpen(false);
+        }
+
+        useEffect(() => {
+
+        }, [])
 
         return (
             <>{isFetched ? <>
                 <Row className={'mb-24'}>
                     <Col xs={12}>
                         <hr/>
-                        <Filter open={open} setOpen={setOpen} />
+                        <Filter open={open} setOpen={setOpen}>
+                            {({register, handleSubmit, setValue, getValues, control}) => (
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter, 'regiId')} options={regions}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'regiId'} onChange={({value}) => setFilter(filter => ({
+                                                ...filter,
+                                                regId: value
+                                            }))} placeholder={'Вилоятни танланг'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter, 'distId')} options={districts}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'distId'} onChange={({value}) => setFilter(filter => ({
+                                                ...filter,
+                                                distId: value
+                                            }))} placeholder={'Туманни танланг'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter, 'mfyId')} options={neighborhoods}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter,'orderstatus')} options={ordersStatusList}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'orderstatus'} placeholder={'Берилган ордернинг холати'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter,'basisorder')} options={basisOrderList}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'basisorder'} placeholder={'Ҳимоя ордери бериш учун асос'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter,'basistermination')} options={basisTerminationList}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'basistermination'}
+                                                        placeholder={'Ҳимоя ордерини тугатиш асослари'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(advancedFilter,'orederresults')} options={resultOrderList}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'orederresults'} placeholder={'Ҳимоя ордери бериш натижаси'}/>
+
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={12} className={'text-center mt-16'}>
+                                            <Button type={'submit'} success>Саралаш</Button>
+                                        </Col>
+                                    </Row>
+                                </form>)}
+                        </Filter>
                     </Col>
                 </Row>
                 <Row className={'mb-24'} align={'center'}>
@@ -265,7 +412,12 @@ const mapStateToProps = (state) =>
         regions: get(state, 'normalizer.data.region-list.result.region', []),
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         totalItems: get(state, 'normalizer.data.order-list.result.totalItems', 0),
-        user: get(state, 'auth.user', {})
+        neighborhoods: get(state, 'normalizer.data.neighborhoods-list.result.mfy', []),
+        user: get(state, 'auth.user', {}),
+        ordersStatusList: get(state, 'normalizer.data.status-order-list.result.statusOrder', []),
+        basisOrderList: get(state, 'normalizer.data.basis-order-list.result.basisorder', []),
+        basisTerminationList: get(state, 'normalizer.data.basis-termination-list.result.basistermination', []),
+        resultOrderList: get(state, 'normalizer.data.result-order-list.result.resultorder', []),
     }
 }
 const mapDispatchToProps = (dispatch) =>
@@ -283,6 +435,44 @@ const mapDispatchToProps = (dispatch) =>
                         params: {
                             page: page + 1,
                         },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getOrdersListFromFilter: ({
+                                      page = 0,
+                                      size = 20,
+                                      from = null,
+                                      to = null,
+                                      regiId = null,
+                                      distId = null,
+                                      mfyId = null,
+                                      orderstatus = null,
+                                      basisorder = null,
+                                      basistermination = null,
+                                      orederresults = null
+                                  }) => {
+            const storeName = 'order-list';
+            const entityName = 'order';
+            const scheme = {oreders: [OrderScheme]};
+            dispatch({
+                type: ApiActions.POST_ALL.REQUEST,
+                payload: {
+                    url: '/orders/filteradvansed',
+                    config: {
+                        page: page + 1,
+                        from,
+                        to,
+                        regiId,
+                        distId,
+                        mfyId,
+                        orderstatus,
+                        basisorder,
+                        basistermination,
+                        orederresults
                     },
                     scheme,
                     storeName,
@@ -339,6 +529,101 @@ const mapDispatchToProps = (dispatch) =>
                     url: `/districts/reg/${regId}`,
                     config: {
                         params: {},
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getNeighborhoodsListByDistrict: ({districtId, page = 0}) => {
+            const storeName = 'neighborhoods-list';
+            const entityName = 'neighborhood';
+            const scheme = {mfy: [NeighborhoodScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/mfy/distId/${districtId}`,
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getOrderStatusList: ({page = 1}) => {
+            const storeName = 'status-order-list';
+            const entityName = 'status-order';
+            const scheme = {statusOrder: [StatusOrderScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/statusorder`,
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getBasisOrderList: ({page = 1}) => {
+            const storeName = 'basis-order-list';
+            const entityName = 'basis-order';
+            const scheme = {basisorder: [BasisOrderScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/basisorder`,
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getBasisTerminationList: ({page = 1}) => {
+            const storeName = 'basis-termination-list';
+            const entityName = 'basis-termination';
+            const scheme = {basistermination: [BasisTerminationScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/basistermination`,
+                    config: {
+                        params: {
+                            page
+                        },
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+        getResultOrderList: ({page = 1}) => {
+            const storeName = 'result-order-list';
+            const entityName = 'result-order';
+            const scheme = {resultorder: [ResultOrderScheme]};
+            dispatch({
+                type: ApiActions.GET_ALL.REQUEST,
+                payload: {
+                    url: `/resultorder`,
+                    config: {
+                        params: {
+                            page
+                        },
                     },
                     scheme,
                     storeName,

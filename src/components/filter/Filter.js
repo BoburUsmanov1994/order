@@ -42,79 +42,17 @@ const StyledFilter = styled.div`
   }
 `;
 const Filter = ({
-                    open = false, setOpen = () => {
-        }, onSubmit = () => {
+                   children, open = false, setOpen = () => {
         }, ...props
                 }) => {
-        const {register, handleSubmit, formState: {errors}, setValue, getValues, control} = useForm();
-
+        const {register, handleSubmit, setValue, getValues, control} = useForm();
         return (
             <>{open &&
-            <StyledFilter {...props} onSubmit={handleSubmit(onSubmit)}>
+            <StyledFilter {...props} >
                 <div className="filter__content">
                     <X className={'filter__close'} size={36} onClick={() => setOpen(false)}/>
                     <h2>Филтрлар</h2>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'regiId'} placeholder={'Вилоятни танланг'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'distId'} placeholder={'Туманни танланг'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'orderstatus'} placeholder={'Order status'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'basisorder'} placeholder={'Basis status'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'basistermination'} placeholder={'Basis termination'}/>
-
-                        </Col>
-                    </Row>
-                    <Row className={'mb-16'}>
-                        <Col xs={12}>
-                            <FormSelect defaultValue={null} options={[]}
-                                        setValue={setValue} Controller={Controller} control={control}
-                                        name={'orederresults'} placeholder={'Order results'}/>
-
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12} className={'text-center mt-16'}>
-                            <Button type={'submit'} success>Саралаш</Button>
-                        </Col>
-                    </Row>
+                    {children({register, handleSubmit,  setValue, getValues, control})}
                 </div>
             </StyledFilter>}
             </>
