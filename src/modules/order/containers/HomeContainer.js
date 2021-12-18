@@ -27,8 +27,9 @@ import Actions from "../Actions";
 import config from "../../../config";
 import moment from "moment";
 import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
-import Loader from "../../../components/loader";
 import PieChartList from "../components/pie-chart-list/pie-chart-list";
+import {PDFDownloadLink} from '@react-pdf/renderer';
+import PdfReport from "../../../components/pdf";
 
 const HomeContainer = ({
                            history,
@@ -63,6 +64,7 @@ const HomeContainer = ({
     const [orderFilter, setOrderFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
     const [mfyFilter, setMfyFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
     const [filterMonthlyStatistic, setFilterMonthlyStatistics] = useState({from: '', to: ''});
+    const [title, setTitle] = useState('');
     useEffect(() => {
         if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
             history.push(`/region/${get(user, 'regionId._id')}`);
@@ -77,6 +79,9 @@ const HomeContainer = ({
 
     useEffect(() => {
         getStatisticsOrderCounts({...orderFilter});
+
+        setTitle(`Республика ${get(regions.find(({_id}) => isEqual(_id, get(orderFilter, 'regId'))), 'name', '')} ${get(districts.find(({_id}) => isEqual(_id, get(orderFilter, 'distId'))), 'name', '')} `)
+
     }, [orderFilter]);
 
 
@@ -148,12 +153,30 @@ const HomeContainer = ({
                             <Row>
                                 <Col xs={12} className={'mb-16'}>
                                     <Slider items={regions} active={get(orderFilter, 'regId')}
-                                            setActive={(value) => setOrderFilter(orderFilter =>({...orderFilter,regId: value}))}/>
+                                            setActive={(value) => setOrderFilter(orderFilter => ({
+                                                ...orderFilter,
+                                                regId: value
+                                            }))}/>
                                 </Col>
                                 <Col xs={12} className={'text-right mb-16'}>
-                                    <Flex justify={'flex-end'}> <Text className={'cursor-pointer'}>Хисоботни экспорт
-                                        қилиш <img src={exportImg} className={'ml-16 mr-16'}
-                                                   alt=""/></Text>
+                                    <Flex justify={'flex-end'}>
+                                        {get(orderStatisticsForMap, 'isFetched') && <PDFDownloadLink
+                                            document={<PdfReport from={get(orderFilter, 'from')}
+                                                                 to={get(orderFilter, 'to')}
+                                                                 title={`${get(orderStatisticsForMap, 'result.message')} (${title})`}
+                                                                 items={get(orderStatisticsForMap, 'result.persrnage').map(({
+                                                                                                                                name,
+                                                                                                                                per: percent
+                                                                                                                            }, index) => ({
+                                                                     name,
+                                                                     count: get(orderStatisticsForMap, `result.orederscount[${index}].statuscount`),
+                                                                     percent: round(percent, 2)
+                                                                 }))}/>} fileName={`${get(orderStatisticsForMap, 'result.message')}.pdf`}>
+                                            {({blob, url, loading, error}) => <Text className={'cursor-pointer'}>Хисоботни
+                                                экспорт
+                                                қилиш <img src={exportImg} className={'ml-16'}
+                                                           alt=""/></Text>}
+                                        </PDFDownloadLink>}
                                         <RangeCalendar handleCalendar={({
                                                                             startDate,
                                                                             endDate

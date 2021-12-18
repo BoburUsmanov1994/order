@@ -4,7 +4,10 @@ import {get,isEqual,round} from "lodash";
 import {Col, Row} from "react-grid-system";
 import exportImg from "../../assets/images/icons/export.png";
 import { PieChart } from 'react-minimal-pie-chart';
+import {PDFDownloadLink} from '@react-pdf/renderer';
 import Dot from "../dot";
+import PdfReport from "../pdf";
+import Text from "../text";
 
 const StyledCustomPieChart = styled.div`
   background-color: #fff;
@@ -44,17 +47,20 @@ const StyledCustomPieChart = styled.div`
     }
   }
 `;
-const CustomPieChart = ({name,data,...props}) => {
+const CustomPieChart = ({name,data,filter,title='Республика',...props}) => {
     const COLORS = ['#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412']
     const chartData = data.filter(({percent}) => percent > 0).map(({name,percent},index) => ({title:name,value:round(percent,2),color:COLORS[index]}));
     const listData = data.filter(({value}) => value > 0).map(({name,value},index) => ({name:name,value:round(value,2)}));
-    console.log("DATA",data,listData)
+
 
     return (
         <StyledCustomPieChart {...props}>
             <div className="chart__head">
                 <span>{name}</span>
-                <img src={exportImg} alt=""/>
+                {chartData && listData && <PDFDownloadLink document={<PdfReport from={get(filter,'from')} to={get(filter,'to')} title={`${name} (${title ?? null})`} items={data.map(({name,percent,value},index) => ({name,count:value,percent:round(percent,2)}))} />}  fileName={`${name}.pdf`}>
+                    {({blob, url, loading, error}) => <img src={exportImg} alt=""/>}
+                </PDFDownloadLink>}
+
             </div>
             <div className="chart__center">
                 <PieChart

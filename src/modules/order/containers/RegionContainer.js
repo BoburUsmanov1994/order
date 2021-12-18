@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-grid-system";
-import {get} from "lodash";
+import {get,round,isEqual} from "lodash";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import {PDFDownloadLink} from '@react-pdf/renderer';
 import SubHeaderBox from "../../../components/subheader";
 import ProgressBox from "../../../components/progressbar";
 import Title from "../../../components/title";
@@ -21,6 +22,7 @@ import ContentLoader from "../../../components/loader/ContentLoader";
 import moment from "moment";
 import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
 import List from "../../../components/list";
+import PdfReport from "../../../components/pdf";
 
 
 const RegionContainer = ({
@@ -42,8 +44,7 @@ const RegionContainer = ({
                              getStatisticsOrderCounts,
                              ...rest
                          }) => {
-    const [items] = useState([]);
-    const [active, setActive] = useState(null);
+    const [title, setTitle] = useState(null);
     const [filter, setFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
     const [coordinate, setCoordinate] = useState({x: 0, y: 0});
 
@@ -61,12 +62,18 @@ const RegionContainer = ({
             getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
         }
         getStatisticsOrderCounts({...filter});
+        if(get(region,'name')){
+            setTitle(`${get(region, 'name')} ${get(districts.find(({_id}) => isEqual(_id,get(filter,'distId'))),'name','')} ${get(neighborhoods.find(({_id}) => isEqual(_id,get(filter,'mfyId'))),'name','')}`)
+        }
     }, [id, filter])
+
+
 
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities);
     region = Normalizer.Denormalize(region, RegionScheme, entities);
     neighborhoods = Normalizer.Denormalize(neighborhoods, [NeighborhoodScheme], entities);
-    console.log('orderStatisticsForMap',orderStatisticsForMap)
+
+
     return (
         <>{isFetched ? <>
             <Row className={'mb-16'}>
@@ -83,9 +90,11 @@ const RegionContainer = ({
                         </Col>
                         <Col xs={2} className={'text-right'}>
                             <Flex justify={'flex-end'}>
-                                <Text className={'cursor-pointer'}>Хисоботни экспорт
+                                {get(orderStatisticsForMap,'isFetched') && <PDFDownloadLink document={<PdfReport from={get(filter,'from')} to={get(filter,'to')} title={`${get(orderStatisticsForMap,'result.message')} (${title})`} items={get(orderStatisticsForMap,'result.persrnage').map(({name,per:percent},index) => ({name,count:get(orderStatisticsForMap,`result.orederscount[${index}].statuscount`),percent:round(percent,2)}))} />}  fileName={`${get(orderStatisticsForMap, 'result.message')}.pdf`}>
+                                    {({blob, url, loading, error}) =><Text className={'cursor-pointer'}>Хисоботни экспорт
                                     қилиш <img src={exportImg} className={'ml-16'}
-                                               alt=""/></Text>
+                                               alt=""/></Text>}
+                                </PDFDownloadLink>}
                             </Flex>
                         </Col>
                     </Row>
@@ -154,6 +163,7 @@ const RegionContainer = ({
                                      }))} height={250}/>
                 </Col>
             </Row>
+
 
             </>:<ContentLoader />}
         </>

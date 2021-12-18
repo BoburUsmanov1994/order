@@ -95,7 +95,7 @@ const PieChartList = ({
 {
     const [items, setItems] = useState([]);
     const [activeItems, setActiveItems] = useState([]);
-    const [filter, setFilter] = useState({from: '2020-01-01', to: '2021-12-31', regId: '', distId: '', mfyId: ''})
+    const [filter, setFilter] = useState({from: '2021-01-01', to: '2021-12-31', regId: '', distId: '', mfyId: ''})
     useEffect(() => {
         getBasisOrder({...filter});
         getBasisTermination({...filter});
@@ -733,7 +733,7 @@ const PieChartList = ({
             </Row>
             <Row>
                 {items && items.map(({name, data}, index) => includes(activeItems, name) && <Col key={index} xs={6}>
-                    <CustomPieChart name={name} data={data}/>
+                    <CustomPieChart name={name} data={data} filter={filter}/>
                 </Col>)
                 }
             </Row>
