@@ -60,6 +60,7 @@ import VictimViewPage from "../modules/order/pages/VictimViewPage";
 import ViolentViewPage from "../modules/order/pages/ViolentViewPage";
 import HasAccess from "../services/auth/HasAccess";
 import config from "../config";
+import DynamicFilterPage from "../modules/order/pages/DynamicFilterPage";
 
 const Router = () => {
     return (
@@ -170,6 +171,8 @@ const Router = () => {
                                     <BehaviorPage/> : <ForbiddenPage/>} />
                                 <Route path={'/result-order'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <ResultOrderPage/> : <ForbiddenPage/>} />
+                                <Route path={'/filter'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <DynamicFilterPage/> : <ForbiddenPage/>} />
                                 <Route path={'/logout'} exact component={LogoutPage}/>
                                 <Route path={'/403'} exact component={ForbiddenPage}/>
                                 <Route path={'/404'} exact component={NotFoundPage}/>
