@@ -74,7 +74,7 @@ const HomeContainer = ({
         }
         setDistrictListTrigger();
         getRegionList({});
-        statisticsOrderCounts({});
+        statisticsOrderCounts({...orderFilter});
     }, []);
 
     useEffect(() => {
@@ -131,7 +131,7 @@ const HomeContainer = ({
         <>
             <Row className={'mb-16'}>
                 <Col xs={10}>
-                    <SubHeaderBox items={get(statistics_order_counts, 'data', {})}/>
+                    <SubHeaderBox items={get(statistics_order_counts, 'result', {})}/>
                     <Row className={'mt-16 mb-16'}>
                         <Col xs={12}>
                             <Title>Худудлар бўйича статистика</Title>
@@ -199,7 +199,7 @@ const HomeContainer = ({
                     </Row>
                 </Col>
                 <Col xs={2}>
-                    <ProgressBox items={get(statistics_order_counts, 'data')}/>
+                    <ProgressBox items={get(statistics_order_counts, 'result')}/>
                 </Col>
             </Row>
             <Row className={'mb-24'}>
@@ -342,7 +342,7 @@ const mapStateToProps = (state) => {
         districts: get(state, 'normalizer.data.district-list.result.districts', []),
         districtsByRegion: get(state, 'normalizer.data.district-list-by-region.result.districts', []),
         statistics_place_action_counts: get(state, 'normalizer.data.get-statistics-place-action-counts', {}),
-        statistics_order_counts: get(state, 'order.statistics_order_counts', {}),
+        statistics_order_counts: get(state, 'normalizer.data.get-statistics-main-order-counts', {}),
         statistics_type_violence: get(state, 'normalizer.data.get-statistics-type-violence', {}),
         statistics_victim_count: get(state, 'normalizer.data.get-statistics-victim-count', {}),
         user: get(state, 'auth.user', {}),
@@ -435,9 +435,21 @@ const mapDispatchToProps = (dispatch) => {
             },
         }),
 
-        statisticsOrderCounts: (params) => dispatch({
-            type: Actions.STATISTICS_ORDER_COUNTS.REQUEST,
-            payload: {params},
+        statisticsOrderCounts: ({from = '', to = '', regId = '', distId = ''}) => dispatch({
+            type: ApiActions.GET_ONE.REQUEST,
+            payload: {
+                url: `/orders/statistics/ordercounts`,
+                config: {
+                    params: {},
+                    headers: {
+                        'from': `${from}`,
+                        'to': `${to}`,
+                        'regId': `${regId}`,
+                        'distId': `${distId}`,
+                    },
+                },
+                storeName: 'get-statistics-main-order-counts',
+            },
         }),
         getStatisticsOrderCounts: ({from = '', to = '', regId = '', distId = '', mfyId = ''}) => dispatch({
             type: ApiActions.GET_ONE.REQUEST,
