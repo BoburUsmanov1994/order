@@ -28,6 +28,7 @@ function* statisticsOrderCounts(action) {
     const {params} = action.payload;
     try {
         const {data} = yield call(ApiService.StatisticsOrderCounts,{...params});
+
         yield put({type: Actions.STATISTICS_ORDER_COUNTS.SUCCESS, payload: {orders:data}});
 
     } catch (e) {

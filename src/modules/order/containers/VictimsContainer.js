@@ -8,7 +8,7 @@ import Title from "../../../components/title";
 import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isEqual} from "lodash";
+import {get, includes, isEmpty, isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
 import {Edit, Eye, List, Trash} from 'react-feather';
 import ApiService from "../ApiService";
@@ -97,6 +97,15 @@ const VictimsContainer = ({
         setListTrigger();
         getVictimsListByFilter({...filter})
     }, [get(filter, 'page')]);
+
+    useEffect(() => {
+        if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
+            setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
+        }
+        if (includes([config.ROLES.USER], get(user, 'accountrole.name'))) {
+            setFilter(filter => ({...filter, distId: get(user, 'districtsId._id')}));
+        }
+    },[user])
 
     useEffect(() => {
         getRegionList({});
@@ -228,140 +237,143 @@ const VictimsContainer = ({
             <Row className={'mb-24'}>
                 <Col xs={12}>
                     <hr/>
-                    <Filter open={open} setOpen={setOpen}>
-                        {({register, handleSubmit, setValue, getValues, control}) => (
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'regiId')} options={regions}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'regiId'} onChange={({value}) => setFilter(filter => ({
-                                            ...filter,
-                                            regId: value
-                                        }))} placeholder={'Вилоятни танланг'}/>
+                    <HasAccess>
+                        {({userCan}) => <Filter open={open} setOpen={setOpen}>
+                            {({register, handleSubmit, setValue, getValues, control}) => (
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])} defaultValue={get(filter, 'regId')} options={regions}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'regiId'} onChange={({value}) => setFilter(filter => ({
+                                                ...filter,
+                                                regId: value
+                                            }))} placeholder={'Вилоятни танланг'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'distId')} options={districts}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'distId'} onChange={({value}) => setFilter(filter => ({
-                                            ...filter,
-                                            distId: value
-                                        }))} placeholder={'Туманни танланг'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect isDisabled={userCan([config.ROLES.USER])} defaultValue={get(filter, 'distId')} options={districts}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'distId'} onChange={({value}) => setFilter(filter => ({
+                                                ...filter,
+                                                distId: value
+                                            }))} placeholder={'Туманни танланг'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'mfyId')} options={neighborhoods}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'mfyId')} options={neighborhoods}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'agesId')}
-                                                    options={ages}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'agesId'} placeholder={'Ëши'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'agesId')}
+                                                        options={ages}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'agesId'} placeholder={'Ëши'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'citizensId')}
-                                                    options={citizenship}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'citizensId'} placeholder={'Фуқаролиги'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'citizensId')}
+                                                        options={citizenship}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'citizensId'} placeholder={'Фуқаролиги'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'educationId')}
-                                                    options={education}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'educationId'}
-                                                    placeholder={'Маълумоти'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'educationId')}
+                                                        options={education}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'educationId'}
+                                                        placeholder={'Маълумоти'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'familypositionId')}
-                                                    options={familyPosition}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'familypositionId'} placeholder={'Оилавий аҳволи'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'familypositionId')}
+                                                        options={familyPosition}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'familypositionId'} placeholder={'Оилавий аҳволи'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'socialstatusId')}
-                                                    options={socialStatus}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'socialstatusId'} placeholder={'Ижтимоий аҳволи'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'socialstatusId')}
+                                                        options={socialStatus}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'socialstatusId'} placeholder={'Ижтимоий аҳволи'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'conditionpersonId')}
-                                                    options={personcondition}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'conditionpersonId'} placeholder={'Шахснинг ҳолати бўйича'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'conditionpersonId')}
+                                                        options={personcondition}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'conditionpersonId'} placeholder={'Шахснинг ҳолати бўйича'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'placeectionId')}
-                                                    options={actionplace}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'placeectionId'} placeholder={'Содир этилган жойи'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'placeectionId')}
+                                                        options={actionplace}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'placeectionId'} placeholder={'Содир этилган жойи'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'workingplaceId')}
-                                                    options={workingplace}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'workingplaceId'} placeholder={'Шахснинг бандлиги'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'workingplaceId')}
+                                                        options={workingplace}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'workingplaceId'} placeholder={'Шахснинг бандлиги'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'typeviolencesId')}
-                                                    options={typeviolence}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'typeviolencesId'}
-                                                    placeholder={'Тазйиқ ва зўравонлик турлари'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'typeviolencesId')}
+                                                        options={typeviolence}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'typeviolencesId'}
+                                                        placeholder={'Тазйиқ ва зўравонлик турлари'}/>
 
-                                    </Col>
-                                </Row>
-                                <Row className={'mb-16'}>
-                                    <Col xs={12}>
-                                        <FormSelect defaultValue={get(filter, 'typerestrictionsId')}
-                                                    options={typerestrictions}
-                                                    setValue={setValue} Controller={Controller} control={control}
-                                                    name={'typerestrictionsId'}
-                                                    placeholder={'Тазйиқ ўтказган ёки зўравонлик содир этган этишга белгиланган чекловлар'}/>
+                                        </Col>
+                                    </Row>
+                                    <Row className={'mb-16'}>
+                                        <Col xs={12}>
+                                            <FormSelect defaultValue={get(filter, 'typerestrictionsId')}
+                                                        options={typerestrictions}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'typerestrictionsId'}
+                                                        placeholder={'Тазйиқ ўтказган ёки зўравонлик содир этган этишга белгиланган чекловлар'}/>
 
-                                    </Col>
-                                </Row>
+                                        </Col>
+                                    </Row>
 
-                                <Row>
-                                    <Col xs={12} className={'text-center mt-16'}>
-                                        <Button type={'submit'} success>Саралаш</Button>
-                                    </Col>
-                                </Row>
-                            </form>)}
-                    </Filter>
+                                    <Row>
+                                        <Col xs={12} className={'text-center mt-16'}>
+                                            <Button type={'submit'} success>Саралаш</Button>
+                                        </Col>
+                                    </Row>
+                                </form>)}
+                        </Filter>}
+                    </HasAccess>
+
                 </Col>
                 <Col xs={12}>
                     {loading && <Loader/>}
@@ -386,7 +398,7 @@ const VictimsContainer = ({
                             !isEmpty(victims) ? victims && victims.map((victim, index) => <tr key={get(victim, '_id')}>
                                 <td>{index + 1}</td>
                                 <td>{`${get(victim, 'citizensId.name', '-')} ${get(victim, 'citizensId.secondname', '-')} ${get(victim, 'citizensId.middlename', '-')}`}</td>
-                                <td>{moment.unix(get(victim, 'citizensId.dateofbirthday', '-')/1000).format("DD-MM-YYYY")}</td>
+                                <td>{moment(get(victim, 'citizensId.dateofbirthday', '-')).format("DD-MM-YYYY")}</td>
                                 <td>{get(victim, 'citizensId.passportinfo', '-')}</td>
                                 <td>{get(victim, 'citizensId.identitynumber', '-')}</td>
                                 <td>{get(victim, 'conditionpersonId.name', '-')}</td>
@@ -436,18 +448,23 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getVictimsList: ({page = 0, size = 20}) => {
+        getVictimsList: ({page = 0, size = 20,    regId,
+                             distId,}) => {
             const storeName = 'victim-list';
             const entityName = 'victim';
             const scheme = {data: [VictimScheme]};
             dispatch({
                 type: ApiActions.GET_ALL.REQUEST,
                 payload: {
-                    url: '/victim',
+                    url: '/victim/vic/filter',
                     config: {
                         params: {
                             page: page + 1,
                         },
+                        headers: {
+                            regId,
+                            distId,
+                        }
                     },
                     scheme,
                     storeName,
@@ -480,6 +497,8 @@ const mapDispatchToProps = (dispatch) => {
                     config: {
                         params: {
                             page: page + 1,
+                        },
+                        headers:{
                             regId,
                             distId,
                             agesId,
@@ -492,7 +511,7 @@ const mapDispatchToProps = (dispatch) => {
                             workingplaceId,
                             typeviolencesId,
                             typerestrictionsId
-                        },
+                        }
                     },
                     scheme,
                     storeName,

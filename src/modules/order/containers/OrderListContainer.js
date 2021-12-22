@@ -84,7 +84,14 @@ const OrderListContainer = ({
             orederresults : null
         })
         useEffect(() => {
-            getOrdersList({...filter});
+            if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+                getOrdersList({...filter,regId:get(user, 'regionId._id')})
+            }else if(isEqual(get(user, 'accountrole.name'), config.ROLES.USER)){
+                getOrdersList({...filter,regId:get(user, 'regionId._id'),distId: get(user, 'districtsId._id')})
+            }
+            else {
+                getOrdersList({...filter});
+            }
             getRegionList({});
             getOrderStatusList({});
             getBasisOrderList({});
@@ -152,14 +159,10 @@ const OrderListContainer = ({
         }));
 
         if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
-            orders = orders.filter(item => isEqual(get(item, 'regiId._id'), get(user, 'regionId._id')));
             regions = regions.filter(item => isEqual(get(item, 'value'), get(user, 'regionId._id')));
 
         }
 
-        if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
-            orders = orders.filter(item => isEqual(get(item, 'creatorId._id'), get(user, '_id')));
-        }
         const deleteOrder = (id) => {
             confirmAlert({
                 title: 'Ишончингиз комилми?',
@@ -228,79 +231,84 @@ const OrderListContainer = ({
                 <Row className={'mb-24'}>
                     <Col xs={12}>
                         <hr/>
-                        <Filter open={open} setOpen={setOpen}>
-                            {({register, handleSubmit, setValue, getValues, control}) => (
-                                <form onSubmit={handleSubmit(onSubmit)}>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter, 'regiId')} options={regions}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'regiId'} onChange={({value}) => setFilter(filter => ({
-                                                ...filter,
-                                                regId: value
-                                            }))} placeholder={'Вилоятни танланг'}/>
+                        <HasAccess>
+                            {
+                                ({userCan}) => <Filter open={open} setOpen={setOpen}>
+                                    {({register, handleSubmit, setValue, getValues, control}) => (
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])} defaultValue={get(advancedFilter, 'regiId')} options={regions}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'regiId'} onChange={({value}) => setFilter(filter => ({
+                                                        ...filter,
+                                                        regId: value
+                                                    }))} placeholder={'Вилоятни танланг'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter, 'distId')} options={districts}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'distId'} onChange={({value}) => setFilter(filter => ({
-                                                ...filter,
-                                                distId: value
-                                            }))} placeholder={'Туманни танланг'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect isDisabled={userCan([config.ROLES.USER])} defaultValue={get(advancedFilter, 'distId')} options={districts}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'distId'} onChange={({value}) => setFilter(filter => ({
+                                                        ...filter,
+                                                        distId: value
+                                                    }))} placeholder={'Туманни танланг'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter, 'mfyId')} options={neighborhoods}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect defaultValue={get(advancedFilter, 'mfyId')} options={neighborhoods}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'mfyId'} placeholder={'Маҳаллани танланг'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter,'orderstatus')} options={ordersStatusList}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'orderstatus'} placeholder={'Берилган ордернинг холати'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect defaultValue={get(advancedFilter,'orderstatus')} options={ordersStatusList}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'orderstatus'} placeholder={'Берилган ордернинг холати'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter,'basisorder')} options={basisOrderList}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'basisorder'} placeholder={'Ҳимоя ордери бериш учун асос'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect defaultValue={get(advancedFilter,'basisorder')} options={basisOrderList}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'basisorder'} placeholder={'Ҳимоя ордери бериш учун асос'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter,'basistermination')} options={basisTerminationList}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'basistermination'}
-                                                        placeholder={'Ҳимоя ордерини тугатиш асослари'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect defaultValue={get(advancedFilter,'basistermination')} options={basisTerminationList}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'basistermination'}
+                                                                placeholder={'Ҳимоя ордерини тугатиш асослари'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row className={'mb-16'}>
-                                        <Col xs={12}>
-                                            <FormSelect defaultValue={get(advancedFilter,'orederresults')} options={resultOrderList}
-                                                        setValue={setValue} Controller={Controller} control={control}
-                                                        name={'orederresults'} placeholder={'Ҳимоя ордери бериш натижаси'}/>
+                                                </Col>
+                                            </Row>
+                                            <Row className={'mb-16'}>
+                                                <Col xs={12}>
+                                                    <FormSelect defaultValue={get(advancedFilter,'orederresults')} options={resultOrderList}
+                                                                setValue={setValue} Controller={Controller} control={control}
+                                                                name={'orederresults'} placeholder={'Ҳимоя ордери бериш натижаси'}/>
 
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xs={12} className={'text-center mt-16'}>
-                                            <Button type={'submit'} success>Саралаш</Button>
-                                        </Col>
-                                    </Row>
-                                </form>)}
-                        </Filter>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={12} className={'text-center mt-16'}>
+                                                    <Button type={'submit'} success>Саралаш</Button>
+                                                </Col>
+                                            </Row>
+                                        </form>)}
+                                </Filter>
+                            }
+                        </HasAccess>
+
                     </Col>
                 </Row>
                 <Row className={'mb-24'} align={'center'}>
@@ -423,18 +431,23 @@ const mapStateToProps = (state) =>
 const mapDispatchToProps = (dispatch) =>
 {
     return {
-        getOrdersList: ({page = 0, size = 20}) => {
+        getOrdersList: ({page = 0, size = 20, from = null,
+                            to = null,
+                            regId = null,
+                            distId = null,}) => {
             const storeName = 'order-list';
             const entityName = 'order';
             const scheme = {oreders: [OrderScheme]};
             dispatch({
-                type: ApiActions.GET_ALL.REQUEST,
+                type: ApiActions.POST_ALL.REQUEST,
                 payload: {
-                    url: '/orders',
+                    url: '/orders/filteradvansed',
                     config: {
-                        params: {
                             page: page + 1,
-                        },
+                            from,
+                            to,
+                            regiId:regId,
+                            distId,
                     },
                     scheme,
                     storeName,

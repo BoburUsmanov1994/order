@@ -127,8 +127,6 @@ const HomeContainer = ({
         label: name
     }));
 
-
-
     return (
         <>
             <Row className={'mb-16'}>

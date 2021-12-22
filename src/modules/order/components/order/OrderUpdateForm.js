@@ -123,7 +123,7 @@ const OrderUpdateForm = ({
                     <FormSelect defaultValue={get(order,'orederresults._id')} options={resultOrder}
                                 setValue={setValue} Controller={Controller}  control={control}
                                 name={'orederresults'}
-                                label={'Ҳимоя ордери бериш натижаси'} placeholder={'Ҳимоя ордери бериш натижаси'} rule={{required: true}} error={errors?.orederresults}/>
+                                label={'Ҳимоя ордери бериш натижаси'} placeholder={'Ҳимоя ордери бериш натижаси'}  error={errors?.orederresults}/>
                 </Col>
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ордернинг берилган вақти</Label>

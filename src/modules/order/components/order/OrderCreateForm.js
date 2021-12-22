@@ -100,7 +100,7 @@ const OrderCreateForm = ({
                 <Col xs={3} className={'mb-24'}>
                     <Label>Ҳимоя ордери бериш натижаси</Label>
                     <FormSelect options={resultOrder}
-                                setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
+                                setValue={setValue} Controller={Controller}  control={control}
                                 name={'orederresults'}
                                 label={'Basis order'} placeholder={'Танланг'} error={errors?.orederresults}/>
                 </Col>
