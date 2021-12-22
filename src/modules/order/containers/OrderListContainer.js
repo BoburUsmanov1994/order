@@ -474,9 +474,8 @@ const mapDispatchToProps = (dispatch) =>
             dispatch({
                 type: ApiActions.POST_ALL.REQUEST,
                 payload: {
-                    url: '/orders/filteradvansed',
+                    url: `/orders/filteradvansed?page=${page+1}`,
                     config: {
-                        page: page + 1,
                         from,
                         to,
                         regiId,

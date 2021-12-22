@@ -240,8 +240,8 @@ const mapDispatchToProps = (dispatch) => {
                 config: {
                     params: {},
                     headers: {
-                        'from': `${from}`,
-                        'to': `${to}`,
+                        'from': `2021-01-01`,
+                        'to': `2021-12-31`,
                         'regId': `${regId}`,
                     },
                 },
