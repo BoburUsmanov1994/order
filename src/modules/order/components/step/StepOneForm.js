@@ -15,7 +15,7 @@ import moment from "moment";
 
 const StyledStepOneForm = styled.form`
 `;
-const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},getDataFromMvd=()=>{},reset = () => {},...props}) => {
+const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},getDataFromMvd=()=>{},mvdData={},reset = () => {},...props}) => {
     const [dateofbirthday,setDateOfBirthday] = useState(get(victim,'dateofbirthday',moment()))
     const {register, handleSubmit, formState: {errors},setValue,getValues,control} = useForm();
 
@@ -35,6 +35,15 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
     const firstStep = () => {
         reset({firstStep:props.firstStep})
     }
+
+    useEffect(()=>{
+        if(get(mvdData,'status')){
+            setValue('identitynumber',get(mvdData,'inps'));
+            setValue('name',get(mvdData,'name'));
+            setValue('secondname',get(mvdData,'surname'));
+            setValue('middlename',get(mvdData,'patronym'));
+        }
+    },[mvdData])
 
     const reinitilize = () => {
         setValue('passportinfo',get(victim,'passportinfo'));

@@ -7,7 +7,7 @@ import Line from "../../../components/line";
 import StepOneForm from "../components/step/StepOneForm";
 import StepTwoForm from "../components/step/StepTwoForm";
 import ApiActions from "../../../services/api/Actions";
-import {get} from "lodash";
+import {get, isEqual} from "lodash";
 import GenderScheme from "../../../schema/GenderScheme";
 import Normalizer from "../../../services/normalizer";
 import CitizenshipScheme from "../../../schema/CitizenshipScheme";
@@ -79,6 +79,16 @@ const AttachVictimToOrderContainer = ({id,
 
                                       }) => {
     const [victim, setVictim] = useState(JSON.parse(storage.get('victim')));
+    const [mvdData, setMvdData] = useState({
+        birthday: '',
+        name: '',
+        surname: '',
+        patronym: '',
+        genderId: '',
+        inps: '',
+        place: '',
+        status: false
+    });
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         getGendersList({});
@@ -242,7 +252,22 @@ const AttachVictimToOrderContainer = ({id,
         if (brth.length == 10) {
             ApiService.MvdData({passport, brth}).then((res) => {
                 if (res && res.data) {
-                    toast.success('SUCCESS');
+                    if (isEqual(get(res.data, 'AnsweredId'), 1)) {
+                        toast.success(get(res.data,'AnswereMessage','SUCCESS'));
+                        setMvdData(mvdData => ({
+                                ...mvdData,
+                                birthday: get(res.data, 'Data.Person.DateBirth'),
+                                name: get(res.data, 'Data.Person.NameLatin'),
+                                surname: get(res.data, 'Data.Person.SurnameLatin'),
+                                patronym: get(res.data, 'Data.Person.PatronymLatin'),
+                                inps: get(res.data, 'Data.Person.Pinpp'),
+                                genderId: get(res.data, 'Data.Person.Sex.Id'),
+                                place: get(res.data, 'Data.Person.BirthPlace'),
+                                status: true
+                            }));
+                    } else {
+                        toast.warn(get(res.data,'AnswereMessage','WARNING'));
+                    }
                 }
             }).catch((e) => {
                 toast.error('ERROR');
@@ -265,7 +290,7 @@ const AttachVictimToOrderContainer = ({id,
                     <StepWizard isHashEnabled={true}>
                         <StepOneForm victim={victim} reset={reset} hashKey={"one"} genders={genders}
                                      citizenship={citizenship} ages={ages} saveToLocalStorage={saveToLocalStorage}
-                                     getDataFromMvd={getDataFromMvd}/>
+                                     getDataFromMvd={getDataFromMvd} mvdData={mvdData}/>
                         <StepTwoForm hashKey={"two"} victim={victim} reset={reset} education={education}
                                      familyPosition={familyPosition} socialStatus={socialStatus}
                                      workingplace={workingplace} personcondition={personcondition}

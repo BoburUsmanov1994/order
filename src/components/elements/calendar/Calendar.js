@@ -54,7 +54,7 @@ const Calendar = ({
     return (
         <StyledCalendar {...props}>
             <img src={calendarImg} alt=""/>
-            <DatePicker dateFormat={dateFormat} className={'datepicker'} selected={startDate} onChange={handleChange}/>
+            <DatePicker showYearDropdown dateFormat={dateFormat} className={'datepicker'} selected={startDate} onChange={handleChange}/>
         </StyledCalendar>
     );
 };
