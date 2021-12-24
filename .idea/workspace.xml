@@ -112,7 +112,7 @@
       <workItem from="1639933253120" duration="985000" />
       <workItem from="1640003742181" duration="1233000" />
       <workItem from="1640147025295" duration="17005000" />
-      <workItem from="1640321399659" duration="12546000" />
+      <workItem from="1640321399659" duration="18012000" />
     </task>
     <servers />
   </component>
@@ -221,7 +221,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js</url>
-          <line>201</line>
+          <line>197</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -248,6 +248,12 @@
           <url>file://$PROJECT_DIR$/src/modules/order/components/order/OrderUpdateForm.js</url>
           <line>116</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js</url>
+          <line>520</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

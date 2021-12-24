@@ -76,48 +76,46 @@ const OrderListContainer = ({
     });
 
     useEffect(() => {
-        if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
-            getOrdersListFromFilter({...advancedFilter, regId: get(user, 'regionId._id')})
-        } else if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
-            getOrdersListFromFilter({
-                ...advancedFilter,
-                regId: get(user, 'regionId._id'),
-                distId: get(user, 'districtsId._id')
-            })
-        }
-            else {
-            getOrdersListFromFilter({...advancedFilter});
-            }
             getRegionList({});
             getOrderStatusList({});
             getBasisOrderList({});
             getBasisTerminationList({});
             getResultOrderList({});
-            if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
-                setAdvancedFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
-            }
-            if (includes([config.ROLES.USER], get(user, 'accountrole.name'))) {
-                setAdvancedFilter(filter => ({...filter, distId: get(user, 'districtsId._id')}));
-            }
+
         }, []);
 
-        useEffect(() => {
-            if (get(advancedFilter, 'regId') || get(advancedFilter, 'seriya') || get(advancedFilter, 'distId')) {
-                getOrdersListFromFilter(advancedFilter);
-            }
-        }, []);
+
+    useEffect(()=>{
+        if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+            getOrdersListFromFilter({...advancedFilter, regiId: get(user, 'regionId._id')});
+            setAdvancedFilter(advancedFilter=>({...advancedFilter,regiId: get(user, 'regionId._id')}))
+        } else if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
+            getOrdersListFromFilter({
+                ...advancedFilter,
+                regiId: get(user, 'regionId._id'),
+                distId: get(user, 'districtsId._id')
+            })
+            setAdvancedFilter(advancedFilter=>({...advancedFilter,regiId: get(user, 'regionId._id'),distId:get(user, 'districtsId._id') }))
+        }
+        else {
+            getOrdersListFromFilter({...advancedFilter});
+        }
+    },[user])
+
 
         useEffect(() => {
+            if(get(advancedFilter,'page') >= 1) {
                 getOrdersListFromFilter({...advancedFilter});
+            }
         }, [get(advancedFilter,'page')]);
 
         useEffect(() => {
-            getDistrictsList({regId: get(advancedFilter, 'regId')});
-        }, [get(advancedFilter, 'regId')])
+            getDistrictsList({regId: get(advancedFilter, 'regiId')});
+        }, [get(advancedFilter, 'regiId')]);
 
         useEffect(() => {
             getNeighborhoodsListByDistrict({districtId: get(advancedFilter, 'distId')});
-        }, [get(advancedFilter, 'distId')])
+        }, [get(advancedFilter, 'distId')]);
 
 
         orders = Normalizer.Denormalize(orders, [OrderScheme], entities);
@@ -197,12 +195,10 @@ const OrderListContainer = ({
             }))
         }
 
-
-
         const clearFilter = () => {
             setAdvancedFilter(filter => ({
                 page: 0,
-                regId: null,
+                regiId: null,
                 distId: null,
                 from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
                 to: moment().add(1, 'days').format("YYYY-MM-DD")
@@ -237,7 +233,7 @@ const OrderListContainer = ({
                                                         name={'regiId'}
                                                         onChange={({value}) => setAdvancedFilter(filter => ({
                                                             ...filter,
-                                                            regId: value
+                                                            regiId: value
                                                         }))} placeholder={'Вилоятни танланг'}/>
 
                                                 </Col>
@@ -307,7 +303,6 @@ const OrderListContainer = ({
                                 </Filter>
                             }
                         </HasAccess>
-
                     </Col>
                 </Row>
                 <Row className={'mb-24'} align={'center'}>
