@@ -65,21 +65,20 @@ const StyledRangeCalendar = styled.div`
   }
   `}
 `;
-const RangeCalendar = ({handleCalendar = () => {},...props}) => {
+const RangeCalendar = ({handleCalendar = () => {},defaultValue=null,...props}) => {
     const [show,setShow] = useState(false);
     const [selectionRange,setSelectionRange] = useState({
         startDate: moment().subtract(3, 'months').toDate(),
-        endDate: moment().add(1, 'days').toDate(),
+        endDate: moment().add(2, 'days').toDate(),
         key: 'selection',
     })
 
     const handleSelect = ({selection}) => {
         setSelectionRange(selection);
+        handleCalendar(selection);
         setShow(false);
     }
-    useEffect(()=>{
-        handleCalendar(selectionRange);
-    },[selectionRange]);
+
 
     return (
         <StyledRangeCalendar {...props}>
