@@ -69,7 +69,7 @@ const RangeCalendar = ({handleCalendar = () => {},...props}) => {
     const [show,setShow] = useState(false);
     const [selectionRange,setSelectionRange] = useState({
         startDate: moment().subtract(3, 'months').toDate(),
-        endDate: new Date(),
+        endDate: moment().add(1, 'days').toDate(),
         key: 'selection',
     })
 
@@ -79,7 +79,8 @@ const RangeCalendar = ({handleCalendar = () => {},...props}) => {
     }
     useEffect(()=>{
         handleCalendar(selectionRange);
-    },[selectionRange])
+    },[selectionRange]);
+
     return (
         <StyledRangeCalendar {...props}>
             <div className="calendar">

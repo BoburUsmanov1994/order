@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useCallback} from 'react';
 import {Col, Row} from "react-grid-system";
 import {get, includes, isEmpty, isEqual} from "lodash";
-import moment from "moment";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import moment from "moment";
 import ApiActions from "../../../services/api/Actions";
 import OrderScheme from "../../../schema/OrderScheme";
 import {confirmAlert} from "react-confirm-alert";
@@ -14,7 +14,6 @@ import {Table} from "../../../components/table";
 import {Edit, Eye, List, MinusCircle, PlusCircle, Trash} from "react-feather";
 import Flex from "../../../components/flex/Flex";
 import OrderSearch from "../components/order/OrderSearch";
-import Select from "../../../components/elements/select/Select";
 import Button from "../../../components/button";
 import Title from "../../../components/title";
 import Box from "../../../components/box";
@@ -41,8 +40,6 @@ const OrderListContainer = ({
                                 entities,
                                 isFetched,
                                 totalItems,
-                                getOrdersList,
-                                getOrdersListByFilter,
                                 getRegionList,
                                 regions,
                                 districts,
@@ -60,37 +57,36 @@ const OrderListContainer = ({
                                 getOrdersListFromFilter,
                                 ...rest
                             }) => {
-        const [loading, setLoading] = useState(false);
-        const [open,setOpen] = useState(false);
-        const [filter, setFilter] = useState({
-            page: 0,
-            regId: '',
-            distId: '',
-            mfyId: '',
-            from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
-            to: moment().format("YYYY-MM-DD")
-        });
-        const [advancedFilter,setAdvancedFilter] = useState({
-            page : 0,
-            size : 20,
-            from : null,
-            to : null,
-            regiId : null,
-            distId : null,
-            mfyId : null,
-            orderstatus : null,
-            basisorder : null,
-            basistermination : null,
-            orederresults : null
-        })
-        useEffect(() => {
-            if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
-                getOrdersList({...filter,regId:get(user, 'regionId._id')})
-            }else if(isEqual(get(user, 'accountrole.name'), config.ROLES.USER)){
-                getOrdersList({...filter,regId:get(user, 'regionId._id'),distId: get(user, 'districtsId._id')})
-            }
+
+    const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    const [advancedFilter, setAdvancedFilter] = useState({
+        page: 0,
+        size: 20,
+        from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
+        to: moment().add(1, 'days').format("YYYY-MM-DD"),
+        regiId: null,
+        distId: null,
+        mfyId: null,
+        orderstatus: null,
+        basisorder: null,
+        basistermination: null,
+        orederresults: null
+    });
+
+    useEffect(() => {
+        if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+            getOrdersListFromFilter({...advancedFilter, regId: get(user, 'regionId._id')})
+        } else if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
+            getOrdersListFromFilter({
+                ...advancedFilter,
+                regId: get(user, 'regionId._id'),
+                distId: get(user, 'districtsId._id')
+            })
+        }
             else {
-                getOrdersList({...filter});
+            getOrdersListFromFilter({...advancedFilter});
             }
             getRegionList({});
             getOrderStatusList({});
@@ -98,28 +94,30 @@ const OrderListContainer = ({
             getBasisTerminationList({});
             getResultOrderList({});
             if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
-                setFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
+                setAdvancedFilter(filter => ({...filter, regId: get(user, 'regionId._id')}));
             }
             if (includes([config.ROLES.USER], get(user, 'accountrole.name'))) {
-                setFilter(filter => ({...filter, distId: get(user, 'districtsId._id')}));
+                setAdvancedFilter(filter => ({...filter, distId: get(user, 'districtsId._id')}));
             }
         }, []);
 
         useEffect(() => {
-            if (get(filter, 'regId') || get(filter, 'seriya') || get(filter, 'distId')) {
-                getOrdersListByFilter(filter);
+            if (get(advancedFilter, 'regId') || get(advancedFilter, 'seriya') || get(advancedFilter, 'distId')) {
+                getOrdersListFromFilter(advancedFilter);
             }
         }, []);
 
         useEffect(() => {
-            getDistrictsList({regId: get(filter, 'regId')});
-            setAdvancedFilter(advancedFilter => ({...advancedFilter,regiId: get(filter, 'regId')}))
-        }, [get(filter, 'regId')])
+                getOrdersListFromFilter({...advancedFilter});
+        }, [get(advancedFilter,'page')]);
 
         useEffect(() => {
-            getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
-            setAdvancedFilter(advancedFilter => ({...advancedFilter,distId: get(filter, 'distId')}))
-        }, [get(filter, 'distId')])
+            getDistrictsList({regId: get(advancedFilter, 'regId')});
+        }, [get(advancedFilter, 'regId')])
+
+        useEffect(() => {
+            getNeighborhoodsListByDistrict({districtId: get(advancedFilter, 'distId')});
+        }, [get(advancedFilter, 'distId')])
 
 
         orders = Normalizer.Denormalize(orders, [OrderScheme], entities);
@@ -160,7 +158,6 @@ const OrderListContainer = ({
 
         if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
             regions = regions.filter(item => isEqual(get(item, 'value'), get(user, 'regionId._id')));
-
         }
 
         const deleteOrder = (id) => {
@@ -175,7 +172,7 @@ const OrderListContainer = ({
                                 if (res && res.data) {
                                     setLoading(false);
                                     toast.success('SUCCESS');
-                                    getOrdersList({...filter});
+                                    getOrdersListFromFilter({...advancedFilter});
                                 }
                             }).catch((error) => {
                                 setLoading(false);
@@ -193,38 +190,33 @@ const OrderListContainer = ({
         };
 
         const handleCalendar = (selection) => {
-            setFilter(filter => ({
+            setAdvancedFilter(filter => ({
                 ...filter,
                 from: moment(get(selection, 'startDate')).format("YYYY-MM-DD"),
                 to: moment(get(selection, 'endDate')).format("YYYY-MM-DD")
             }))
         }
 
-        const setRegion = (value) => {
-           setFilter(filter => ({...filter,regId: value}));
-        }
+
 
         const clearFilter = () => {
-            setFilter(filter => ({
+            setAdvancedFilter(filter => ({
                 page: 0,
                 regId: null,
                 distId: null,
                 from: moment().subtract(3, 'months').format("YYYY-MM-DD"),
-                to: moment().format("YYYY-MM-DD")
+                to: moment().add(1, 'days').format("YYYY-MM-DD")
             }));
-            getOrdersList({...filter});
-
+            getOrdersListFromFilter({...advancedFilter});
         };
 
         const onSubmit = (data) => {
-            getOrdersListFromFilter({...filter,...data});
-            setAdvancedFilter({...filter,...data});
+            getOrdersListFromFilter({...advancedFilter, ...data});
+            setAdvancedFilter({...advancedFilter, ...data});
             setOpen(false);
         }
 
-        useEffect(() => {
-
-        }, [])
+    const CashedRangeCalendar = useCallback(<RangeCalendar handleCalendar={handleCalendar} lg/>,[get(advancedFilter,'from'),get(advancedFilter,'to')]);
 
         return (
             <>{isFetched ? <>
@@ -238,23 +230,30 @@ const OrderListContainer = ({
                                         <form onSubmit={handleSubmit(onSubmit)}>
                                             <Row className={'mb-16'}>
                                                 <Col xs={12}>
-                                                    <FormSelect isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])} defaultValue={get(advancedFilter, 'regiId')} options={regions}
-                                                                setValue={setValue} Controller={Controller} control={control}
-                                                                name={'regiId'} onChange={({value}) => setFilter(filter => ({
-                                                        ...filter,
-                                                        regId: value
-                                                    }))} placeholder={'Вилоятни танланг'}/>
+                                                    <FormSelect
+                                                        isDisabled={userCan([config.ROLES.REGION_ADMIN, config.ROLES.USER])}
+                                                        defaultValue={get(advancedFilter, 'regiId')} options={regions}
+                                                        setValue={setValue} Controller={Controller} control={control}
+                                                        name={'regiId'}
+                                                        onChange={({value}) => setAdvancedFilter(filter => ({
+                                                            ...filter,
+                                                            regId: value
+                                                        }))} placeholder={'Вилоятни танланг'}/>
 
                                                 </Col>
                                             </Row>
                                             <Row className={'mb-16'}>
                                                 <Col xs={12}>
-                                                    <FormSelect isDisabled={userCan([config.ROLES.USER])} defaultValue={get(advancedFilter, 'distId')} options={districts}
-                                                                setValue={setValue} Controller={Controller} control={control}
-                                                                name={'distId'} onChange={({value}) => setFilter(filter => ({
-                                                        ...filter,
-                                                        distId: value
-                                                    }))} placeholder={'Туманни танланг'}/>
+                                                    <FormSelect isDisabled={userCan([config.ROLES.USER])}
+                                                                defaultValue={get(advancedFilter, 'distId')}
+                                                                options={districts}
+                                                                setValue={setValue} Controller={Controller}
+                                                                control={control}
+                                                                name={'distId'}
+                                                                onChange={({value}) => setAdvancedFilter(filter => ({
+                                                                    ...filter,
+                                                                    distId: value
+                                                                }))} placeholder={'Туманни танланг'}/>
 
                                                 </Col>
                                             </Row>
@@ -327,33 +326,24 @@ const OrderListContainer = ({
                         <Row>
                             <Col xs={12}>
                                 <Flex wrap justify={'space-between'}>
-                                    <OrderSearch defaultValue={get(filter, 'seriya')}
-                                                 search={(val) => setFilter(filter => ({...filter, seriya: val}))}
+                                    <OrderSearch defaultValue={get(advancedFilter, 'seriya')}
+                                                 search={(val) => setAdvancedFilter(filter => ({
+                                                     ...filter,
+                                                     seriya: val
+                                                 }))}
                                                  className={'mr-8 mb-8'}/>
-                                                 <HasAccess>
-                                                     {
-                                                         ({userCan}) => <Select isDisabled={userCan([config.ROLES.REGION_ADMIN,config.ROLES.USER])}  defaultValue={get(filter,'regId')} handleChange={(values) => {
-                                                             setRegion(get(values, 'value'));
-                                                             setFilter(filter => ({...filter, regId: get(values, 'value')}))
-                                                         }} options={regions} placeholder={'Вилоятни танланг'}
-                                                                                className={'mr-8 mb-8'}/>
-                                                     }
-                                                 </HasAccess>
-                                    <HasAccess>
-                                        {
-                                            ({userCan}) =>  <Select isDisabled={userCan([config.ROLES.USER])}
-                                                defaultValue={get(filter,'distId')}
-                                                handleChange={({value}) => setFilter(filter => ({...filter, distId: value}))}
-                                                options={districts} placeholder={'Туман'} className={'mr-8 mb-8'}/>
-                                        }
-                                    </HasAccess>
+                                    <Flex>
 
 
-                                    <RangeCalendar handleCalendar={handleCalendar} lg/>
-                                    <List size={32} color={'#21D59B'} className={'mr-8 cursor-pointer'} onClick={() => setOpen(true)} />
-                                    <HasAccess>
-                                        {({userCan}) =>userCan([config.ROLES.ADMIN]) && <Button className={'mb-8'} danger back handleClick={clearFilter}>Тозалаш</Button>}
-                                    </HasAccess>
+                                        {CashedRangeCalendar}
+                                        <List size={32} color={'#21D59B'} className={'mr-8 cursor-pointer'}
+                                              onClick={() => setOpen(true)}/>
+                                        <HasAccess>
+                                            {({userCan}) => userCan([config.ROLES.ADMIN]) &&
+                                                <Button className={'mb-8'} danger back
+                                                        handleClick={clearFilter}>Тозалаш</Button>}
+                                        </HasAccess>
+                                    </Flex>
                                 </Flex>
                             </Col>
                         </Row>
@@ -362,23 +352,32 @@ const OrderListContainer = ({
             </Row>
             <Row>
                 <Col xs={12}>
-                    {isFetched ? <Table current={get(filter, 'page', 0)}
-                                        paginate={({selected}) => setFilter(filter => ({...filter, page: selected}))}
+                    {isFetched ? <Table current={get(advancedFilter, 'page', 0)}
+                                        paginate={({selected}) => setAdvancedFilter(filter => ({
+                                            ...filter,
+                                            page: selected
+                                        }))}
                                         totalItems={totalItems}
-                                        columns={['ID', 'Ҳимоя ордер серияси', 'Вилоят/Туман/Маҳалла',   'Очилиш сабаби', 'Ёпилиш сабаби','Шахсни кўшиш','Ҳолати',  'Ордер берилган\n' +
+                                        columns={['ID', 'Ҳимоя ордер серияси', 'Вилоят/Туман/Маҳалла', 'Очилиш сабаби', 'Ёпилиш сабаби', 'Шахсни кўшиш', 'Ҳолати', 'Ордер берилган\n' +
                                         'вақти', 'Actions']}>
                         {
-                            !isEmpty(orders) ? orders && orders.map((order, index) => <tr className={classNames({'bg-danger':isEqual(get(order, 'orderstatus.name'),'узайтирилган'),'bg-success':isEqual(get(order, 'orderstatus.name'),'тугатилган'),'bg-primary':isEqual(get(order, 'orderstatus.name'),'янги берилган')})} key={get(order, '_id')}>
-                                <td>{index + 1}</td>
+                            !isEmpty(orders) ? orders && orders.map((order, index) => <tr className={classNames({
+                                'bg-danger': isEqual(get(order, 'orderstatus.name'), 'узайтирилган'),
+                                'bg-success': isEqual(get(order, 'orderstatus.name'), 'тугатилган'),
+                                'bg-primary': isEqual(get(order, 'orderstatus.name'), 'янги берилган')
+                            })} key={get(order, '_id')}>
+                                <td>{(index+1)+get(advancedFilter, 'page', 0)*20}</td>
                                 <td>{get(order, 'protectionorderseries', '-')}</td>
                                 <td>{`${get(order, 'regiId.name', '-')}/${get(order, 'districtId.name', '-')}/${get(order, 'mfyId.name', '-')}`}</td>
                                 <td>{get(order, 'basisorder.name', '-')}</td>
                                 <td>{get(order, 'basistermination.name', '-')}</td>
                                 <td><PlusCircle className={'mr-8 cursor-pointer'} color="#15BF22" size={36}
-                                         onClick={() => history.push(`/order/attach/victim/${get(order, '_id')}`)}/><MinusCircle className={' cursor-pointer'} color="#E58B8B" size={36}
-                                                                                                                                 onClick={() => history.push(`/order/attach/violent/${get(order, '_id')}`)}/></td>
+                                                onClick={() => history.push(`/order/attach/victim/${get(order, '_id')}`)}/><MinusCircle
+                                    className={' cursor-pointer'} color="#E58B8B" size={36}
+                                    onClick={() => history.push(`/order/attach/violent/${get(order, '_id')}`)}/></td>
                                 <td className={'w-200'}>
-                                    {isEqual(get(order, 'orderstatus.name'),'узайтирилган') && <Button danger status>{get(order, 'orderstatus.name', '-')}</Button>}
+                                    {isEqual(get(order, 'orderstatus.name'), 'узайтирилган') &&
+                                    <Button danger status>{get(order, 'orderstatus.name', '-')}</Button>}
                                     {isEqual(get(order, 'orderstatus.name'),'тугатилган') && <Button success status>{get(order, 'orderstatus.name', '-')}</Button>}
                                     {isEqual(get(order, 'orderstatus.name'),'янги берилган') && <Button primary status>{get(order, 'orderstatus.name', '-')}</Button>}
                                 </td>
@@ -431,30 +430,6 @@ const mapStateToProps = (state) =>
 const mapDispatchToProps = (dispatch) =>
 {
     return {
-        getOrdersList: ({page = 0, size = 20, from = null,
-                            to = null,
-                            regId = null,
-                            distId = null,}) => {
-            const storeName = 'order-list';
-            const entityName = 'order';
-            const scheme = {oreders: [OrderScheme]};
-            dispatch({
-                type: ApiActions.POST_ALL.REQUEST,
-                payload: {
-                    url: '/orders/filteradvansed',
-                    config: {
-                            page: page + 1,
-                            from,
-                            to,
-                            regiId:regId,
-                            distId,
-                    },
-                    scheme,
-                    storeName,
-                    entityName,
-                },
-            });
-        },
         getOrdersListFromFilter: ({
                                       page = 0,
                                       size = 20,
@@ -492,26 +467,7 @@ const mapDispatchToProps = (dispatch) =>
                 },
             });
         },
-        getOrdersListByFilter: ({page = 1, ...params}) => {
-            const storeName = 'order-list';
-            const entityName = 'order';
-            const scheme = {oreders: [OrderScheme]};
-            dispatch({
-                type: ApiActions.GET_ALL.REQUEST,
-                payload: {
-                    url: '/orders/filter/filterorder',
-                    config: {
-                        params: {
-                            ...params,
-                            page: page + 1,
-                        },
-                    },
-                    scheme,
-                    storeName,
-                    entityName,
-                },
-            });
-        },
+
         getRegionList: ({page = 1}) => {
             const storeName = 'region-list';
             const entityName = 'region';

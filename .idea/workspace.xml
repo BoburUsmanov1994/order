@@ -4,10 +4,13 @@
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/elements/calendar/Calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/elements/calendar/Calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/range-calendar/RangeCalendar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepOneForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachViolentToOrderContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +112,7 @@
       <workItem from="1639933253120" duration="985000" />
       <workItem from="1640003742181" duration="1233000" />
       <workItem from="1640147025295" duration="17005000" />
-      <workItem from="1640321399659" duration="5001000" />
+      <workItem from="1640321399659" duration="11425000" />
     </task>
     <servers />
   </component>
@@ -218,7 +221,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js</url>
-          <line>206</line>
+          <line>201</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
