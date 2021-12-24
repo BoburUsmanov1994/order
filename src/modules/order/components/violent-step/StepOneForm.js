@@ -15,7 +15,7 @@ import moment from "moment";
 
 const StyledStepOneForm = styled.form`
 `;
-const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},...props}) => {
+const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},getDataFromMvd = () => {},mvdData={},...props}) => {
     const [dateofbirthday,setDateOfBirthday] = useState(get(victim,'dateofbirthday',moment()))
     const {register, handleSubmit, formState: {errors},setValue,control} = useForm();
 
@@ -30,6 +30,15 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
     const firstStep = () => {
         reset({firstStep:props.firstStep})
     }
+
+    useEffect(()=>{
+        if(get(mvdData,'status')){
+            setValue('identitynumber',get(mvdData,'inps'));
+            setValue('name',get(mvdData,'name'));
+            setValue('secondname',get(mvdData,'surname'));
+            setValue('middlename',get(mvdData,'patronym'));
+        }
+    },[mvdData])
 
     const reinitilize = () => {
         setValue('passportinfo',get(victim,'passportinfo'));
@@ -57,6 +66,10 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
                            error={errors?.passportinfo} defaultValue={get(victim,'passportinfo')} sm/>
                 </Col>
                 <Col xs={3} className={'mb-32'}>
+                    <Label>Туғилган санаси</Label>
+                    <Calendar defaultValue={moment(dateofbirthday).toDate()} onChange={(val) => setDateOfBirthday(val)} sm/>
+                </Col>
+                <Col xs={3} className={'mb-32'}>
                     <Label>ЖШИИР</Label>
                     <Input register={register} label={'ЖШИИР'} name={'identitynumber'} validation={{required: true}}
                            error={errors?.identitynumber} type={'number'} defaultValue={get(victim,'identitynumber')} sm/>
@@ -73,10 +86,7 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
                     <Label>Отасининг исми</Label>
                     <Input register={register} label={'Отасининг исми'} name={'middlename'} defaultValue={get(victim,'middlename')} validation={{required: true}} error={errors?.middlename}  sm/>
                 </Col>
-                <Col xs={3} className={'mb-32'}>
-                    <Label>Туғилган санаси</Label>
-                    <Calendar defaultValue={moment(dateofbirthday).toDate()} onChange={(val) => setDateOfBirthday(val)} sm/>
-                </Col>
+
                 <Col xs={3} className={'mb-32'}>
                     <Label>Жинси</Label>
                     <FormSelect defaultValue={get(victim,'genderId')} options={genders}

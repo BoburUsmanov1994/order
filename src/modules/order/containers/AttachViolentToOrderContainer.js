@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Line from "../../../components/line";
 import ApiActions from "../../../services/api/Actions";
-import {get} from "lodash";
+import {get, isEqual} from "lodash";
 import GenderScheme from "../../../schema/GenderScheme";
 import Normalizer from "../../../services/normalizer";
 import CitizenshipScheme from "../../../schema/CitizenshipScheme";
@@ -39,6 +39,7 @@ import ConditionPersonViolenceScheme from "../../../schema/ConditionPersonViolen
 import CrirminalCaseScheme from "../../../schema/CriminalCaseScheme";
 import CriminalCodexScheme from "../../../schema/CriminalCodexScheme";
 import AdministrativeScheme from "../../../schema/AdministrativeScheme";
+import moment from "moment";
 
 
 const AttachViolentToOrderContainer = ({
@@ -103,6 +104,16 @@ const AttachViolentToOrderContainer = ({
                                        }) => {
     const [victim, setVictim] = useState(JSON.parse(storage.get('violent')));
     const [loading, setLoading] = useState(false);
+    const [mvdData, setMvdData] = useState({
+        birthday: '',
+        name: '',
+        surname: '',
+        patronym: '',
+        genderId: '',
+        inps: '',
+        place: '',
+        status: false
+    });
     useEffect(() => {
         getGendersList({});
         getCitizenshipList({});
@@ -329,6 +340,34 @@ const AttachViolentToOrderContainer = ({
     const getPermanentNeighborhoodsByDistrict = (districtId) => {
         getPermanentNeighborhoodsListByDistrict({districtId})
     }
+
+    const getDataFromMvd = (passport, brth) => {
+        brth = moment(brth).format('DD.MM.YYYY');
+        if (brth.length == 10) {
+            ApiService.MvdData({passport, brth}).then((res) => {
+                if (res && res.data) {
+                    if (isEqual(get(res.data, 'AnsweredId'), 1)) {
+                        toast.success(get(res.data,'AnswereMessage','SUCCESS'));
+                        setMvdData(mvdData => ({
+                            ...mvdData,
+                            birthday: get(res.data, 'Data.Person.DateBirth'),
+                            name: get(res.data, 'Data.Person.NameLatin'),
+                            surname: get(res.data, 'Data.Person.SurnameLatin'),
+                            patronym: get(res.data, 'Data.Person.PatronymLatin'),
+                            inps: get(res.data, 'Data.Person.Pinpp'),
+                            genderId: get(res.data, 'Data.Person.Sex.Id'),
+                            place: get(res.data, 'Data.Person.BirthPlace'),
+                            status: true
+                        }));
+                    } else {
+                        toast.warn(get(res.data,'AnswereMessage','WARNING'));
+                    }
+                }
+            }).catch((e) => {
+                toast.error('ERROR');
+            })
+        }
+    }
     return (
         <>
             <Row>
@@ -344,7 +383,7 @@ const AttachViolentToOrderContainer = ({
                 <Col xs={12}>
                     <StepWizard isHashEnabled={true}>
                         <StepOneForm victim={victim} reset={reset} hashKey={"one"} genders={genders}
-                                     citizenship={citizenship} ages={ages} saveToLocalStorage={saveToLocalStorage}/>
+                                     citizenship={citizenship} ages={ages} mvdData={mvdData} getDataFromMvd={getDataFromMvd} saveToLocalStorage={saveToLocalStorage}/>
                         <StepTwoForm hashKey={"two"} victim={victim} reset={reset} education={education}
                                      familyPosition={familyPosition} socialStatus={socialStatus}
                                      workingplace={workingplace} personcondition={personcondition}
