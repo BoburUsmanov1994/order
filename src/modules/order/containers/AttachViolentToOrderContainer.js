@@ -347,21 +347,21 @@ const AttachViolentToOrderContainer = ({
             ApiService.MvdData({passport, brth}).then((res) => {
                 if (res && res.data) {
                     console.log('res.data',res.data)
-                    if (isEqual(get(res.data, 'AnswereId'), 1)) {
-                        toast.success(get(res.data,'AnswereMessage','SUCCESS'));
+                    if (isEqual(get(res.data, 'data.AnswereId'), 1)) {
+                        toast.success(get(res.data,'data.AnswereMessage','SUCCESS'));
                         setMvdData(mvdData => ({
                             ...mvdData,
-                            birthday: get(res.data, 'Data.Person.DateBirth'),
-                            name: get(res.data, 'Data.Person.NameLatin'),
-                            surname: get(res.data, 'Data.Person.SurnameLatin'),
-                            patronym: get(res.data, 'Data.Person.PatronymLatin'),
-                            inps: get(res.data, 'Data.Person.Pinpp'),
-                            genderId: get(res.data, 'Data.Person.Sex.Id'),
-                            place: get(res.data, 'Data.Person.BirthPlace'),
+                            birthday: get(res.data, 'data.Data.Person.DateBirth'),
+                            name: get(res.data, 'data.Data.Person.NameLatin'),
+                            surname: get(res.data, 'data.Data.Person.SurnameLatin'),
+                            patronym: get(res.data, 'data.Data.Person.PatronymLatin'),
+                            inps: get(res.data, 'data.Data.Person.Pinpp'),
+                            genderId: get(res.data, 'data.Data.Person.Sex.Id'),
+                            place: get(res.data, 'data.Data.Person.BirthPlace'),
                             status: true
                         }));
                     } else {
-                        toast.warn(get(res.data,'AnswereMessage','WARNING'));
+                        toast.warn(get(res.data,'data.AnswereMessage','WARNING'));
                     }
                 }
             }).catch((e) => {

@@ -253,17 +253,17 @@ const AttachVictimToOrderContainer = ({id,
             ApiService.MvdData({passport, brth}).then((res) => {
                 console.log('res.data',res.data)
                 if (res && res.data) {
-                    if (isEqual(get(res.data, 'AnswereId'), 1)) {
-                        toast.success(get(res.data,'AnswereMessage','SUCCESS'));
+                    if (isEqual(get(res.data, 'data.AnswereId'), 1)) {
+                        toast.success(get(res.data,'data.AnswereMessage','SUCCESS'));
                         setMvdData(mvdData => ({
                                 ...mvdData,
-                                birthday: get(res.data, 'Data.Person.DateBirth'),
-                                name: get(res.data, 'Data.Person.NameLatin'),
-                                surname: get(res.data, 'Data.Person.SurnameLatin'),
-                                patronym: get(res.data, 'Data.Person.PatronymLatin'),
+                                birthday: get(res.data, 'data.Data.Person.DateBirth'),
+                                name: get(res.data, 'data.Data.Person.NameLatin'),
+                                surname: get(res.data, 'data.Data.Person.SurnameLatin'),
+                                patronym: get(res.data, 'data.Data.Person.PatronymLatin'),
                                 inps: get(res.data, 'data.Data.Person.Pinpp'),
-                                genderId: get(res.data, 'Data.Person.Sex.Id'),
-                                place: get(res.data, 'Data.Person.BirthPlace'),
+                                genderId: get(res.data, 'data.Data.Person.Sex.Id'),
+                                place: get(res.data, 'data.Data.Person.BirthPlace'),
                                 status: true
                             }));
                     } else {
