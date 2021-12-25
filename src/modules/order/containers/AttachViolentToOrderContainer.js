@@ -346,7 +346,8 @@ const AttachViolentToOrderContainer = ({
         if (brth.length == 10) {
             ApiService.MvdData({passport, brth}).then((res) => {
                 if (res && res.data) {
-                    if (isEqual(get(res.data, 'AnsweredId'), 1)) {
+                    console.log('res.data',res.data)
+                    if (isEqual(get(res.data, 'AnswereId'), 1)) {
                         toast.success(get(res.data,'AnswereMessage','SUCCESS'));
                         setMvdData(mvdData => ({
                             ...mvdData,

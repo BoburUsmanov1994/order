@@ -17,7 +17,7 @@ const StyledStepOneForm = styled.form`
 `;
 const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},getDataFromMvd = () => {},mvdData={},...props}) => {
     const [dateofbirthday,setDateOfBirthday] = useState(get(victim,'dateofbirthday',moment()))
-    const {register, handleSubmit, formState: {errors},setValue,control} = useForm();
+    const {register, handleSubmit, getValues,formState: {errors},setValue,control} = useForm();
 
     useEffect(() => {
         reinitilize();
@@ -26,6 +26,12 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
         saveToLocalStorage({...data,dateofbirthday});
         props.nextStep();
     }
+
+    useEffect(() =>{
+        if(dateofbirthday && getValues('passportinfo')){
+            getDataFromMvd(getValues('passportinfo'),dateofbirthday);
+        }
+    },[dateofbirthday])
 
     const firstStep = () => {
         reset({firstStep:props.firstStep})

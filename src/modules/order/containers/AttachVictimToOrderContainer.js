@@ -251,8 +251,9 @@ const AttachVictimToOrderContainer = ({id,
         brth = moment(brth).format('DD.MM.YYYY');
         if (brth.length == 10) {
             ApiService.MvdData({passport, brth}).then((res) => {
+                console.log('res.data',res.data)
                 if (res && res.data) {
-                    if (isEqual(get(res.data, 'AnsweredId'), 1)) {
+                    if (isEqual(get(res.data, 'AnswereId'), 1)) {
                         toast.success(get(res.data,'AnswereMessage','SUCCESS'));
                         setMvdData(mvdData => ({
                                 ...mvdData,
