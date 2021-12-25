@@ -261,7 +261,7 @@ const AttachVictimToOrderContainer = ({id,
                                 name: get(res.data, 'Data.Person.NameLatin'),
                                 surname: get(res.data, 'Data.Person.SurnameLatin'),
                                 patronym: get(res.data, 'Data.Person.PatronymLatin'),
-                                inps: get(res.data, 'Data.Person.Pinpp'),
+                                inps: get(res.data, 'data.Data.Person.Pinpp'),
                                 genderId: get(res.data, 'Data.Person.Sex.Id'),
                                 place: get(res.data, 'Data.Person.BirthPlace'),
                                 status: true
