@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {findIndex, includes, slice} from "lodash";
+import {findIndex, includes, slice,isEqual,get} from "lodash";
 import CustomCheckbox from "../elements/checkbox";
+import ApiService from "../../modules/order/ApiService";
 
 const StyledDropdown = styled.div`
   .dropdown {
@@ -51,15 +52,17 @@ const Dropdown = ({
     }, ...props
                   }) => {
     const [open, setOpen] = useState(false);
-    const handleChange = (e, name) => {
+    const handleChange = (e, _id) => {
         if (e.target.checked) {
-            if (!includes(activeItems, name)) {
-                setActiveItems(prev => [...prev, name])
+            if (!includes(activeItems, _id)) {
+                ApiService.ChangeMessageItemStatus(_id,{...items.find((item) => isEqual(get(item,'_id'),_id)),condition:true});
+                setActiveItems(prev => [...prev, _id])
             }
         }
         if (!e.target.checked) {
-            const index = findIndex(activeItems, item => item == name);
-            if (includes(activeItems, name)) {
+            const index = findIndex(activeItems, item => item == _id);
+            if (includes(activeItems, _id)) {
+                ApiService.ChangeMessageItemStatus(_id,{...items.find((item) => isEqual(get(item,'_id'),_id)),condition:false});
                 setActiveItems([...slice(activeItems, 0, index), ...slice(activeItems, index + 1, activeItems.length)]);
             }
         }
@@ -70,10 +73,10 @@ const Dropdown = ({
                 <div className="dropdown__btn" onClick={() => setOpen(open => !open)}>График танланг</div>
                 {open && <div className="dropdown__box">
                     {
-                        items && items.map(({name},index) => <CustomCheckbox className={'dropdown__checkbox'} key={index}
-                                                                           handleChange={(e) => handleChange(e, name)}
-                                                                           label={name}
-                                                                           defaultChecked={includes(activeItems, name)}/>)
+                        items && items.map(({message,condition,_id},index) => <CustomCheckbox className={'dropdown__checkbox'} key={index}
+                                                                           handleChange={(e) => handleChange(e, _id)}
+                                                                           label={message}
+                                                                           defaultChecked={includes(activeItems, _id)}/>)
                     }
 
                 </div>}

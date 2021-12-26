@@ -346,7 +346,6 @@ const mapStateToProps = (state) => {
         guardianshipList: get(state, 'normalizer.data.guardianship-list.result.data', []),
         occuredRepetitionList: get(state, 'normalizer.data.occurred-repetition-list.result.data', []),
 
-
     }
 }
 

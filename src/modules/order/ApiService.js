@@ -478,6 +478,10 @@ class ApiService{
         return request.post(`/getdata`,{...params});
     }
 
+    static ChangeMessageItemStatus = (id,params) => {
+        return request.put(`/messages/${id}`,{...params});
+    }
+
 
 }
 

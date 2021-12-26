@@ -7,7 +7,6 @@ import { PieChart } from 'react-minimal-pie-chart';
 import {PDFDownloadLink} from '@react-pdf/renderer';
 import Dot from "../dot";
 import PdfReport from "../pdf";
-import Text from "../text";
 
 const StyledCustomPieChart = styled.div`
   background-color: #fff;
@@ -47,17 +46,18 @@ const StyledCustomPieChart = styled.div`
     }
   }
 `;
-const CustomPieChart = ({name,data,filter,title='Республика',...props}) => {
+const CustomPieChart = ({data = {},filter,title='Республика',...props}) => {
+
     const COLORS = ['#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412','#2BCC71', '#E94C3D', '#5A51DE', '#E99412']
-    const chartData = data.filter(({percent}) => percent > 0).map(({name,percent},index) => ({title:name,value:round(percent,2),color:COLORS[index]}));
-    const listData = data.filter(({value}) => value > 0).map(({name,value},index) => ({name:name,value:round(value,2)}));
+    const chartData = get(data,'persentages',[]).filter(({persentages}) => persentages > 0).map(({name,persentages},index) => ({title:name,value:round(persentages,2),color:COLORS[index]}));
+    const listData = get(data,'statistics',[]).filter(({count}) => count > 0).map(({name,count},index) => ({name:name,value:round(count,2)}));
 
 
     return (
         <StyledCustomPieChart {...props}>
             <div className="chart__head">
-                <span>{name}</span>
-                {chartData && listData && <PDFDownloadLink document={<PdfReport from={get(filter,'from')} to={get(filter,'to')} title={`${name} (${title ?? null})`} items={data.map(({name,percent,value},index) => ({name,count:value,percent:round(percent,2)}))} />}  fileName={`${name}.pdf`}>
+                <span>{get(data,'message','-')}</span>
+                {chartData && listData && <PDFDownloadLink document={<PdfReport from={get(filter,'from')} to={get(filter,'to')} title={`${get(data,'message','-')} (${title ?? null})`} items={get(data,'persentages',[]).map(({name,persentages},index) => ({name,count:get(data,`statistics[${index}].count`),percent:round(persentages,2)}))} />}  fileName={`${get(data,'message','-')}.pdf`}>
                     {({blob, url, loading, error}) => <img src={exportImg} alt=""/>}
                 </PDFDownloadLink>}
 

@@ -23,6 +23,7 @@ import moment from "moment";
 import NeighborhoodScheme from "../../../schema/NeighborhoodScheme";
 import List from "../../../components/list";
 import PdfReport from "../../../components/pdf";
+import PieChartList from "../components/pie-chart-list/pie-chart-list";
 
 
 const RegionContainer = ({
@@ -161,6 +162,12 @@ const RegionContainer = ({
                                          name: month,
                                          y: total
                                      }))} height={250}/>
+                </Col>
+            </Row>
+            <Row className={'mb-24'}>
+                <Col xs={12}>
+                    <PieChartList title={get(region,'name')}  startDate={get(filter, 'from')}
+                                  endDate={get(filter, 'to')} regId={get(filter,'regId')}/>
                 </Col>
             </Row>
 
