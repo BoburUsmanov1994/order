@@ -167,7 +167,7 @@ const RegionContainer = ({
             <Row className={'mb-24'}>
                 <Col xs={12}>
                     <PieChartList title={get(region,'name')}  startDate={get(filter, 'from')}
-                                  endDate={get(filter, 'to')} regId={get(filter,'regId')}/>
+                                  endDate={get(filter, 'to')} regId={id}/>
                 </Col>
             </Row>
 

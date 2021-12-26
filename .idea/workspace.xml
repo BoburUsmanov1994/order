@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chart/PieChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chart/PieChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dropdown/Dropdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dropdown/Dropdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/pie-chart-list/pie-chart-list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/AttachVictimToOrderContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +105,7 @@
       <workItem from="1640003742181" duration="1233000" />
       <workItem from="1640147025295" duration="17005000" />
       <workItem from="1640321399659" duration="24594000" />
-      <workItem from="1640498772512" duration="10550000" />
+      <workItem from="1640498772512" duration="11202000" />
     </task>
     <servers />
   </component>
