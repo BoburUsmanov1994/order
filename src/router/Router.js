@@ -61,6 +61,9 @@ import ViolentViewPage from "../modules/order/pages/ViolentViewPage";
 import HasAccess from "../services/auth/HasAccess";
 import config from "../config";
 import DynamicFilterPage from "../modules/order/pages/DynamicFilterPage";
+import ConflictingFamiliesPage from "../modules/order/pages/ConflictingFamiliesPage";
+import TypeofproblemsPage from "../modules/order/pages/TypeofproblemsPage";
+import FamilyResultPage from "../modules/order/pages/FamilyResultPage";
 
 const Router = () => {
     return (
@@ -111,6 +114,9 @@ const Router = () => {
                                     <DistrictsPage/> : <ForbiddenPage/>} />
                                 <Route path={'/neighborhoods'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
                                     <NeighborhoodsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/conflicting-families/list'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <ConflictingFamiliesPage/> : <ForbiddenPage/>} />
+
                                 <Route path={'/ranks'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <RanksPage/> : <ForbiddenPage/>} />
                                 <Route path={'/account-roles'} exact render={() => userCan([config.ROLES.ADMIN]) ?
@@ -173,6 +179,11 @@ const Router = () => {
                                     <ResultOrderPage/> : <ForbiddenPage/>} />
                                 <Route path={'/filter'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <DynamicFilterPage/> : <ForbiddenPage/>} />
+                                <Route path={'/type-of-problems'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <TypeofproblemsPage/> : <ForbiddenPage/>} />
+                                <Route path={'/family-result'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <FamilyResultPage/> : <ForbiddenPage/>} />
+
                                 <Route path={'/logout'} exact component={LogoutPage}/>
                                 <Route path={'/403'} exact component={ForbiddenPage}/>
                                 <Route path={'/404'} exact component={NotFoundPage}/>

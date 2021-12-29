@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/components/family-conflicting/CreateForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/FamilyResultContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/TypeofproblemsContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ConflictingFamiliesPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/FamilyResultPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/TypeofproblemsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +115,8 @@
       <workItem from="1640003742181" duration="1233000" />
       <workItem from="1640147025295" duration="17005000" />
       <workItem from="1640321399659" duration="24594000" />
-      <workItem from="1640498772512" duration="11202000" />
+      <workItem from="1640498772512" duration="11929000" />
+      <workItem from="1640754499908" duration="9213000" />
     </task>
     <servers />
   </component>
@@ -144,7 +155,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/menu/Menu.js</url>
-          <line>349</line>
+          <line>373</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

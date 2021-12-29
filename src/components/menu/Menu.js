@@ -114,6 +114,15 @@ const Menu = ({items, ...props}) => {
                             </li>
                         }
 
+                        {
+                            userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN, config.ROLES.USER]) &&
+                            <li title={'orders'}>
+                                <NavLink to={'/conflicting-families/list'}>
+                                    <ReactSVG src={usersIcon}/> <span className={'text'}> Низоли Оилалар</span>
+                                </NavLink>
+                            </li>
+                        }
+
 
                         {
                             userCan([config.ROLES.ADMIN]) && <li title={'filter'}>
@@ -191,6 +200,21 @@ const Menu = ({items, ...props}) => {
                                     <ReactSVG src={clipboardIcon}/><span className={'text'}>Маҳаллалар</span>
                                 </NavLink>
                             </li>
+
+                            {
+                                userCan([config.ROLES.ADMIN]) && <li>
+                                    <NavLink to={'/type-of-problems'}>
+                                        <ReactSVG src={clipboardIcon}/><span className={'text'}>Иш туркуми</span>
+                                    </NavLink>
+                                </li>
+                            }
+                            {
+                                userCan([config.ROLES.ADMIN]) && <li>
+                                    <NavLink to={'/family-result'}>
+                                        <ReactSVG src={clipboardIcon}/><span className={'text'}>Натижа</span>
+                                    </NavLink>
+                                </li>
+                            }
                             {
                                 userCan([config.ROLES.ADMIN]) && <li>
                                 <NavLink to={'/citizenship'}>

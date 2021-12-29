@@ -446,6 +446,29 @@ class ApiService{
         return request.delete(`/resultorder/${id}`);
     }
 
+    static CreateTypeOfProblems = (params) => {
+        return request.post(`/typeofproblems/`,{...params});
+    }
+
+    static UpdateTypeOfProblems = (id,params) => {
+        return request.put(`/typeofproblems/${id}`,{...params});
+    }
+
+    static DeleteTypeOfProblems = (id) => {
+        return request.delete(`/typeofproblems/${id}`);
+    }
+
+    static CreateResultConflict = (params) => {
+        return request.post(`/resultofconflict/`,{...params});
+    }
+
+    static UpdateResultConflict = (id,params) => {
+        return request.put(`/resultofconflict/${id}`,{...params});
+    }
+
+    static DeleteResultConflict = (id) => {
+        return request.delete(`/resultofconflict/${id}`);
+    }
     static StatisticsPlaceActionCounts = () => {
         return request.get(`/statistics/vicplaceection`);
     }
