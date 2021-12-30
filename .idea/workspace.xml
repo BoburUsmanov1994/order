@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/family-conflicting/CreateForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/FamilyResultContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/TypeofproblemsContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ConflictingFamiliesPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/FamilyResultPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/TypeofproblemsPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepFourForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepOneForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepThreeForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepTwoForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesCreateContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ConflictingFamiliesCreatePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/schema/ConflictingFamilies.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/step-nav/step-nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/step-nav/step-nav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +41,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/modules/order/components/conflicting-families" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,6 +54,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WORKS\FRONTEND\REACT\order\src\modules\order\components\conflicting-families" />
       <recent name="D:\WORKS\FRONTEND\REACT\order\src\modules\order\components\violent-step" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -116,7 +118,7 @@
       <workItem from="1640147025295" duration="17005000" />
       <workItem from="1640321399659" duration="24594000" />
       <workItem from="1640498772512" duration="11929000" />
-      <workItem from="1640754499908" duration="9213000" />
+      <workItem from="1640754499908" duration="22618000" />
     </task>
     <servers />
   </component>

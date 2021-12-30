@@ -8,98 +8,57 @@ import Title from "../../../components/title";
 import Button from "../../../components/button";
 import {Table} from "../../../components/table";
 import ApiActions from "../../../services/api/Actions";
-import {get, isEmpty, isNil} from "lodash";
+import {get, isEmpty, isEqual} from "lodash";
 import Normalizer from "../../../services/normalizer";
-import {Edit, Trash} from 'react-feather';
+import {Edit, Eye, Trash} from 'react-feather';
 import ApiService from "../ApiService";
 import Loader from "../../../components/loader";
 import {toast} from "react-toastify";
-import Modal from "../../../components/modal";
 import ContentLoader from "../../../components/loader/ContentLoader";
-import RankScheme from "../../../schema/RankScheme";
-import ItemCreateForm from "../components/item/ItemCreateForm";
-import ItemUpdateForm from "../components/item/ItemUpdateForm";
+import UserScheme from "../../../schema/UserScheme";
+import config from "../../../config";
+import HasAccess from "../../../services/auth/HasAccess";
+import ConflictingFamilies from "../../../schema/ConflictingFamilies";
 
 
 const ConflictingFamiliesContainer = ({
-                                history,
-                                getItemsList,
-                                entities,
-                                items,
-                                getOneItem,
-                                isFetched,
-                                isFetchedItem,
-                                item,
-                                setTrigger,
-                                totalItems,
-                                setListTrigger
-                            }) => {
+                                          history,
+                                          user,
+                                          getConflictingFamiliesList,
+                                          entities,
+                                          conflictingFamilies,
+                                          isFetched,
+                                          totalItems,
+                                          setListTrigger,
+                                      }) => {
     const [loading, setLoading] = useState(false);
-    const [show, setShow] = useState(false);
-    const [item_id, setItemId] = useState(null);
-    const [filter, setFilter] = useState({page:0});
-    items = Normalizer.Denormalize(items, [RankScheme], entities);
-    item = Normalizer.Denormalize(item, RankScheme, entities);
+    const [filter, setFilter] = useState({page: 0, regId: '', distId: ''});
+
+
     useEffect(() => {
         setListTrigger();
-        getItemsList({...filter})
-    }, [filter]);
-    useEffect(() => {
-        if (item_id) {
-            setTrigger();
-            getOneItem({item_id})
+        if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
+            getConflictingFamiliesList({...filter, regId: get(user, 'regionId._id')});
+        } else {
+            getConflictingFamiliesList({...filter});
         }
-    }, [item_id]);
+    }, [filter]);
 
+    conflictingFamilies = Normalizer.Denormalize(conflictingFamilies, [ConflictingFamilies], entities);
 
-    const create = (params) => {
-        setLoading(true);
-        ApiService.CreateEducation(params).then((res) => {
-            if (res && res.data) {
-                setLoading(false);
-                setShow(false);
-                toast.success('SUCCESS');
-                getItemsList({...filter});
-            }
-        }).catch((error) => {
-            setLoading(false);
-            setShow(false);
-            if (error.response && error.response.data) {
-                toast.error(`${error.response.data}`)
-            }
-        })
-    }
-    const update = (params) => {
-        setLoading(true);
-        ApiService.UpdateEducation(item_id, params).then((res) => {
-            if (res && res.data) {
-                setLoading(false);
-                setShow(false);
-                toast.success('SUCCESS');
-                getItemsList({...filter});
-            }
-        }).catch((error) => {
-            setLoading(false);
-            setShow(false);
-            if (error.response && error.response.data) {
-                toast.error(`${error.response.data}`)
-            }
-        })
-    }
-    const deleteItem = (id) => {
+    const deleteUser = (id) => {
         confirmAlert({
             title: 'Ишончингиз комилми?',
-
             buttons: [
                 {
                     label: 'Ўчириш',
                     onClick: () => {
                         setLoading(true);
-                        ApiService.DeleteEducation(id).then((res) => {
+                        ApiService.DeleteFamilyConflicting(id).then((res) => {
                             if (res && res.data) {
                                 setLoading(false);
                                 toast.success('SUCCESS');
-                                getItemsList({...filter});
+                                getConflictingFamiliesList({...filter});
                             }
                         }).catch((error) => {
                             setLoading(false);
@@ -120,13 +79,6 @@ const ConflictingFamiliesContainer = ({
         <>
             <Row className={'mb-24'}>
                 <Col xs={12}>
-                    <Modal show={show} setShow={setShow}>
-                        {isNil(item_id) ? <ItemCreateForm create={create}/> :
-                            <ItemUpdateForm isFetched={isFetchedItem} item={isFetchedItem && item}
-                                            update={update}/>}
-                    </Modal>
-                </Col>
-                <Col xs={12}>
                     <hr/>
                 </Col>
                 <Col xs={12}>
@@ -135,37 +87,45 @@ const ConflictingFamiliesContainer = ({
             </Row>
             <Row className={'mb-24'} align={'center'}>
                 <Col xs={6}>
-                    <Title> Низоли Оилалар рўйхати</Title>
+                    <Title>Низоли оилаларнинг рўйхати</Title>
                 </Col>
                 <Col xs={6} className={'text-right'}>
-                    <Button success lg thin handleClick={() => {
-                        setItemId(null);
-                        setShow(true)
-                    }}>Янги яратиш</Button>
+                    <Button success lg thin handleClick={() => history.push('/conflicting-families/create')}>Янги яратиш</Button>
                 </Col>
             </Row>
             <Row>
                 <Col xs={12}>
-                    {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Давогар','Давогар манзили', 'Жавобгар','Жавобгар манзили','Иш туркуми','Низо натижаси','Базага ёзилган сана', 'Actions']} >
+                    {isFetched ? <Table current={get(filter, 'page', 0)}
+                                        paginate={({selected}) => setFilter(filter => ({...filter, page: selected}))}
+                                        totalItems={totalItems}
+                                        columns={['ID', 'Давогар', 'Давогар манзили', 'Жавобгар', 'Жавобгар манзили', 'Иш туркуми','Натижа','Зиддият тури', 'Яратилган вақти', 'Actions']}>
                         {
-                            !isEmpty(items) ? items.map((item, index) => <tr key={get(item, '_id')}>
-                                <td>{index + 1}</td>
+                            !isEmpty(conflictingFamilies) ? conflictingFamilies && conflictingFamilies.map((item, index) => <tr key={get(item, '_id')}>
+                                <td>{(index + 1) + get(filter, 'page', 0) * 20}</td>
                                 <td>{`${get(item, 'davsecondname', '-')} ${get(item, 'davname', '-')} ${get(item, 'davmiddelname', '-')}`}</td>
-                                <td>{`${get(item, 'davregId.name', '-')}/${get(item, 'davdistrictId.name', '-')}/${get(item, 'davmfyId.name', '-')}/${get(item, 'davaddress', '-')}`}</td>
+                                <td>{`${get(item, 'davregId.name', '-')} ${get(item, 'davdistrictId.name', '-')} ${get(item, 'davmfyId.name', '-')} ${get(item, 'davaddress', '-')}`}</td>
                                 <td>{`${get(item, 'javsecondname', '-')} ${get(item, 'javname', '-')} ${get(item, 'javmiddelname', '-')}`}</td>
-                                <td>{`${get(item, 'javregId.name', '-')}/${get(item, 'javdistrictId.name', '-')}/${get(item, 'javmfyId.name', '-')}/${get(item, 'javaddress', '-')}`}</td>
-                                <td>{get(item, 'typeofproblems.name', '-')}</td>
+                                <td>{`${get(item, 'javregId.name', '-')} ${get(item, 'javdistrictId.name', '-')} ${get(item, 'javmfyId.name', '-')} ${get(item, 'javaddress', '-')}`}</td>
+                                <td>{`${get(item, 'typeofproblems.name', '-')} `}</td>
                                 <td>{get(item, 'resultofconflicts.name', '-')}</td>
+                                <td>{get(item, 'typeofconflect', '-')}</td>
                                 <td>{moment(get(item, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
-                                <td><Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => {
-                                    setItemId(get(item, '_id'));
-                                    setShow(true);
-                                }
-                                }/><Trash
-                                    onClick={() => deleteItem(get(item, '_id'))} className={'cursor-pointer'}
-                                    color="#E3111A" size={24}/></td>
+                                <td>
+                                    {/*<Eye className={'mr-8 cursor-pointer d-none'} color="#FFC700" size={24}*/}
+                                    {/*     onClick={() => history.push(`/user/view/${get(item, '_id')}`)}/>*/}
+                                    {/*<Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24}*/}
+                                    {/*      onClick={() => history.push(`/user/update/${get(item, '_id')}`)}/>*/}
+                                    <HasAccess>
+                                        {
+                                            ({userCan}) => userCan(config.ROLES.ADMIN) && <Trash
+                                                onClick={() => deleteUser(get(item, '_id'))}
+                                                className={'cursor-pointer'}
+                                                color="#E3111A" size={24}/>
+                                        }
+                                    </HasAccess>
+                                </td>
                             </tr>) : <tr>
-                                <td colSpan={4}>Маълумот мавжуд эмас</td>
+                                <td colSpan={8}>Маълумот мавжуд эмас</td>
                             </tr>
                         }
                     </Table> : <ContentLoader />}
@@ -178,27 +138,27 @@ const ConflictingFamiliesContainer = ({
 const mapStateToProps = (state) => {
     return {
         entities: get(state, 'normalizer.entities', {}),
-        items: get(state, 'normalizer.data.item-list.result.accounts', []),
-        item: get(state, 'normalizer.data.get-one-item.result.accounts', {}),
-        isFetched: get(state, 'normalizer.data.item-list.isFetched', false),
-        isFetchedItem: get(state, 'normalizer.data.get-one-item.isFetched', false),
-        totalItems:get(state, 'normalizer.data.item-list.result.totalItems', 0),
+        conflictingFamilies: get(state, 'normalizer.data.conflicting-families-list.result.accounts', []),
+        isFetched: get(state, 'normalizer.data.conflicting-families-list.isFetched', false),
+        totalItems: get(state, 'normalizer.data.conflicting-families-list.result.totalItems', 0),
+        user: get(state, 'auth.user', {})
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getItemsList: ({page = 0, size = 20}) => {
-            const storeName = 'item-list';
-            const entityName = 'item';
-            const scheme = {accounts: [RankScheme]};
+        getConflictingFamiliesList: ({page = 0, size = 20}) => {
+            const storeName = 'conflicting-families-list';
+            const entityName = 'conflicting-families';
+            const scheme = {accounts: [ConflictingFamilies]};
             dispatch({
                 type: ApiActions.GET_ALL.REQUEST,
                 payload: {
                     url: '/conflictingfamilies',
                     config: {
                         params: {
-                            page:page+1,
+                            page: page + 1,
                         },
+                        header: {}
                     },
                     scheme,
                     storeName,
@@ -206,30 +166,11 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        getOneItem: ({item_id}) => dispatch({
-            type: ApiActions.GET_ONE.REQUEST,
-            payload: {
-                url: `/conflictingfamilies/${item_id}`,
-                config: {
-                    params: {},
-                },
-                scheme: {accounts: RankScheme},
-                storeName: 'get-one-item',
-                entityName: 'item',
-            },
-        }),
-        setTrigger: () => dispatch({
-            type: ApiActions.GET_ONE.TRIGGER,
-            payload: {
-                scheme: {},
-                storeName: 'get-one-item',
-            },
-        }),
         setListTrigger: () => dispatch({
             type: ApiActions.GET_ALL.TRIGGER,
             payload: {
                 scheme: {},
-                storeName: 'item-list',
+                storeName: 'conflicting-families-list',
             },
         })
     }

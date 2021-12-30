@@ -90,7 +90,7 @@ const StepNav = ({step = 1,...props}) => {
                     <p>Учинчи қадам</p>
                     <div className={'step'}>3</div>
                 </li>
-                <li className={classNames({active:includes(range(0,step+1),4)})}>
+             <li className={classNames({active:includes(range(0,step+1),4)})}>
                     <p>Тўртинчи қадам</p>
                     <div className={'step'}>4</div>
                 </li>

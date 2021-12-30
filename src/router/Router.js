@@ -64,6 +64,7 @@ import DynamicFilterPage from "../modules/order/pages/DynamicFilterPage";
 import ConflictingFamiliesPage from "../modules/order/pages/ConflictingFamiliesPage";
 import TypeofproblemsPage from "../modules/order/pages/TypeofproblemsPage";
 import FamilyResultPage from "../modules/order/pages/FamilyResultPage";
+import ConflictingFamiliesCreatePage from "../modules/order/pages/ConflictingFamiliesCreatePage";
 
 const Router = () => {
     return (
@@ -116,6 +117,8 @@ const Router = () => {
                                     <NeighborhoodsPage/> : <ForbiddenPage/>} />
                                 <Route path={'/conflicting-families/list'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
                                     <ConflictingFamiliesPage/> : <ForbiddenPage/>} />
+                                <Route path={'/conflicting-families/create'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <ConflictingFamiliesCreatePage/> : <ForbiddenPage/>} />
 
                                 <Route path={'/ranks'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <RanksPage/> : <ForbiddenPage/>} />

@@ -230,6 +230,12 @@ class ApiService{
         return request.delete(`/violent/${id}`);
     }
 
+    static CreateFamilyConflicting = (params) => {
+        return request.post(`/conflictingfamilies`,{...params});
+    }
+    static DeleteFamilyConflicting = (id,params) => {
+        return request.delete(`/conflictingfamilies/${id}`);
+    }
     static CreateReasonViolence = (params) => {
         return request.post(`/reasonviolence/`,{...params});
     }
