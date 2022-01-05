@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepFourForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepOneForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepThreeForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/components/conflicting-families/StepTwoForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesCreateContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ConflictingFamiliesCreatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schema/ConflictingFamilies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/pdf/pdf-static-report-table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/StaticReportOneContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/StaticReportOnePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/step-nav/step-nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/step-nav/step-nav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/ApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/ApiService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ConflictingFamiliesContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/Table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/modules/order/components/conflicting-families" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -118,7 +114,8 @@
       <workItem from="1640147025295" duration="17005000" />
       <workItem from="1640321399659" duration="24594000" />
       <workItem from="1640498772512" duration="11929000" />
-      <workItem from="1640754499908" duration="22618000" />
+      <workItem from="1640754499908" duration="22775000" />
+      <workItem from="1641295672014" duration="14524000" />
     </task>
     <servers />
   </component>
@@ -222,12 +219,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/pdf/pdf-report.js</url>
-          <line>13</line>
+          <line>14</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/pdf/pdf-report.js</url>
-          <line>5</line>
+          <line>6</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

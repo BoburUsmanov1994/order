@@ -9,12 +9,20 @@ const StyledTable = styled.div`
   padding-bottom: 30px;
   margin-bottom: 15px;
   overflow-x: auto;
-  table{
+
+  table {
     width: 100%;
     text-align: center;
     vertical-align: middle;
+
+    th {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
-  td ,th{
+
+  td, th {
     font-size: 14px;
     color: #7E7E7E;
     font-weight: 300;

@@ -65,6 +65,7 @@ import ConflictingFamiliesPage from "../modules/order/pages/ConflictingFamiliesP
 import TypeofproblemsPage from "../modules/order/pages/TypeofproblemsPage";
 import FamilyResultPage from "../modules/order/pages/FamilyResultPage";
 import ConflictingFamiliesCreatePage from "../modules/order/pages/ConflictingFamiliesCreatePage";
+import StaticReportOnePage from "../modules/order/pages/StaticReportOnePage";
 
 const Router = () => {
     return (
@@ -186,6 +187,8 @@ const Router = () => {
                                     <TypeofproblemsPage/> : <ForbiddenPage/>} />
                                 <Route path={'/family-result'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <FamilyResultPage/> : <ForbiddenPage/>} />
+                                <Route path={'/static-report-1'} exact render={() => userCan([config.ROLES.ADMIN]) ?
+                                    <StaticReportOnePage/> : <ForbiddenPage/>} />
 
                                 <Route path={'/logout'} exact component={LogoutPage}/>
                                 <Route path={'/403'} exact component={ForbiddenPage}/>

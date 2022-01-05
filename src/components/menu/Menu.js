@@ -174,7 +174,7 @@ const Menu = ({items, ...props}) => {
                         }
                         {userCan([config.ROLES.ADMIN]) && <MenuParent icon={enqIcon} name={'Ҳисоботлар'}>
                             <li title={'users'}>
-                                <NavLink to={'/users'}>
+                                <NavLink to={'/static-report-1'}>
                                     <ReactSVG src={statisticsIcon}/><span className={'text'}>Ҳисобот - 1</span>
                                 </NavLink>
                             </li>

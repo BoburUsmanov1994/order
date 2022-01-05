@@ -3,6 +3,7 @@ import {Document, Page, StyleSheet} from "@react-pdf/renderer";
 import PDFHeader from "./pdf-header";
 import styled from "styled-components";
 import PDFTable from "./pdf-table";
+import PDFStaticReportTable from "./pdf-static-report-table";
 
 const StyledPdf = styled.div`
 
@@ -17,13 +18,13 @@ const styles = StyleSheet.create({
     },
 });
 
-const PdfReport = ({from = '',to='',title='',items=[]}) => {
+const PdfReport = ({from = '',to='',title='',items=[],isStaticReport = false,titles = []}) => {
 
     return (
         <Document >
             <Page size="A4"  style={styles.page}>
                 <PDFHeader from={from} title={title} to={to}  />
-                <PDFTable items={items} />
+                {isStaticReport ? <PDFStaticReportTable items={items} titles={titles} /> : <PDFTable items={items} />}
             </Page>
         </Document>
     );
