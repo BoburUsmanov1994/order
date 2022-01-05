@@ -408,7 +408,7 @@ const ViolentsContainer = ({
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} />
                                     <HasAccess>
                                         {
-                                            ({userCan}) =>userCan([config.ROLES.ADMIN]) &&  <Trash
+                                            ({userCan}) =>userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) &&  <Trash
                                                 onClick={() => deleteViolent(get(violent, '_id'))} className={'cursor-pointer'}
                                                 color="#E3111A" size={24}/>
                                         }

@@ -384,7 +384,7 @@ const OrderListContainer = ({
                                           onClick={() => history.push(`/order/update/${get(order, '_id')}`)}/>
                                     <HasAccess>
                                         {
-                                            ({userCan}) => userCan([config.ROLES.ADMIN]) && <Trash
+                                            ({userCan}) => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) && <Trash
                                                 onClick={() => deleteOrder(get(order, '_id'))}
                                                 className={'cursor-pointer'}
                                                 color="#E3111A" size={24}/>

@@ -9,6 +9,10 @@
       <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/DynamicFilterContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/DynamicFilterContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ViolentsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolentsContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +119,7 @@
       <workItem from="1640321399659" duration="24594000" />
       <workItem from="1640498772512" duration="11929000" />
       <workItem from="1640754499908" duration="22775000" />
-      <workItem from="1641295672014" duration="14524000" />
+      <workItem from="1641295672014" duration="18677000" />
     </task>
     <servers />
   </component>

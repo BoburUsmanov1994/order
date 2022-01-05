@@ -1,20 +1,26 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Col, Row} from "react-grid-system";
 import RangeCalendar from "../../../components/range-calendar";
 import Title from "../../../components/title";
 import {Controller, useForm} from "react-hook-form";
 import FormSelect from "../../../components/elements/form-select";
 import Button from "../../../components/button";
-import {get, isEmpty, isEqual} from "lodash";
+import {get, isEqual} from "lodash";
 import classNames from "classnames";
 import moment from "moment";
 import {Table} from "../../../components/table";
+import {connect} from "react-redux";
+import OrderScheme from "../../../schema/OrderScheme";
+import ApiActions from "../../../services/api/Actions";
 
-const DynamicFilterContainer = () => {
+const DynamicFilterContainer = ({getDynamicFilterData}) => {
     const {register, handleSubmit, setValue, getValues, control} = useForm();
     const handleCalendar = () => {
 
     }
+    useEffect(()=>{
+        getDynamicFilterData({})
+    },[])
     return (
         <>
             <Row className={'mb-24'}>
@@ -96,8 +102,8 @@ const DynamicFilterContainer = () => {
                                 <td>{moment(get(order, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
 
                             </tr>) : <tr>
-                                <td colSpan={12}>Маълумот мавжуд эмас</td>
-                            </tr>
+                              <td colSpan={12}>Маълумот мавжуд эмас</td>
+                          </tr>
                         }
                     </Table>
                 </Col>
@@ -106,4 +112,74 @@ const DynamicFilterContainer = () => {
     );
 };
 
-export default DynamicFilterContainer;
+const mapStateToProps = (state) => {
+    return {
+        entities: get(state, 'normalizer.entities', {}),
+        data: get(state, 'normalizer.data.dynamic-filter-data', []),
+        isFetched: get(state, 'normalizer.data.dynamic-filter-data.isFetched', false),
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getDynamicFilterData: ({
+                                   page = 0,
+                                   size = 20,
+                                   from = null,
+                                   to = null,
+                                   regiId = null,
+                                   distId = null,
+                                   mfyId = null,
+                                   victypeviolences ,
+                                   victyperestrictions ,
+                                   vicguardianships,
+                                   vicage ,
+                                   viccitizens,
+                                   vicconditionperson,
+                                   viceducation,
+                                   vicfamilyposition,
+                                   vicgenders,
+                                   vicoccurredrepetition,
+                                   vicplaceection,
+                                   vicsendpreparation,
+                                   vicsocialstatus,
+                                   vicworkingplace
+                               }) => {
+            const storeName = 'dynamic-filter-data';
+            const entityName = 'order';
+            const scheme = {oreders: [OrderScheme]};
+            dispatch({
+                type: ApiActions.POST_ALL.REQUEST,
+                payload: {
+                    url: `/reports/report-dynamic`,
+                    config: {
+                        from,
+                        to,
+                        // regiId,
+                        // distId,
+                        // mfyId,
+                        victypeviolences ,
+                        victyperestrictions ,
+                        vicguardianships,
+                        vicage ,
+                        viccitizens,
+                        vicconditionperson,
+                        viceducation,
+                        vicfamilyposition,
+                        vicgenders,
+                        vicoccurredrepetition,
+                        vicplaceection,
+                        vicsendpreparation,
+                        vicsocialstatus,
+                        vicworkingplace
+                    },
+                    scheme,
+                    storeName,
+                    entityName,
+                },
+            });
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DynamicFilterContainer);

@@ -408,7 +408,7 @@ const VictimsContainer = ({
                                     <Eye className={'mr-8 cursor-pointer'} onClick={() => history.push(`/victim/view/${get(victim, '_id')}`)} color="#FFC700" size={24} />
                                     <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => history.push(`/victim/update/${get(victim,'_id')}`)} />
                                     <HasAccess>
-                                        {({userCan}) => userCan([config.ROLES.ADMIN]) && <Trash
+                                        {({userCan}) => userCan([config.ROLES.ADMIN,config.ROLES.USER,config.ROLES.REGION_ADMIN]) && <Trash
                                             onClick={() => deleteVictim(get(victim, '_id'))} className={'cursor-pointer'}
                                             color="#E3111A" size={24}/>}
                                     </HasAccess>
