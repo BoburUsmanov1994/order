@@ -12,7 +12,7 @@ import FormSelect from "../../../../components/elements/form-select";
 
 const StyledStepFourForm = styled.form`
 `;
-const StepFourForm = ({reset=()=>{},create = () =>{},typeviolence=[],typerestrictions=[],sendpreparationlist=[],guardianshipList=[],occuredRepetitionList=[],...props}) => {
+const StepFourForm = ({reset=()=>{},victim={},create = () =>{},typeviolence=[],typerestrictions=[],sendpreparationlist=[],guardianshipList=[],occuredRepetitionList=[],...props}) => {
     const { register, handleSubmit, watch, formState: { errors },setValue,control } = useForm();
 
 
@@ -23,7 +23,6 @@ const StepFourForm = ({reset=()=>{},create = () =>{},typeviolence=[],typerestric
     const firstStep = () => {
         reset({firstStep: props.firstStep})
     }
-
 
 
     return (

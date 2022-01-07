@@ -33,6 +33,7 @@ const StyledModal = styled.div`
       width: 600px;
       border-radius: 10px;
       max-height: 90vh;
+      min-height: 60vh;
       overflow-y: auto;
     }
 

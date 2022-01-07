@@ -75,7 +75,7 @@ const StyledSlider = styled.div`
 `;
 const Slider = ({
                     items = [], active, setActive = () => {
-    }, ...props
+    },hasLink=true, ...props
                 }) => {
     const history = useHistory();
     return (
@@ -85,7 +85,7 @@ const Slider = ({
                 {
                     items && items.map(({_id, name}) => <SwiperSlide
                         className={classNames({active: isEqual(_id, active)})}
-                        onDoubleClick={() => history.push(`/region/${_id}`)}
+                        onDoubleClick={() => hasLink && history.push(`/region/${_id}`)}
                         onClick={() => setActive(_id)}
                         key={_id}>{name}</SwiperSlide>)
                 }

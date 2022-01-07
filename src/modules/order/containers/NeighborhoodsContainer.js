@@ -79,7 +79,7 @@ const NeighborhoodsContainer = ({
     districts = Normalizer.Denormalize(districts, [DistrictScheme], entities).map(({_id, name}) => ({
         value: _id,
         label: name
-    }));;
+    }));
     neighborhoods = Normalizer.Denormalize(neighborhoods,[NeighborhoodScheme],entities);
     neighborhood = Normalizer.Denormalize(neighborhood,NeighborhoodScheme,entities);
     district = Normalizer.Denormalize(district, DistrictScheme, entities);

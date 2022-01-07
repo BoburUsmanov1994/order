@@ -46,13 +46,13 @@ const RegionContainer = ({
                              ...rest
                          }) => {
     const [title, setTitle] = useState(null);
-    const [filter, setFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
+    const [filter, setFilter] = useState({from: moment().subtract(3, 'months').format("YYYY-MM-DD"), to: moment().add(2, 'days').format("YYYY-MM-DD"), regId: id, distId: '', mfyId: ''});
     const [coordinate, setCoordinate] = useState({x: 0, y: 0});
 
     useEffect(() => {
         getOneRegion({region_id: id});
         getDistrictsList({regId: id});
-        getRegionStatisticsOrderCounts({regId: id})
+        getRegionStatisticsOrderCounts({...filter,regId: id})
 
     }, [id]);
 
@@ -85,7 +85,7 @@ const RegionContainer = ({
                             <Title md>{(get(region, 'name'))} худудлари бўйича статистика </Title>
                         </Col>
                         <Col xs={6}>
-                            <Slider active={get(filter, 'distId')}
+                            <Slider hasLink={false} active={get(filter, 'distId')}
                                     setActive={(value) => setFilter(filter => ({...filter, distId: value}))}
                                     items={districts}/>
                         </Col>

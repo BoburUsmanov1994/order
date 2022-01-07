@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3157868e-07d7-4902-be44-09c1506a261e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/pdf/pdf-static-report-table.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/StaticReportOneContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/StaticReportOnePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolentUpdateContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/order/pages/ViolentUpdatePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pdf/pdf-report.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/Table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/DynamicFilterContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/DynamicFilterContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/slider/Slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slider/Slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepFourForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepFourForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepOneForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepThreeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepThreeForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/step/StepTwoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/step/StepTwoForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepOneForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/components/violent-step/StepOneForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/HomeContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/NeighborhoodsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/NeighborhoodsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/RegionContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/VictimsContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/order/containers/ViolentsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/order/containers/ViolentsContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
@@ -119,7 +124,8 @@
       <workItem from="1640321399659" duration="24594000" />
       <workItem from="1640498772512" duration="11929000" />
       <workItem from="1640754499908" duration="22775000" />
-      <workItem from="1641295672014" duration="18677000" />
+      <workItem from="1641295672014" duration="19926000" />
+      <workItem from="1641497399190" duration="8907000" />
     </task>
     <servers />
   </component>
@@ -198,7 +204,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js</url>
-          <line>690</line>
+          <line>695</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -245,6 +251,12 @@
           <url>file://$PROJECT_DIR$/src/modules/order/containers/OrderListContainer.js</url>
           <line>520</line>
           <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/order/containers/VictimUpdateContainer.js</url>
+          <line>233</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

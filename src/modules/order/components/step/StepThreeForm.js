@@ -14,7 +14,7 @@ import Textarea from "../../../../components/elements/textarea";
 const StyledStepThreeForm = styled.form`
 `;
 const StepThreeForm = ({
-                           victim = {}, saveToLocalStorage = () => {
+                           victim = {},update=false, saveToLocalStorage = () => {
     }, reset = () => {
     }, getDistrictsByRegion = () => {
     }, getNeighborhoodsByDistrict = () => {

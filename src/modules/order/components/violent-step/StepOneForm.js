@@ -15,7 +15,7 @@ import moment from "moment";
 
 const StyledStepOneForm = styled.form`
 `;
-const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},getDataFromMvd = () => {},mvdData={},...props}) => {
+const StepOneForm = ({victim = {},update=false,genders,citizenship,ages,saveToLocalStorage = () => {},reset = () => {},getDataFromMvd = () => {},mvdData={},...props}) => {
     const [dateofbirthday,setDateOfBirthday] = useState(get(victim,'dateofbirthday',moment()))
     const {register, handleSubmit, getValues,formState: {errors},setValue,control} = useForm();
 
@@ -47,15 +47,28 @@ const StepOneForm = ({victim = {},genders,citizenship,ages,saveToLocalStorage = 
     },[mvdData])
 
     const reinitilize = () => {
-        setValue('passportinfo',get(victim,'passportinfo'));
-        setValue('identitynumber',get(victim,'identitynumber'));
-        setValue('name',get(victim,'name'));
-        setValue('secondname',get(victim,'secondname'));
-        setValue('middlename',get(victim,'middlename'));
-        setValue('genderId',get(victim,'genderId'));
-        setValue('citizenshipId',get(victim,'citizenshipId'));
-        setValue('agesId',get(victim,'agesId'));
-        setValue('nationality',get(victim,'nationality'));
+        if(update) {
+            console.log(victim);
+            setValue('passportinfo', get(victim, 'citizensId.passportinfo'));
+            setValue('identitynumber', get(victim, 'citizensId.identitynumber'));
+            setValue('name', get(victim, 'citizensId.name'));
+            setValue('secondname', get(victim, 'citizensId.secondname'));
+            setValue('middlename', get(victim, 'citizensId.middlename'));
+            setValue('genderId', get(victim, 'citizensId.genderId'));
+            setValue('citizenshipId', get(victim, 'citizensId.citizenshipId'));
+            setValue('agesId', get(victim, 'citizensId.agesId'));
+            setValue('nationality', get(victim, 'citizensId.nationality'));
+        }else{
+            setValue('passportinfo', get(victim, 'passportinfo'));
+            setValue('identitynumber', get(victim, 'identitynumber'));
+            setValue('name', get(victim, 'name'));
+            setValue('secondname', get(victim, 'secondname'));
+            setValue('middlename', get(victim, 'middlename'));
+            setValue('genderId', get(victim, 'genderId'));
+            setValue('citizenshipId', get(victim, 'citizenshipId'));
+            setValue('agesId', get(victim, 'agesId'));
+            setValue('nationality', get(victim, 'nationality'));
+        }
     }
     return (
         <StyledStepOneForm {...props} onSubmit={handleSubmit(onSubmit)}>

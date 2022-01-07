@@ -66,6 +66,7 @@ import TypeofproblemsPage from "../modules/order/pages/TypeofproblemsPage";
 import FamilyResultPage from "../modules/order/pages/FamilyResultPage";
 import ConflictingFamiliesCreatePage from "../modules/order/pages/ConflictingFamiliesCreatePage";
 import StaticReportOnePage from "../modules/order/pages/StaticReportOnePage";
+import ViolentUpdatePage from "../modules/order/pages/ViolentUpdatePage";
 
 const Router = () => {
     return (
@@ -110,6 +111,8 @@ const Router = () => {
                                     <ViolentsPage/> : <ForbiddenPage/>} />
                                 <Route path={'/violent/view/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
                                     <ViolentViewPage/> : <ForbiddenPage/>} />
+                                <Route path={'/violent/update/:id'} exact render={() => userCan([config.ROLES.ADMIN, config.ROLES.REGION_ADMIN,config.ROLES.USER]) ?
+                                    <ViolentUpdatePage/> : <ForbiddenPage/>} />
                                 <Route path={'/regions'} exact render={() => userCan([config.ROLES.ADMIN]) ?
                                     <RegionsPage/> : <ForbiddenPage/>} />
                                 <Route path={'/districts'} exact render={() => userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN]) ?

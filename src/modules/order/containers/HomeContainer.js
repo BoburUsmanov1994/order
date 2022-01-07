@@ -61,9 +61,9 @@ const HomeContainer = ({
                            ...props
                        }) => {
     const [coordinate, setCoordinate] = useState({x: 0, y: 0});
-    const [orderFilter, setOrderFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
-    const [mfyFilter, setMfyFilter] = useState({from: '', to: '', regId: '', distId: '', mfyId: ''});
-    const [filterMonthlyStatistic, setFilterMonthlyStatistics] = useState({from: '', to: ''});
+    const [orderFilter, setOrderFilter] = useState({from: moment().subtract(3, 'months').format("YYYY-MM-DD"), to: moment().add(2, 'days').format("YYYY-MM-DD"), regId: '', distId: '', mfyId: ''});
+    const [mfyFilter, setMfyFilter] = useState({from: moment().subtract(3, 'months').format("YYYY-MM-DD"), to: moment().add(2, 'days').format("YYYY-MM-DD"), regId: '', distId: '', mfyId: ''});
+    const [filterMonthlyStatistic, setFilterMonthlyStatistics] = useState({from: moment().subtract(3, 'months').format("YYYY-MM-DD"), to: moment().add(2, 'days').format("YYYY-MM-DD")});
     const [title, setTitle] = useState('');
     useEffect(() => {
         if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
@@ -175,7 +175,7 @@ const HomeContainer = ({
                                                 қилиш <img src={exportImg} className={'ml-16'}
                                                            alt=""/></Text>}
                                         </PDFDownloadLink>}
-                                        <RangeCalendar handleCalendar={({
+                                        <RangeCalendar className={'ml-16'} handleCalendar={({
                                                                             startDate,
                                                                             endDate
                                                                         }) => setOrderFilter(orderFilter => ({

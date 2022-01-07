@@ -12,7 +12,7 @@ import {get} from "lodash";
 
 const StyledStepTwoForm = styled.form`
 `;
-const StepTwoForm = ({victim = {},education = [],familyPosition = [],socialStatus=[],workingplace=[],personcondition=[],actionplace=[],saveToLocalStorage = () => {},reset = () => {},...props}) => {
+const StepTwoForm = ({victim = {},update=false,education = [],familyPosition = [],socialStatus=[],workingplace=[],personcondition=[],actionplace=[],saveToLocalStorage = () => {},reset = () => {},...props}) => {
     const { register, handleSubmit, watch, formState: { errors },control,setValue } = useForm();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const StepTwoForm = ({victim = {},education = [],familyPosition = [],socialStatu
     }
 
     const reinitilize = () => {
-        setValue('educationId',get(victim,'educationId'));
+        setValue('educationId',get(victim,'educationId.name'));
         setValue('familypositionId',get(victim,'familypositionId'));
         setValue('socialstatusId',get(victim,'socialstatusId'));
         setValue('workingplaceId',get(victim,'workingplaceId'));
@@ -47,7 +47,7 @@ const StepTwoForm = ({victim = {},education = [],familyPosition = [],socialStatu
             <Row className={'mb-48'}>
                 <Col xs={3} className={'mb-32'}>
                     <Label>Маълумоти</Label>
-                    <FormSelect defaultValue={get(victim,'educationId')} options={education}
+                    <FormSelect defaultValue={get(victim,'educationId.name')} options={education}
                                 setValue={setValue} Controller={Controller} rule={{required: true}} control={control}
                                 name={'educationId'}
                                 label={'Маълумоти'} placeholder={'Маълумоти'} error={errors?.educationId} />

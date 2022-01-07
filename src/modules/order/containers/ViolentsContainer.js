@@ -100,7 +100,7 @@ const ViolentsContainer = ({
         }else {
             getViolentsList({...filter});
         }
-    }, [get(filter, 'page')]);
+    }, [filter]);
 
     useEffect(() => {
         if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
@@ -395,7 +395,7 @@ const ViolentsContainer = ({
                     {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Туғилган санаси','Пасспорт','ПИНФЛ','Шахснинг бандлиги','Вилоят/Туман/Маҳалла','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(violents) ? violents && violents.map((violent, index) => <tr key={get(violent, '_id')}>
-                                <td>{index + 1}</td>
+                                <td>{(index+1)+get(filter, 'page', 0)*20}</td>
                                 <td>{`${get(violent, 'citizensId.name', '-')} ${get(violent, 'citizensId.secondname', '-')} ${get(violent, 'citizensId.middlename', '-')}`}</td>
                                 <td>{moment(get(violent, 'citizensId.dateofbirthday', '-')).format("DD-MM-YYYY")}</td>
                                 <td>{get(violent, 'citizensId.passportinfo', '-')}</td>
@@ -405,7 +405,7 @@ const ViolentsContainer = ({
                                 <td>{moment(get(violent, 'createdAt', '-')).format("DD-MM-YYYY")}</td>
                                 <td>
                                     <Eye className={'mr-8 cursor-pointer'} color="#FFC700" size={24} onClick={() => history.push(`/violent/view/${get(violent,'_id')}`)} />
-                                    <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} />
+                                    <Edit className={'mr-8 cursor-pointer'} color="#2BCC71" size={24} onClick={() => history.push(`/violent/update/${get(violent,'_id')}`)} />
                                     <HasAccess>
                                         {
                                             ({userCan}) =>userCan([config.ROLES.ADMIN,config.ROLES.REGION_ADMIN,config.ROLES.USER]) &&  <Trash

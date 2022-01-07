@@ -96,7 +96,7 @@ const VictimsContainer = ({
     useEffect(() => {
         setListTrigger();
         getVictimsListByFilter({...filter})
-    }, [get(filter, 'page')]);
+    }, [filter]);
 
     useEffect(() => {
         if (includes([config.ROLES.USER, config.ROLES.REGION_ADMIN], get(user, 'accountrole.name'))) {
@@ -129,13 +129,7 @@ const VictimsContainer = ({
         getNeighborhoodsListByDistrict({districtId: get(filter, 'distId')});
     }, [get(filter, 'distId')])
 
-    if (isEqual(get(user, 'accountrole.name'), config.ROLES.REGION_ADMIN)) {
-        victims = victims.filter(item => isEqual(get(item, 'regId._id'), get(user, 'regionId._id')));
-    }
 
-    if (isEqual(get(user, 'accountrole.name'), config.ROLES.USER)) {
-        victims = victims.filter(item => isEqual(get(item, 'destId._id'), get(user, 'districtsId._id')));
-    }
 
     const deleteVictim = (id) => {
         confirmAlert({
@@ -396,7 +390,7 @@ const VictimsContainer = ({
                     {isFetched ? <Table current={get(filter,'page',0)} paginate={({selected}) => setFilter(filter => ({...filter,page:selected}))} totalItems={totalItems} columns={['ID', 'Ф.И.Ш','Туғилган санаси','Пасспорт','ПИНФЛ','Шахснинг бандлиги','Вилоят/Туман/Маҳалла','Яратилган вақти','Actions']} >
                         {
                             !isEmpty(victims) ? victims && victims.map((victim, index) => <tr key={get(victim, '_id')}>
-                                <td>{index + 1}</td>
+                                <td>{(index+1)+get(filter, 'page', 0)*20}</td>
                                 <td>{`${get(victim, 'citizensId.name', '-')} ${get(victim, 'citizensId.secondname', '-')} ${get(victim, 'citizensId.middlename', '-')}`}</td>
                                 <td>{moment(get(victim, 'citizensId.dateofbirthday', '-')).format("DD-MM-YYYY")}</td>
                                 <td>{get(victim, 'citizensId.passportinfo', '-')}</td>
